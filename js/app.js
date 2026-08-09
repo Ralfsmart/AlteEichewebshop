@@ -331,6 +331,7 @@ function productCard(p, pct) {
   <div class="card" data-art="${escapeHtml(p.art)}">
     <div class="card-cat">${escapeHtml(p.kat)}</div>
     <h3 class="card-title">${escapeHtml(p.bez)}</h3>
+    <div class="card-artnr">Art.-Nr. ${escapeHtml(p.art)}</div>
     <div class="card-meta">${escapeHtml(p.hers || '')}${p.land ? ' · ' + escapeHtml(p.land) : ''}</div>
     <div class="card-meta">${escapeHtml(p.qual || '')}</div>
     <div class="card-geb">${escapeHtml(p.geb || '')}</div>
