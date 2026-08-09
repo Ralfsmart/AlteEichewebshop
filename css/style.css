@@ -61,7 +61,11 @@ input, select { font-family: inherit; }
 .view { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
 /* ---------- Shop toolbar ---------- */
-.toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+.toolbar {
+  display: flex; flex-wrap: wrap; gap: 10px; margin: 0 -20px 12px; padding: 12px 20px;
+  position: sticky; top: var(--topbar-h, 64px); z-index: 15;
+  background: rgba(247,246,242,.92); backdrop-filter: blur(6px);
+}
 .toolbar input, .toolbar select {
   padding: 10px 12px; border: 1px solid rgba(255,255,255,.8); border-radius: var(--radius);
   background: rgba(255,255,255,.8); backdrop-filter: blur(3px); font-size: .95rem;

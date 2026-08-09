@@ -290,6 +290,7 @@ function renderAll() {
     const s = getSession();
     document.getElementById('whoami').textContent = s ? ('👋 ' + s.username) : '';
   }
+  updateTopbarHeightVar();
 
   if (state.view === 'shop') renderShop();
   if (state.view === 'checkout') renderCheckout();
@@ -773,7 +774,15 @@ function onAuthSuccess(msg) {
   showToast(msg || 'Willkommen!');
 }
 
+function updateTopbarHeightVar() {
+  const h = document.querySelector('.topbar').getBoundingClientRect().height;
+  document.documentElement.style.setProperty('--topbar-h', h + 'px');
+}
+
 function bindGlobalEvents() {
+  updateTopbarHeightVar();
+  window.addEventListener('resize', updateTopbarHeightVar);
+
   /* ---- Auth ---- */
   document.getElementById('tabLogin').addEventListener('click', () => switchAuthTab('login'));
   document.getElementById('tabRegister').addEventListener('click', () => switchAuthTab('register'));
