@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FoodCoop Alte Eiche · Webshop</title>
+<link rel="icon" href="img/logo.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand" data-nav="shop">
+      <img src="img/logo.png" alt="FoodCoop Alte Eiche" class="brand-logo">
+      <span>FoodCoop <strong>Alte Eiche</strong></span>
+    </div>
+    <nav class="topnav auth-only hidden">
+      <button data-nav="shop">Shop</button>
+      <button data-nav="admin">Daten verwalten</button>
+    </nav>
+    <div class="topbar-right auth-only hidden">
+      <span id="whoami" class="whoami"></span>
+      <button id="logoutBtn" class="btn-secondary btn-small">Abmelden</button>
+      <button id="cartToggle" class="cart-toggle">
+        🛒 <span id="cartCount" class="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== AUTH (Login/Registrierung) ===================== -->
+<main id="view-auth" class="view auth-view">
+  <div class="auth-hero">
+    <div class="auth-hero-scrim">
+      <img src="img/logo.png" alt="FoodCoop Alte Eiche" class="auth-logo">
+      <h1>FoodCoop Alte Eiche</h1>
+      <p>Unsere Bio-Einkaufsgemeinschaft &mdash; frisch, regional, gemeinsam bestellt.</p>
+    </div>
+  </div>
+
+  <div class="auth-card">
+    <div class="auth-tabs">
+      <button id="tabLogin" class="auth-tab active">Anmelden</button>
+      <button id="tabRegister" class="auth-tab">Registrieren</button>
+    </div>
+
+    <form id="loginForm" class="auth-form">
+      <label>Benutzername oder E-Mail<input id="loginUser" type="text" autocomplete="username" required></label>
+      <label>Passwort<input id="loginPass" type="password" autocomplete="current-password" required></label>
+      <div id="loginError" class="auth-error"></div>
+      <button type="submit" class="btn-primary">Anmelden</button>
+      <button type="button" id="forgotPassLink" class="link-btn">Passwort vergessen?</button>
+    </form>
+
+    <form id="registerForm" class="auth-form hidden">
+      <label>Benutzername<input id="regUser" type="text" autocomplete="username" required></label>
+      <label>E-Mail-Adresse<input id="regEmail" type="email" autocomplete="email" required></label>
+      <label>Passwort<input id="regPass" type="password" autocomplete="new-password" required></label>
+      <label>Passwort wiederholen<input id="regPass2" type="password" autocomplete="new-password" required></label>
+      <div id="registerError" class="auth-error"></div>
+      <button type="submit" class="btn-primary">Konto erstellen</button>
+    </form>
+
+    <form id="resetPassForm" class="auth-form hidden">
+      <p class="hint">Zur Bestätigung bitte Benutzername <strong>und</strong> die bei der Registrierung hinterlegte E-Mail-Adresse eingeben.</p>
+      <label>Benutzername<input id="resetUser" type="text" autocomplete="username" required></label>
+      <label>E-Mail-Adresse<input id="resetEmail" type="email" autocomplete="email" required></label>
+      <label>Neues Passwort<input id="resetPass" type="password" autocomplete="new-password" required></label>
+      <label>Neues Passwort wiederholen<input id="resetPass2" type="password" autocomplete="new-password" required></label>
+      <div id="resetPassError" class="auth-error"></div>
+      <button type="submit" class="btn-primary">Passwort setzen</button>
+      <button type="button" id="backToLoginLink" class="link-btn">← Zurück zum Login</button>
+    </form>
+  </div>
+</main>
+
+<!-- ===================== SHOP ===================== -->
+<main id="view-shop" class="view hidden">
+  <div class="hero-banner">
+    <h1>Frisch aus der Region</h1>
+    <p>Bio-Vollsortiment für Mitglieder der FoodCoop Alte Eiche</p>
+  </div>
+
+  <div class="toolbar">
+    <input id="searchInput" type="search" placeholder="Suche nach Artikel, Hersteller, Artikel-Nr. …">
+    <select id="categorySelect"></select>
+    <select id="sortSelect">
+      <option value="name-asc">Name A–Z</option>
+      <option value="name-desc">Name Z–A</option>
+      <option value="price-asc">Preis aufsteigend</option>
+      <option value="price-desc">Preis absteigend</option>
+    </select>
+  </div>
+  <div class="result-bar">
+    <span id="resultCount"></span>
+  </div>
+  <div id="productGrid" class="product-grid"></div>
+  <div id="pager" class="pager"></div>
+</main>
+
+<!-- ===================== CHECKOUT ===================== -->
+<main id="view-checkout" class="view hidden">
+  <div class="checkout-header">
+    <h2>Bestellübersicht</h2>
+    <button id="backToShopBtn" class="btn-secondary">← Zurück zum Shop</button>
+  </div>
+
+  <div class="buyer-form">
+    <label>Name<input id="checkoutName" type="text"></label>
+    <label>Adresse<input id="checkoutAdresse" type="text"></label>
+    <label>Eigene Bankverbindung (für Rücküberweisung)<input id="checkoutBank" type="text"></label>
+  </div>
+
+  <div class="table-wrap">
+    <table class="checkout-table">
+      <thead>
+        <tr>
+          <th>Nr.</th><th>Artikel-Nr.</th><th>Bezeichnung</th><th>Gebinde</th>
+          <th>Preis</th><th>MwSt.</th><th>Menge</th><th>Summe</th>
+        </tr>
+      </thead>
+      <tbody id="checkoutRows"></tbody>
+    </table>
+  </div>
+
+  <div id="checkoutTotals" class="totals-box"></div>
+
+  <div class="checkout-actions">
+    <button id="printBtn" class="btn-secondary">🖨️ Drucken</button>
+    <button id="exportBestellungBtn" class="btn-secondary">⬇️ Bestellliste als CSV herunterladen</button>
+    <button id="emailBestellungBtn" class="btn-primary">📧 Bestellung per E-Mail senden</button>
+  </div>
+  <p class="hint checkout-email-hint">Öffnet dein E-Mail-Programm mit einer vorausgefüllten Nachricht an <strong>alteeiche.info@gmail.com</strong>. Bitte vor dem Absenden kurz prüfen und ggf. die heruntergeladene CSV-Datei anhängen.</p>
+</main>
+
+<!-- ===================== ADMIN ===================== -->
+<main id="view-admin" class="view hidden">
+  <h2>Daten verwalten</h2>
+
+  <div id="adminGate" class="admin-card">
+    <div id="adminSetupBox" class="hidden">
+      <h3>Admin-Passwort einrichten</h3>
+      <p class="hint">Es ist noch kein Admin-Passwort vergeben. Lege jetzt eines fest, um den Verwaltungsbereich zu schützen.</p>
+      <form id="adminSetupForm" class="auth-form narrow">
+        <label>Neues Admin-Passwort<input id="adminSetupPass" type="password" required></label>
+        <label>Wiederholen<input id="adminSetupPass2" type="password" required></label>
+        <div id="adminSetupError" class="auth-error"></div>
+        <button type="submit" class="btn-primary">Passwort festlegen</button>
+      </form>
+    </div>
+    <div id="adminLoginBox">
+      <h3>Verwaltungsbereich gesperrt</h3>
+      <p class="hint">Bitte Admin-Passwort eingeben.</p>
+      <form id="adminLoginForm" class="auth-form narrow">
+        <label>Admin-Passwort<input id="adminLoginPass" type="password" required></label>
+        <div id="adminLoginError" class="auth-error"></div>
+        <button type="submit" class="btn-primary">Entsperren</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="adminContent" class="hidden">
+    <p class="hint">Diese Seite läuft ohne Datenbank und ohne eigenes Backend. Der Produktkatalog und die Zuschläge werden beim Laden aus den <code>data/*.csv</code>-Dateien deines Hostings geladen, damit alle Mitglieder denselben Stand sehen. Kundenkonten, Warenkorb und das Admin-Passwort liegen dagegen geräte­gebunden in diesem Browser (localStorage).</p>
+
+    <section class="admin-card">
+      <h3>Status</h3>
+      <div class="stat-grid">
+        <div><span class="stat-label">Artikel</span><span id="statProducts" class="stat-value">0</span></div>
+        <div><span class="stat-label">Kategorien</span><span id="statCategories" class="stat-value">0</span></div>
+        <div><span class="stat-label">Kundenkonten</span><span id="statUsers" class="stat-value">0</span></div>
+        <div><span class="stat-label">Zuletzt aktualisiert</span><span id="statUpdated" class="stat-value">–</span></div>
+      </div>
+      <button id="lockAdminBtn" class="btn-secondary" style="margin-top:12px;">🔒 Verwaltung sperren</button>
+    </section>
+
+    <section class="admin-card">
+      <h3>Veröffentlichung (GitHub)</h3>
+      <p class="hint">Optional: Trägst du hier die Zugangsdaten zu einem GitHub-Repository ein (gehostet z. B. über GitHub Pages), erscheint bei jeder Kategorie und bei den Zuschlägen zusätzlich ein Button „🚀 Veröffentlichen", der die Datei direkt im Repository aktualisiert — ohne manuellen Download/Upload. Ohne diese Einrichtung funktioniert „Exportieren" + manuelles Ersetzen im Hosting weiterhin wie gewohnt.</p>
+      <p class="hint"><strong>Sicherheitshinweis:</strong> Das Zugriffstoken wird nur lokal in diesem Browser gespeichert, aber im Klartext — wer Zugriff auf dieses Gerät hat, könnte es auslesen. Verwende daher unbedingt ein <strong>fein-granulares GitHub-Token</strong> (Fine-grained personal access token), das nur auf <strong>dieses eine Repository</strong> beschränkt ist und dort nur die Berechtigung „Contents: Read and write" besitzt, sowie ein Ablaufdatum. Nie ein Token mit vollem Konto-/Repo-Zugriff hier eintragen.</p>
+      <div class="gh-form">
+        <label>GitHub-Benutzername/Organisation<input id="ghOwner" type="text" placeholder="z. B. alteeiche-foodcoop"></label>
+        <label>Repository-Name<input id="ghRepo" type="text" placeholder="z. B. webshop"></label>
+        <label>Branch<input id="ghBranch" type="text" placeholder="main"></label>
+        <label>Access Token<input id="ghToken" type="password" placeholder="github_pat_…"></label>
+      </div>
+      <div class="admin-actions">
+        <button id="saveGithubBtn" class="btn-primary">Speichern</button>
+        <button id="clearGithubBtn" class="btn-secondary">Token entfernen</button>
+      </div>
+      <div id="githubStatus" class="cat-csv-source">–</div>
+    </section>
+
+    <section class="admin-card">
+      <h3>Produktkatalog je Kategorie</h3>
+      <p class="hint">Diese Seite hat keine Datenbank: Damit <strong>alle</strong> Mitglieder denselben Katalog sehen, lädt der Shop die Daten bei jedem Aufruf aus den <code>data/*.csv</code>-Dateien deines Hostings. Ein Upload hier zeigt dir erst eine <strong>lokale Vorschau</strong> in diesem Browser. Um sie für alle sichtbar zu machen: „Exportieren" klicken und die heruntergeladene Datei im Hosting unter dem angegebenen Pfad ersetzen (z. B. per FTP oder Git-Push), dann neu deployen.</p>
+      <p class="hint">Zwei Formate werden erkannt: entweder die Spalten <code>ArtikelNr, Bezeichnung, Hersteller, Land, Qualitaet, Gebinde, PreisInklMwst, EntMwst, MwstSatz</code> — oder direkt der Export aus Bodans Bestellsystem mit <code>ArtNr, Bezeichnung, Hersteller, Land, Qualität, Gebinde, EK Ladeneinheit, EK VPE, UVP, EAN, MwSt</code> (der Netto-Einkaufspreis „EK VPE" wird dann automatisch um die MwSt. hochgerechnet). Ein Upload ersetzt nur die jeweilige Kategorie.</p>
+      <div id="categoryCsvList" class="category-csv-list"></div>
+      <button id="reloadServerBtn" class="btn-secondary" style="margin-top:12px;">🔄 Alle Kategorien vom Server neu laden</button>
+    </section>
+
+    <section class="admin-card">
+      <h3>Prozentzuschläge</h3>
+      <p class="hint">Für Kunden ist der Zuschlag nie einzeln sichtbar – er fließt nur unsichtbar in den Verkaufspreis ein. Jedes Feld unten ist ein eigener Posten (z. B. Rücklage, Bankkosten, Fahrtkosten); zusammen ergeben sie den Gesamt-Zuschlag, der auf den Bodan-Preis inkl. MwSt. aufgeschlagen wird. Namen und Prozentsätze lassen sich direkt bearbeiten.</p>
+      <div id="surchargeSource" class="cat-csv-source">–</div>
+      <div id="surchargeList" class="surcharge-list"></div>
+      <button id="addSurchargeBtn" class="btn-secondary btn-small" style="margin-top:8px;">+ Zuschlag hinzufügen</button>
+      <div class="sc-row sc-total"><span>Gesamt-Zuschlag (berechnet)</span><span id="computedTotalPct">0%</span></div>
+
+      <div class="override-row">
+        <label>Manueller Gesamt-Zuschlag % (überschreibt die Felder oben, leer = automatisch)</label>
+        <div class="override-controls">
+          <input id="overridePctInput" type="number" step="0.1" min="0" placeholder="z. B. 8">
+          <button id="resetOverrideBtn" class="btn-secondary">Zurücksetzen</button>
+        </div>
+      </div>
+
+      <div class="admin-actions">
+        <label class="file-btn">📤 Zuschläge-CSV hochladen (ersetzt alle Felder)<input id="surchargeCsvInput" type="file" accept=".csv" hidden></label>
+        <button id="exportSurchargesBtn" class="btn-secondary">⬇️ Zuschläge als CSV exportieren</button>
+        <button id="publishSurchargesBtn" class="btn-publish hidden">🚀 Veröffentlichen</button>
+      </div>
+      <p class="hint">Server-Datei: <code>data/zuschlaege.csv</code> — nach dem Bearbeiten exportieren und dort ersetzen, damit alle Mitglieder den neuen Zuschlag sehen. Mit hinterlegtem GitHub-Token geht das auch direkt über „Veröffentlichen".</p>
+    </section>
+
+    <section class="admin-card">
+      <h3>Kundenkonten</h3>
+      <p class="hint">Zugangsdaten der registrierten Mitglieder (Passwörter nur gesalzen &amp; gehasht, nie im Klartext).</p>
+      <div class="admin-actions">
+        <button id="exportUsersBtn" class="btn-secondary">⬇️ Kundenkonten als CSV exportieren</button>
+        <label class="file-btn">📤 Kundenkonten-CSV hochladen (ersetzt alle Konten)<input id="usersCsvInput" type="file" accept=".csv" hidden></label>
+      </div>
+    </section>
+
+    <section class="admin-card">
+      <h3>Admin-Passwort ändern</h3>
+      <form id="changeAdminPassForm" class="auth-form narrow">
+        <label>Aktuelles Passwort<input id="changeAdminOld" type="password" required></label>
+        <label>Neues Passwort<input id="changeAdminNew" type="password" required></label>
+        <label>Neues Passwort wiederholen<input id="changeAdminNew2" type="password" required></label>
+        <div id="changeAdminError" class="auth-error"></div>
+        <button type="submit" class="btn-primary">Passwort ändern</button>
+      </form>
+    </section>
+
+    <section class="admin-card">
+      <h3>Zurücksetzen</h3>
+      <button id="resetDataBtn" class="btn-danger">Auf Original-Bodan-Daten zurücksetzen</button>
+    </section>
+  </div>
+</main>
+
+<!-- ===================== CART DRAWER ===================== -->
+<div id="cartOverlay" class="cart-overlay"></div>
+<aside id="cartDrawer" class="cart-drawer">
+  <div class="cart-drawer-header">
+    <h3>Warenkorb</h3>
+    <button id="cartClose" class="btn-icon">✕</button>
+  </div>
+  <div id="cartItems" class="cart-items"></div>
+  <div id="cartSummary" class="cart-summary"></div>
+  <div class="cart-drawer-actions">
+    <button id="cartClearBtn" class="btn-secondary">Leeren</button>
+    <button id="cartCheckoutBtn" class="btn-primary">Zur Bestellübersicht</button>
+  </div>
+</aside>
+
+<div id="toast" class="toast"></div>
+
+<script src="js/csv.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/data-default.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
