@@ -693,8 +693,25 @@ function githubErrorMessage(status) {
 
 function exportBestellliste() {
   const entries = cartEntries();
-  const objs = entries.map(e => ({ artnr: e.p.art, menge: e.qty, kommentar: e.p.bez }));
-  downloadText('bestellliste.csv', objectsToCSV(objs, ['artnr', 'menge', 'kommentar']));
+  if (!entries.length) { showToast('Warenkorb ist leer.', true); return; }
+  const totalVk = entries.reduce((s, e) => s + e.sum, 0);
+  const lines = [];
+  if (state.buyer.name) lines.push(['Name', state.buyer.name].map(toCSVField).join(','));
+  if (state.buyer.adresse) lines.push(['Adresse', state.buyer.adresse].map(toCSVField).join(','));
+  if (state.buyer.bank) lines.push(['Bankverbindung', state.buyer.bank].map(toCSVField).join(','));
+  if (lines.length) lines.push('');
+  const objs = entries.map(e => ({
+    artnr: e.p.art,
+    bezeichnung: e.p.bez,
+    gebinde: e.p.geb || '',
+    menge: e.qty,
+    preis: money(e.vk),
+    summe: money(e.sum)
+  }));
+  lines.push(objectsToCSV(objs, ['artnr', 'bezeichnung', 'gebinde', 'menge', 'preis', 'summe']));
+  lines.push('');
+  lines.push(['Gesamt-Bestellbetrag', money(totalVk)].map(toCSVField).join(','));
+  downloadText('bestellliste.csv', lines.join('\r\n'));
 }
 
 // Bestellungen laufen über die Koordination, nicht direkt an Bodan -- die Mitglieder schicken
