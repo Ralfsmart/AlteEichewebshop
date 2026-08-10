@@ -290,6 +290,7 @@ function renderAll() {
     const s = getSession();
     document.getElementById('whoami').textContent = s ? ('👋 ' + s.username) : '';
   }
+  updateTopbarHeightVar();
 
   if (state.view === 'shop') renderShop();
   if (state.view === 'checkout') renderCheckout();
@@ -331,6 +332,7 @@ function productCard(p, pct) {
   <div class="card" data-art="${escapeHtml(p.art)}">
     <div class="card-cat">${escapeHtml(p.kat)}</div>
     <h3 class="card-title">${escapeHtml(p.bez)}</h3>
+    <div class="card-artnr">Art.-Nr. ${escapeHtml(p.art)}</div>
     <div class="card-meta">${escapeHtml(p.hers || '')}${p.land ? ' · ' + escapeHtml(p.land) : ''}</div>
     <div class="card-meta">${escapeHtml(p.qual || '')}</div>
     <div class="card-geb">${escapeHtml(p.geb || '')}</div>
@@ -789,7 +791,15 @@ function onAuthSuccess(msg) {
   showToast(msg || 'Willkommen!');
 }
 
+function updateTopbarHeightVar() {
+  const h = document.querySelector('.topbar').getBoundingClientRect().height;
+  document.documentElement.style.setProperty('--topbar-h', h + 'px');
+}
+
 function bindGlobalEvents() {
+  updateTopbarHeightVar();
+  window.addEventListener('resize', updateTopbarHeightVar);
+
   /* ---- Auth ---- */
   document.getElementById('tabLogin').addEventListener('click', () => switchAuthTab('login'));
   document.getElementById('tabRegister').addEventListener('click', () => switchAuthTab('register'));
