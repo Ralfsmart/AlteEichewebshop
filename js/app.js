@@ -215,13 +215,20 @@ function pctFmt(v) {
 
 function parseGrundpreis(geb, verkPreis) {
   if (!geb) return null;
-  const m = String(geb).match(/^\s*(\d+)\s*[x×]\s*([\d.,]+)\s*(kg|g|l|ml|stk|stück|st)?/i);
+  // Multiplikator ("6x250g") ist optional, damit auch Einzelpackungen ohne "x"
+  // (z. B. "480g", "7kg") einen Grundpreis bekommen.
+  const m = String(geb).match(/^\s*(?:(\d+)\s*[x×]\s*)?([\d.,]+)\s*(kg|g|l|ml|stk|stück|st)\s*$/i);
   if (!m) return null;
-  const stueck = parseInt(m[1], 10);
+  const stueck = m[1] ? parseInt(m[1], 10) : 1;
   const menge = parseFloat(m[2].replace(',', '.'));
-  const einheit = (m[3] || 'Stk').toLowerCase();
+  let einheit = m[3].toLowerCase();
   if (!stueck || !menge) return null;
-  const gesamtMenge = stueck * menge;
+  let gesamtMenge = stueck * menge;
+  // Gramm/Milliliter auf die übliche Grundpreis-Einheit kg/l umrechnen, statt z. B.
+  // "0,02 € je g" anzuzeigen, wenn eigentlich "16,62 € je kg" gemeint ist.
+  if (einheit === 'g') { gesamtMenge /= 1000; einheit = 'kg'; }
+  else if (einheit === 'ml') { gesamtMenge /= 1000; einheit = 'l'; }
+  else if (einheit === 'stück' || einheit === 'st') { einheit = 'stk'; }
   const proEinheit = verkPreis / gesamtMenge;
   return { proEinheit, gesamtMenge, einheit };
 }
