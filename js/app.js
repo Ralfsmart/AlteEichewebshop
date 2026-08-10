@@ -745,9 +745,17 @@ function emailBestellung() {
 }
 
 function downloadText(filename, text) {
-  // BOM voranstellen: ohne sie erkennen Excel/Sheets bei lokalen CSV-Dateien die
-  // UTF-8-Kodierung nicht zuverlässig und zeigen Sonderzeichen wie "€" als "â¬" an.
-  const blob = new Blob(['\uFEFF' + text], { type: 'text/csv;charset=utf-8' });
+  // UTF-16LE mit BOM statt UTF-8: Excel/Sheets erkennen auf manchen (v.a. mobilen)
+  // Plattformen den UTF-8-BOM nicht zuverlässig, wodurch Sonderzeichen wie "ß" oder "€"
+  // falsch dargestellt werden (z. B. als "â¬"). UTF-16LE+BOM wird durchgängig erkannt.
+  const withBom = '\uFEFF' + text;
+  const bytes = new Uint8Array(withBom.length * 2);
+  for (let i = 0; i < withBom.length; i++) {
+    const code = withBom.charCodeAt(i);
+    bytes[i * 2] = code & 0xff;
+    bytes[i * 2 + 1] = code >> 8;
+  }
+  const blob = new Blob([bytes], { type: 'text/csv;charset=utf-16le' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = filename;
