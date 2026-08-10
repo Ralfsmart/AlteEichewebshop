@@ -745,7 +745,9 @@ function emailBestellung() {
 }
 
 function downloadText(filename, text) {
-  const blob = new Blob([text], { type: 'text/csv;charset=utf-8' });
+  // BOM voranstellen: ohne sie erkennen Excel/Sheets bei lokalen CSV-Dateien die
+  // UTF-8-Kodierung nicht zuverlässig und zeigen Sonderzeichen wie "€" als "â¬" an.
+  const blob = new Blob(['\uFEFF' + text], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = filename;
