@@ -425,7 +425,10 @@ function cartEntries() {
 }
 
 function renderCartBadge() {
-  const count = Object.values(state.cart).reduce((a, b) => a + (Number(b) || 0), 0);
+  // Nur Artikel zählen, die noch im Katalog existieren -- sonst zeigt der Badge eine Menge an,
+  // die im geöffneten Warenkorb gar nicht auftaucht (cartEntries() lässt verschwundene Artikel
+  // ja bereits stillschweigend weg), was wie ein Anzeigefehler wirkt.
+  const count = cartEntries().reduce((a, e) => a + e.qty, 0);
   document.getElementById('cartCount').textContent = count;
 }
 
@@ -618,13 +621,18 @@ function renderSurchargeEditor() {
   document.getElementById('surchargeSource').className = 'cat-csv-source cat-csv-source-' + src;
 
   const list = document.getElementById('surchargeList');
-  list.innerHTML = state.surcharges.map((s, i) => `
+  list.innerHTML = state.surcharges.map((s, i) => {
+    // Bei einem frisch mit "+ Zuschlag hinzufügen" angelegten Posten ist s.art noch leer --
+    // dann auf die Positionsnummer ausweichen, statt Screenreadern ein leeres Label zu geben.
+    const label = s.art || `Zuschlagsposten ${i + 1}`;
+    return `
     <div class="sc-edit-row" data-idx="${i}">
-      <input type="text" class="sc-name-input" value="${escapeHtml(s.art)}" placeholder="Bezeichnung">
-      <div class="sc-pct-wrap"><input type="number" step="0.1" class="sc-pct-input" value="${s.pct}"><span>%</span></div>
-      <button class="sc-remove-btn" title="Entfernen">✕</button>
+      <input type="text" class="sc-name-input" value="${escapeHtml(s.art)}" placeholder="Bezeichnung" aria-label="Bezeichnung für ${escapeHtml(label)}">
+      <div class="sc-pct-wrap"><input type="number" step="0.1" class="sc-pct-input" value="${s.pct}" aria-label="Prozentsatz für ${escapeHtml(label)}"><span>%</span></div>
+      <button class="sc-remove-btn" aria-label="${escapeHtml(label)} entfernen">✕</button>
     </div>
-  `).join('');
+  `;
+  }).join('');
   document.getElementById('computedTotalPct').textContent = pctFmt(totalSurchargePct());
 }
 
@@ -681,7 +689,10 @@ function hasUsablePrice(r) {
 // (Bodans aktuelles Bestellsystem, "bodan2-*.csv") -- EK ist laut Konvention netto, MwSt.
 // wird dann rechnerisch aufgeschlagen, um auf den Bruttopreis inkl. MwSt. zu kommen.
 function productFromMappedRow(kat, r) {
-  const mwst = parseFloat(String(r.mwst).replace(',', '.')) || 0;
+  let mwst = parseFloat(String(r.mwst).replace(',', '.')) || 0;
+  // Ein korrupter MwSt-Wert wie "-100" würde unten eine Division durch 0 auslösen und als
+  // "Infinity €"/"NaN €" beim Kunden landen -- auf einen sicheren Standardwert zurückfallen.
+  if (!isFinite(mwst) || mwst <= -100) mwst = 0;
   let preis, mwstb;
   if (r.preis !== undefined && String(r.preis).trim() !== '') {
     preis = parseFloat(String(r.preis).replace(',', '.')) || 0;
@@ -1344,6 +1355,9 @@ function bindGlobalEvents() {
 let toastTimer = null;
 function showToast(msg, isError) {
   const t = document.getElementById('toast');
+  // role="alert" (assertive) für Fehler, sonst role="status" (polite) -- damit Screenreader
+  // den Hinweis überhaupt vorlesen; vorher gab es keinerlei Ankündigung für blinde Nutzer.
+  t.setAttribute('role', isError ? 'alert' : 'status');
   t.textContent = msg;
   t.classList.toggle('error', !!isError);
   t.classList.add('show');
