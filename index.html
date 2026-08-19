@@ -254,10 +254,10 @@
 
 <!-- ===================== CART DRAWER ===================== -->
 <div id="cartOverlay" class="cart-overlay"></div>
-<aside id="cartDrawer" class="cart-drawer">
+<aside id="cartDrawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle" tabindex="-1">
   <div class="cart-drawer-header">
-    <h3>Warenkorb</h3>
-    <button id="cartClose" class="btn-icon">✕</button>
+    <h3 id="cartDrawerTitle">Warenkorb</h3>
+    <button id="cartClose" class="btn-icon" aria-label="Warenkorb schließen">✕</button>
   </div>
   <div id="cartItems" class="cart-items"></div>
   <div id="cartSummary" class="cart-summary"></div>

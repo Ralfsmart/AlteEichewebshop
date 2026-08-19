@@ -64,7 +64,12 @@ function loadJSON(key, fallback) {
     return JSON.parse(raw);
   } catch (e) { return fallback; }
 }
-function saveJSON(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+// try/catch, damit ein blockierter/voller Speicher (z. B. strikte Privatsphäre-Einstellungen,
+// manche Inapp-Browser) die Seite nicht mitten in init() abbrechen lässt -- die Seite läuft dann
+// eben nur ohne dauerhafte Speicherung weiter, statt komplett weiß zu bleiben.
+function saveJSON(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* Speicher nicht verfügbar */ }
+}
 
 function slugify(s) {
   return String(s).toLowerCase()
@@ -318,8 +323,30 @@ function renderAll() {
 
   renderCartBadge();
   renderCartDrawer();
-  document.getElementById('cartDrawer').classList.toggle('open', state.cartOpen && loggedIn);
-  document.getElementById('cartOverlay').classList.toggle('open', state.cartOpen && loggedIn);
+  const cartNowOpen = state.cartOpen && loggedIn;
+  document.getElementById('cartDrawer').classList.toggle('open', cartNowOpen);
+  document.getElementById('cartOverlay').classList.toggle('open', cartNowOpen);
+  updateCartDrawerFocus(cartNowOpen);
+}
+
+// Fokus beim Öffnen/Schließen des Warenkorb-Drawers verwalten (Tastatur-/Screenreader-Nutzung):
+// beim Öffnen in den Drawer springen, beim Schließen zurück zum auslösenden Element. Reagiert
+// nur auf den tatsächlichen Wechsel offen<->geschlossen, nicht auf jedes renderAll() währenddessen
+// (sonst würde z. B. jeder Mengenklick bei offenem Drawer den Fokus zurück auf "Schließen" reißen).
+let cartDrawerWasOpen = false;
+let cartDrawerTriggerEl = null;
+function updateCartDrawerFocus(cartNowOpen) {
+  if (cartNowOpen && !cartDrawerWasOpen) {
+    cartDrawerTriggerEl = document.activeElement;
+    const closeBtn = document.getElementById('cartClose');
+    if (closeBtn) closeBtn.focus();
+  } else if (!cartNowOpen && cartDrawerWasOpen) {
+    if (cartDrawerTriggerEl && document.body.contains(cartDrawerTriggerEl) && typeof cartDrawerTriggerEl.focus === 'function') {
+      cartDrawerTriggerEl.focus();
+    }
+    cartDrawerTriggerEl = null;
+  }
+  cartDrawerWasOpen = cartNowOpen;
 }
 
 function renderShop() {
@@ -367,9 +394,9 @@ function productCard(p, pct) {
       <div class="pd-row pd-sub"><span>davon MwSt. (${pctFmt(p.mwst)})</span><span>${money(p.mwstb)}</span></div>
     </details>
     <div class="card-cart">
-      <button class="qty-btn" data-act="dec">−</button>
-      <input class="qty-input" type="number" min="0" step="1" value="${qty}" data-act="set">
-      <button class="qty-btn" data-act="inc">+</button>
+      <button class="qty-btn" data-act="dec" aria-label="Menge verringern für ${escapeHtml(p.bez)}">−</button>
+      <input class="qty-input" type="number" min="0" step="1" value="${qty}" data-act="set" aria-label="Menge für ${escapeHtml(p.bez)}">
+      <button class="qty-btn" data-act="inc" aria-label="Menge erhöhen für ${escapeHtml(p.bez)}">+</button>
     </div>
   </div>`;
 }
@@ -407,12 +434,12 @@ function renderCartDrawer() {
           <div class="ci-meta">${money(e.vk)} · ${escapeHtml(formatGebinde(e.p.geb))}</div>
         </div>
         <div class="ci-qty">
-          <button class="qty-btn" data-act="dec">−</button>
+          <button class="qty-btn" data-act="dec" aria-label="Menge verringern für ${escapeHtml(e.p.bez)}">−</button>
           <span>${e.qty}</span>
-          <button class="qty-btn" data-act="inc">+</button>
+          <button class="qty-btn" data-act="inc" aria-label="Menge erhöhen für ${escapeHtml(e.p.bez)}">+</button>
         </div>
         <div class="ci-sum">${money(e.sum)}</div>
-        <button class="ci-remove" data-act="remove" title="Entfernen">✕</button>
+        <button class="ci-remove" data-act="remove" aria-label="${escapeHtml(e.p.bez)} entfernen">✕</button>
       </div>
     `).join('');
   }
@@ -883,6 +910,27 @@ function updateTopbarHeightVar() {
 function bindGlobalEvents() {
   updateTopbarHeightVar();
   window.addEventListener('resize', updateTopbarHeightVar);
+
+  // Escape schließt den Warenkorb-Drawer, Tab bleibt darin gefangen, solange er offen ist --
+  // liest den aktuellen state.cartOpen live statt einen Listener bei jedem Öffnen/Schließen an-
+  // und abzumelden, damit das auch bei Wegen funktioniert, die den Drawer ohne cartClose/cartOverlay
+  // schließen (z. B. "Zur Bestellübersicht").
+  document.addEventListener('keydown', e => {
+    if (!state.cartOpen) return;
+    if (e.key === 'Escape') {
+      state.cartOpen = false; renderAll();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const drawer = document.getElementById('cartDrawer');
+      const focusables = Array.from(drawer.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+        .filter(el => !el.disabled && el.offsetParent !== null);
+      if (!focusables.length) return;
+      const first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
 
   /* ---- Auth ---- */
   document.getElementById('tabLogin').addEventListener('click', () => switchAuthTab('login'));
