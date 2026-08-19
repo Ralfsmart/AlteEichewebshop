@@ -86,7 +86,8 @@ const state = {
   sort: 'name-asc',
   page: 1,
   pageSize: 60,
-  cartOpen: false
+  cartOpen: false,
+  checkoutPrevEntries: null  // Preise/Artikel vor dem letzten Bestellübersicht-Refresh (für Änderungs-Hervorhebung)
 };
 
 function init() {
@@ -411,32 +412,94 @@ function renderCartDrawer() {
   ` : '';
 }
 
+// Ruft den Warenkorb auf: bevor die Bestellübersicht angezeigt wird, den Katalog frisch vom
+// Server laden und mit dem Stand vor dem Refresh vergleichen. So fallen Preisänderungen oder
+// inzwischen entfernte Artikel auf, auch wenn der Warenkorb schon länger (über mehrere Besuche)
+// im Browser lag, statt sie beim Bestellen stillschweigend zu übernehmen.
+async function openCheckout() {
+  const prevByArt = new Map(cartEntries().map(e => [e.p.art, {
+    vk: e.vk, bez: e.p.bez, geb: e.p.geb, mwst: e.p.mwst, art: e.p.art
+  }]));
+  state.cartOpen = false;
+  state.view = 'checkout';
+  state.checkoutPrevEntries = null;
+  renderAll();
+  await loadServerCatalog(true);
+  state.checkoutPrevEntries = prevByArt;
+  renderAll();
+}
+
 function renderCheckout() {
   const entries = cartEntries();
   const totalMwst = entries.reduce((s, e) => s + e.p.mwstb * e.qty, 0);
   const totalVk = entries.reduce((s, e) => s + e.sum, 0);
+  const prevByArt = state.checkoutPrevEntries;
 
   document.getElementById('checkoutName').value = state.buyer.name || '';
   document.getElementById('checkoutAdresse').value = state.buyer.adresse || '';
   document.getElementById('checkoutBank').value = state.buyer.bank || '';
 
+  // Artikel, die noch im Warenkorb liegen, aber inzwischen aus dem Katalog verschwunden sind
+  // (z. B. nicht mehr im Sortiment) -- werden einmalig durchgestrichen mit angezeigt.
+  const removedRows = [];
+  if (prevByArt) {
+    prevByArt.forEach((prev, art) => {
+      if (state.cart[art] && !entries.some(e => e.p.art === art)) {
+        removedRows.push(`
+          <tr class="row-removed">
+            <td>–</td>
+            <td>${escapeHtml(prev.art)}</td>
+            <td><s>${escapeHtml(prev.bez)}</s></td>
+            <td>${escapeHtml(prev.geb || '')}</td>
+            <td><s>${money(prev.vk)}</s></td>
+            <td>${pctFmt(prev.mwst)}</td>
+            <td>${state.cart[art]}</td>
+            <td>nicht mehr verfügbar</td>
+          </tr>
+        `);
+      }
+    });
+  }
+
   const tbody = document.getElementById('checkoutRows');
-  if (!entries.length) {
+  if (!entries.length && !removedRows.length) {
     tbody.innerHTML = `<tr><td colspan="8" class="empty">Warenkorb ist leer.</td></tr>`;
   } else {
-    tbody.innerHTML = entries.map((e, i) => `
-      <tr>
+    tbody.innerHTML = entries.map((e, i) => {
+      const prev = prevByArt && prevByArt.get(e.p.art);
+      const priceChanged = prev && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+      const priceCell = priceChanged
+        ? `<span class="price-old"><s>${money(prev.vk)}</s></span> <span class="price-new">${money(e.vk)}</span>`
+        : money(e.vk);
+      return `
+      <tr class="${priceChanged ? 'row-price-changed' : ''}">
         <td>${i + 1}</td>
         <td>${escapeHtml(e.p.art)}</td>
         <td>${escapeHtml(e.p.bez)}</td>
         <td>${escapeHtml(e.p.geb || '')}</td>
-        <td>${money(e.vk)}</td>
+        <td>${priceCell}</td>
         <td>${pctFmt(e.p.mwst)}</td>
         <td>${e.qty}</td>
         <td>${money(e.sum)}</td>
       </tr>
-    `).join('');
+    `;
+    }).join('') + removedRows.join('');
   }
+
+  const changedCount = prevByArt ? entries.filter(e => {
+    const prev = prevByArt.get(e.p.art);
+    return prev && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+  }).length : 0;
+  const notice = document.getElementById('checkoutChangesNotice');
+  if (changedCount || removedRows.length) {
+    const parts = [];
+    if (changedCount) parts.push(`${changedCount} Preis${changedCount === 1 ? '' : 'e'} wurde${changedCount === 1 ? '' : 'n'} seit deiner Auswahl aktualisiert`);
+    if (removedRows.length) parts.push(`${removedRows.length} Artikel ${removedRows.length === 1 ? 'ist' : 'sind'} nicht mehr verfügbar`);
+    notice.innerHTML = `<div class="checkout-changes-notice">⚠️ ${parts.join(' · ')} — bitte unten prüfen.</div>`;
+  } else {
+    notice.innerHTML = '';
+  }
+
   document.getElementById('checkoutTotals').innerHTML = `
     <div class="sum-row"><span>davon MwSt. gesamt</span><span>${money(totalMwst)}</span></div>
     <div class="sum-row sum-total"><span>Gesamt-Bestellbetrag</span><span>${money(totalVk)}</span></div>
@@ -914,7 +977,7 @@ function bindGlobalEvents() {
     state.cartOpen = false; renderAll();
   });
   document.getElementById('cartCheckoutBtn').addEventListener('click', () => {
-    state.cartOpen = false; state.view = 'checkout'; renderAll();
+    openCheckout();
   });
   document.getElementById('cartClearBtn').addEventListener('click', () => {
     if (confirm('Warenkorb wirklich leeren?')) { state.cart = {}; saveJSON(LS_KEYS.cart, state.cart); renderAll(); }
