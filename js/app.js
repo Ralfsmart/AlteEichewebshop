@@ -71,6 +71,14 @@ function saveJSON(key, val) {
   try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* Speicher nicht verfügbar */ }
 }
 
+function debounce(fn, delayMs) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delayMs);
+  };
+}
+
 function slugify(s) {
   return String(s).toLowerCase()
     .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
@@ -443,6 +451,10 @@ function renderCartDrawer() {
       </div>
     `).join('');
   }
+  renderCartSummary(entries);
+}
+
+function renderCartSummary(entries) {
   const totalMwst = entries.reduce((s, e) => s + e.p.mwstb * e.qty, 0);
   const totalVk = entries.reduce((s, e) => s + e.sum, 0);
   document.getElementById('cartSummary').innerHTML = entries.length ? `
@@ -882,7 +894,41 @@ function setQty(art, qty) {
   if (qty === 0) delete state.cart[art];
   else state.cart[art] = qty;
   saveJSON(LS_KEYS.cart, state.cart);
-  renderAll();
+  updateQtyUI(art, qty);
+}
+
+// Menge geändert: nur die betroffenen Stellen im DOM anfassen statt renderAll() aufzurufen.
+// filteredProducts()/renderShop() durchsucht+sortiert bei jedem Aufruf den kompletten
+// 10.486-Artikel-Katalog (gemessen ~15-50ms) und ersetzt alle sichtbaren Karten neu -- unnötig,
+// weil eine Mengenänderung weder Filter noch Sortierung beeinflusst. Ein voller Grid-Neubau
+// hätte außerdem aufgeklappte "Preisdetails" wieder zugeklappt und den Tastatur-/Screenreader-
+// Fokus vom gerade angeklickten Button gerissen (der alte DOM-Knoten wird durch einen neuen
+// ersetzt, der Fokus fällt dann auf <body> zurück).
+function updateQtyUI(art, qty) {
+  const card = Array.from(document.querySelectorAll('.card[data-art]')).find(el => el.dataset.art === String(art));
+  if (card) {
+    const input = card.querySelector('.qty-input');
+    if (input) input.value = qty;
+  }
+
+  renderCartBadge();
+
+  if (!state.cartOpen) return;
+
+  const row = Array.from(document.querySelectorAll('.cart-item[data-art]')).find(el => el.dataset.art === String(art));
+  if (qty > 0 && row) {
+    // Zeile bleibt bestehen -- nur Menge/Summe aktualisieren, nicht die ganze Liste neu aufbauen.
+    const entries = cartEntries();
+    const entry = entries.find(e => e.p.art === art);
+    if (entry) {
+      row.querySelector('.ci-qty span').textContent = entry.qty;
+      row.querySelector('.ci-sum').textContent = money(entry.sum);
+    }
+    renderCartSummary(entries);
+  } else {
+    // Zeile taucht neu auf oder verschwindet komplett -- dafür muss die Liste neu aufgebaut werden.
+    renderCartDrawer();
+  }
 }
 
 function switchAuthTab(which) {
@@ -987,8 +1033,13 @@ function bindGlobalEvents() {
   });
 
   /* ---- Shop ---- */
+  // Debounced: filteredProducts() durchsucht+sortiert bei jedem Aufruf alle 10.486 Artikel
+  // (gemessen ~15-50ms) -- ohne Debounce würde jeder einzelne Tastendruck das komplette Raster
+  // neu berechnen und spürbar ruckeln.
+  const debouncedShopSearch = debounce(() => { state.page = 1; renderShop(); }, 200);
   document.getElementById('searchInput').addEventListener('input', e => {
-    state.query = e.target.value; state.page = 1; renderShop();
+    state.query = e.target.value;
+    debouncedShopSearch();
   });
   document.getElementById('categorySelect').addEventListener('change', e => {
     state.category = e.target.value; state.page = 1; renderShop();
