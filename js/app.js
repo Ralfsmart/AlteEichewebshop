@@ -214,6 +214,18 @@ function pctFmt(v) {
   return (Number(v) || 0).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 2 }) + '%';
 }
 
+// Nur für die Anzeige: Leerzeichen zwischen Anzahl und ausgeschriebener Einheit ergänzen
+// ("10Stück" -> "10 Stück", "5Tüten" -> "5 Tüten"). Kurzabkürzungen wie "400g", "7KG" oder
+// "10ML" bleiben absichtlich eng dran, das ist übliche Schreibweise. Die Rohdaten in
+// state.products bleiben unverändert -- betrifft nur die Textdarstellung.
+const GEBINDE_TIGHT_UNITS = new Set(['g', 'kg', 'l', 'ml', 'st']);
+function formatGebinde(geb) {
+  if (!geb) return '';
+  return String(geb).replace(/(\d)([A-Za-zÄÖÜäöüß]+)$/, (match, digit, unit) =>
+    GEBINDE_TIGHT_UNITS.has(unit.toLowerCase()) ? match : digit + ' ' + unit
+  );
+}
+
 function parseGrundpreis(geb, verkPreis) {
   if (!geb) return null;
   // Multiplikator ("6x250g") ist optional, damit auch Einzelpackungen ohne "x"
@@ -343,7 +355,7 @@ function productCard(p, pct) {
     <div class="card-artnr">Art.-Nr. ${escapeHtml(p.art)}</div>
     <div class="card-meta">${escapeHtml(p.hers || '')}${p.land ? ' · ' + escapeHtml(p.land) : ''}</div>
     <div class="card-meta">${escapeHtml(p.qual || '')}</div>
-    <div class="card-geb">${escapeHtml(p.geb || '')}</div>
+    <div class="card-geb">${escapeHtml(formatGebinde(p.geb))}</div>
     <div class="card-price">
       <span class="vk">${money(vk)}</span>
       <span class="unit">/ Gebinde</span>
@@ -392,7 +404,7 @@ function renderCartDrawer() {
       <div class="cart-item" data-art="${escapeHtml(e.p.art)}">
         <div class="ci-info">
           <div class="ci-title">${escapeHtml(e.p.bez)}</div>
-          <div class="ci-meta">${money(e.vk)} · ${escapeHtml(e.p.geb || '')}</div>
+          <div class="ci-meta">${money(e.vk)} · ${escapeHtml(formatGebinde(e.p.geb))}</div>
         </div>
         <div class="ci-qty">
           <button class="qty-btn" data-act="dec">−</button>
@@ -450,7 +462,7 @@ function renderCheckout() {
             <td>–</td>
             <td>${escapeHtml(prev.art)}</td>
             <td><s>${escapeHtml(prev.bez)}</s></td>
-            <td>${escapeHtml(prev.geb || '')}</td>
+            <td>${escapeHtml(formatGebinde(prev.geb))}</td>
             <td><s>${money(prev.vk)}</s></td>
             <td>${pctFmt(prev.mwst)}</td>
             <td>${state.cart[art]}</td>
@@ -476,7 +488,7 @@ function renderCheckout() {
         <td>${i + 1}</td>
         <td>${escapeHtml(e.p.art)}</td>
         <td>${escapeHtml(e.p.bez)}</td>
-        <td>${escapeHtml(e.p.geb || '')}</td>
+        <td>${escapeHtml(formatGebinde(e.p.geb))}</td>
         <td>${priceCell}</td>
         <td>${pctFmt(e.p.mwst)}</td>
         <td>${e.qty}</td>
@@ -775,7 +787,7 @@ function exportBestellliste() {
   const objs = entries.map(e => ({
     artnr: e.p.art,
     bezeichnung: e.p.bez,
-    gebinde: e.p.geb || '',
+    gebinde: formatGebinde(e.p.geb),
     menge: e.qty,
     preis: money(e.vk),
     summe: money(e.sum)
@@ -799,7 +811,7 @@ function buildOrderEmailBody(entries, totalVk) {
   if (state.buyer.bank) lines.push('Bankverbindung: ' + state.buyer.bank);
   lines.push('', 'Artikel-Nr. | Bezeichnung | Gebinde | Menge | Preis | Summe');
   entries.forEach(e => {
-    lines.push(`${e.p.art} | ${e.p.bez} | ${e.p.geb || ''} | ${e.qty} | ${money(e.vk)} | ${money(e.sum)}`);
+    lines.push(`${e.p.art} | ${e.p.bez} | ${formatGebinde(e.p.geb)} | ${e.qty} | ${money(e.vk)} | ${money(e.sum)}`);
   });
   lines.push('', 'Gesamt-Bestellbetrag: ' + money(totalVk));
   return lines.join('\n');
