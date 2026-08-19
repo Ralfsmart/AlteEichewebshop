@@ -148,9 +148,12 @@ input, select { font-family: inherit; }
 .ci-title { font-size: .9rem; font-weight: 600; }
 .ci-meta { font-size: .78rem; color: var(--muted); }
 .ci-qty { display: flex; align-items: center; gap: 6px; }
-.ci-qty .qty-btn { width: 24px; height: 24px; font-size: .95rem; }
+.ci-qty .qty-btn { width: 36px; height: 36px; font-size: 1rem; }
 .ci-sum { font-weight: 600; font-size: .9rem; white-space: nowrap; }
-.ci-remove { background: none; border: none; color: var(--danger); font-size: 1rem; }
+.ci-remove {
+  background: none; border: none; color: var(--danger); font-size: 1.1rem;
+  min-width: 36px; min-height: 36px; display: flex; align-items: center; justify-content: center;
+}
 .cart-items .empty { color: var(--muted); text-align: center; margin-top: 30px; }
 
 .cart-summary { padding: 10px 16px; border-top: 1px solid var(--border); }
