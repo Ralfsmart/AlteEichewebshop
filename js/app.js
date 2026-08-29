@@ -835,7 +835,7 @@ function exportBestellliste() {
     lines.push(['Vorname', acc.vorname || ''].map(toCSVField).join(','));
     lines.push(['Nachname', acc.nachname || ''].map(toCSVField).join(','));
     lines.push(['E-Mail', acc.email || ''].map(toCSVField).join(','));
-    if (acc.iban) lines.push(['IBAN', acc.iban].map(toCSVField).join(','));
+    lines.push(['IBAN', acc.iban || ''].map(toCSVField).join(','));
   }
   if (state.buyer.name) lines.push(['Name', state.buyer.name].map(toCSVField).join(','));
   if (state.buyer.adresse) lines.push(['Adresse', state.buyer.adresse].map(toCSVField).join(','));
@@ -868,7 +868,7 @@ function buildOrderEmailBody(entries, totalVk) {
     lines.push('Vorname: ' + (acc.vorname || ''));
     lines.push('Nachname: ' + (acc.nachname || ''));
     lines.push('E-Mail: ' + (acc.email || ''));
-    if (acc.iban) lines.push('IBAN: ' + acc.iban);
+    lines.push('IBAN: ' + (acc.iban || ''));
   }
   if (state.buyer.name) lines.push('Name: ' + state.buyer.name);
   if (state.buyer.adresse) lines.push('Adresse: ' + state.buyer.adresse);
