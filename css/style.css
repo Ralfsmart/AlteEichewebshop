@@ -259,6 +259,7 @@ input, select { font-family: inherit; }
 .toast.error { background: var(--danger); }
 
 /* ---------- Print ---------- */
+@page { size: landscape; }
 @media print {
   .topbar, .cart-drawer, .cart-overlay, .checkout-actions, .checkout-email-hint, .site-footer { display: none !important; }
   .view { padding: 0; }
