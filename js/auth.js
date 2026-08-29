@@ -83,6 +83,15 @@ function currentUserAccount() {
   return findUser(s.username) || null;
 }
 
+// Loescht ein Kundenkonto unwiderruflich aus diesem Browser (Recht auf Loeschung, Art. 17
+// DSGVO) und meldet die Person ab. Da Konten nur lokal gespeichert werden, betrifft das
+// ausschliesslich dieses Geraet -- auf anderen Geraeten registrierte Konten bleiben bestehen.
+function deleteAccount(username) {
+  const users = getUsers().filter(u => u.username !== username);
+  saveUsers(users);
+  clearSession();
+}
+
 // Ermöglicht einem angemeldeten Kunden, die bei der Registrierung hinterlegten Daten
 // (Vorname, Nachname, E-Mail, IBAN) nachträglich zu ändern. Benutzername und Passwort
 // bleiben davon unberührt (dafür gibt es Login bzw. Passwort-zurücksetzen).

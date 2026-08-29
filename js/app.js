@@ -317,6 +317,7 @@ function renderAll() {
   document.getElementById('view-checkout').classList.toggle('hidden', state.view !== 'checkout');
   document.getElementById('view-profile').classList.toggle('hidden', state.view !== 'profile');
   document.getElementById('view-admin').classList.toggle('hidden', state.view !== 'admin');
+  document.getElementById('view-impressum').classList.toggle('hidden', state.view !== 'impressum');
   document.body.classList.toggle('bg-market', state.view === 'shop');
 
   document.querySelectorAll('.auth-only').forEach(el => el.classList.toggle('hidden', !loggedIn));
@@ -1066,6 +1067,19 @@ function bindGlobalEvents() {
     } catch (ex) { err.textContent = ex.message; }
   });
 
+  document.getElementById('deleteAccountBtn').addEventListener('click', () => {
+    if (!confirm('Konto wirklich endgültig löschen? Alle hinterlegten Daten (Benutzername, Passwort, Vorname, Nachname, E-Mail, IBAN) werden aus diesem Browser entfernt. Das kann nicht rückgängig gemacht werden.')) return;
+    const s = getSession();
+    if (!s) return;
+    deleteAccount(s.username);
+    state.cart = {};
+    saveJSON(LS_KEYS.cart, state.cart);
+    state.cartOpen = false;
+    state.view = 'auth';
+    renderAll();
+    showToast('Konto wurde gelöscht.');
+  });
+
   document.getElementById('forgotPassLink').addEventListener('click', () => switchAuthTab('reset'));
   document.getElementById('backToLoginLink').addEventListener('click', () => switchAuthTab('login'));
 
@@ -1161,6 +1175,19 @@ function bindGlobalEvents() {
   });
 
   document.getElementById('backToShopBtn').addEventListener('click', () => { state.view = 'shop'; renderAll(); });
+
+  document.getElementById('backFromImpressumBtn').addEventListener('click', () => {
+    state.view = isLoggedIn() ? 'shop' : 'auth';
+    renderAll();
+  });
+
+  // Eigener Handler statt der generischen [data-nav]-Bindung, da diese ein Login voraussetzt --
+  // das Impressum muss aber auch ohne Anmeldung erreichbar sein.
+  document.getElementById('impressumLink').addEventListener('click', () => {
+    state.view = 'impressum';
+    renderAll();
+    window.scrollTo(0, 0);
+  });
 
   ['checkoutName', 'checkoutAdresse', 'checkoutBank'].forEach(id => {
     document.getElementById(id).addEventListener('input', e => {

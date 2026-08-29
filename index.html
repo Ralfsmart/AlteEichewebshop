@@ -160,6 +160,12 @@
     <div id="profileSuccess" class="hint"></div>
     <button id="profileSaveBtn" class="btn-primary" form="profileForm" type="submit">Änderungen speichern</button>
   </div>
+
+  <div class="admin-card">
+    <h3>Konto löschen</h3>
+    <p class="hint">Löscht dein Konto (Benutzername, Passwort, Vorname, Nachname, E-Mail, IBAN) unwiderruflich aus diesem Browser. Diese Aktion kann nicht rückgängig gemacht werden.</p>
+    <button id="deleteAccountBtn" class="btn-danger">Konto endgültig löschen</button>
+  </div>
 </main>
 
 <!-- ===================== ADMIN ===================== -->
@@ -277,6 +283,33 @@
     </section>
   </div>
 </main>
+
+<!-- ===================== IMPRESSUM ===================== -->
+<main id="view-impressum" class="view hidden">
+  <div class="checkout-header">
+    <h2>Impressum</h2>
+    <button id="backFromImpressumBtn" class="btn-secondary">← Zurück</button>
+  </div>
+
+  <div class="admin-card">
+    <h3>Angaben gemäß § 5 DDG</h3>
+    <p>FoodCoop Alte Eiche<br>
+    Bei der alten Eiche 5<br>
+    78315 Radolfzell</p>
+    <p>Vertreten durch: Ralf Schultheiß</p>
+    <p>Rechtsform: nicht eingetragene Einkaufsgemeinschaft (kein rechtsfähiger Verein)</p>
+
+    <h3>Kontakt</h3>
+    <p>E-Mail: alteeiche.info@gmail.com</p>
+
+    <h3>Haftungshinweis</h3>
+    <p class="hint">Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <button id="impressumLink" class="footer-link">Impressum</button>
+</footer>
 
 <!-- ===================== CART DRAWER ===================== -->
 <div id="cartOverlay" class="cart-overlay"></div>
