@@ -112,8 +112,14 @@
 
   <div class="buyer-form">
     <label>Name<input id="checkoutName" type="text"></label>
-    <label>Adresse<input id="checkoutAdresse" type="text"></label>
+    <label id="buyerAdresseField">Adresse<input id="checkoutAdresse" type="text"></label>
     <label>Eigene Bankverbindung (für Rücküberweisung)<input id="checkoutBank" type="text"></label>
+  </div>
+
+  <div class="print-only checkout-print-account">
+    <p><strong>Vorname:</strong> <span id="printVorname"></span></p>
+    <p><strong>Nachname:</strong> <span id="printNachname"></span></p>
+    <p><strong>IBAN:</strong> <span id="printIban"></span></p>
   </div>
 
   <div id="checkoutChangesNotice"></div>

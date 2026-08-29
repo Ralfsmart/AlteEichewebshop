@@ -507,6 +507,11 @@ function renderCheckout() {
   document.getElementById('checkoutAdresse').value = state.buyer.adresse || '';
   document.getElementById('checkoutBank').value = state.buyer.bank || '';
 
+  const acc = currentUserAccount();
+  document.getElementById('printVorname').textContent = acc ? (acc.vorname || '') : '';
+  document.getElementById('printNachname').textContent = acc ? (acc.nachname || '') : '';
+  document.getElementById('printIban').textContent = acc ? (acc.iban || '') : '';
+
   // Artikel, die noch im Warenkorb liegen, aber inzwischen aus dem Katalog verschwunden sind
   // (z. B. nicht mehr im Sortiment) -- werden einmalig durchgestrichen mit angezeigt.
   const removedRows = [];
