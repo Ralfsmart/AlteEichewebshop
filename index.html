@@ -110,16 +110,10 @@
     <button id="backToShopBtn" class="btn-secondary">← Zurück zum Shop</button>
   </div>
 
-  <div class="buyer-form">
-    <label>Name<input id="checkoutName" type="text"></label>
-    <label id="buyerAdresseField">Adresse<input id="checkoutAdresse" type="text"></label>
-    <label>Eigene Bankverbindung (für Rücküberweisung)<input id="checkoutBank" type="text"></label>
-  </div>
-
-  <div class="print-only checkout-print-account">
-    <p><strong>Vorname:</strong> <span id="printVorname"></span></p>
-    <p><strong>Nachname:</strong> <span id="printNachname"></span></p>
-    <p><strong>IBAN:</strong> <span id="printIban"></span></p>
+  <div class="admin-card checkout-account-info">
+    <p><strong>Vorname:</strong> <span id="checkoutVorname"></span> &nbsp; <strong>Nachname:</strong> <span id="checkoutNachname"></span></p>
+    <p><strong>IBAN:</strong> <span id="checkoutIban"></span></p>
+    <p class="hint">Diese Angaben stammen aus deinem Konto und werden in Bestellliste, E-Mail und Ausdruck verwendet. Falls sie nicht stimmen: <button id="goToMyAccountLink" class="footer-link">Mein Konto bearbeiten</button></p>
   </div>
 
   <div id="checkoutChangesNotice"></div>

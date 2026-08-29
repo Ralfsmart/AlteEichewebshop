@@ -10,7 +10,6 @@ const LS_KEYS = {
   overridePct: 'ws_override_pct',
   cart: 'ws_cart',
   catMeta: 'ws_cat_meta',
-  buyer: 'ws_buyer',
   dataSource: 'ws_data_source',
   githubConfig: 'ws_github_config'
 };
@@ -90,7 +89,6 @@ const state = {
   surcharges: [],
   overridePct: null,
   cart: {},        // { artNr: qty }
-  buyer: { name: '', adresse: '', bank: '' },
   catMeta: {},      // { kategorie: { updated, source } }
   dataSource: {},   // { kategorie: 'server' | 'local' | 'default' }
   view: 'auth',     // auth | shop | checkout | admin
@@ -108,7 +106,6 @@ function init() {
   state.surcharges = loadJSON(LS_KEYS.surcharges, null) || (window.DEFAULT_SURCHARGES || []);
   state.overridePct = loadJSON(LS_KEYS.overridePct, null);
   state.cart = loadJSON(LS_KEYS.cart, {});
-  state.buyer = loadJSON(LS_KEYS.buyer, { name: '', adresse: '', bank: '' });
   state.catMeta = loadJSON(LS_KEYS.catMeta, {});
   state.dataSource = loadJSON(LS_KEYS.dataSource, {});
 
@@ -503,14 +500,10 @@ function renderCheckout() {
   const totalVk = entries.reduce((s, e) => s + e.sum, 0);
   const prevByArt = state.checkoutPrevEntries;
 
-  document.getElementById('checkoutName').value = state.buyer.name || '';
-  document.getElementById('checkoutAdresse').value = state.buyer.adresse || '';
-  document.getElementById('checkoutBank').value = state.buyer.bank || '';
-
   const acc = currentUserAccount();
-  document.getElementById('printVorname').textContent = acc ? (acc.vorname || '') : '';
-  document.getElementById('printNachname').textContent = acc ? (acc.nachname || '') : '';
-  document.getElementById('printIban').textContent = acc ? (acc.iban || '') : '';
+  document.getElementById('checkoutVorname').textContent = acc ? (acc.vorname || '') : '';
+  document.getElementById('checkoutNachname').textContent = acc ? (acc.nachname || '') : '';
+  document.getElementById('checkoutIban').textContent = acc ? (acc.iban || '') : '';
 
   // Artikel, die noch im Warenkorb liegen, aber inzwischen aus dem Katalog verschwunden sind
   // (z. B. nicht mehr im Sortiment) -- werden einmalig durchgestrichen mit angezeigt.
@@ -856,9 +849,6 @@ function exportBestellliste() {
     lines.push(['E-Mail', acc.email || ''].map(toCSVField).join(','));
     lines.push(['IBAN', acc.iban || ''].map(toCSVField).join(','));
   }
-  if (state.buyer.name) lines.push(['Name', state.buyer.name].map(toCSVField).join(','));
-  if (state.buyer.adresse) lines.push(['Adresse', state.buyer.adresse].map(toCSVField).join(','));
-  if (state.buyer.bank) lines.push(['Bankverbindung', state.buyer.bank].map(toCSVField).join(','));
   if (lines.length) lines.push('');
   const objs = entries.map(e => ({
     artnr: e.p.art,
@@ -889,9 +879,6 @@ function buildOrderEmailBody(entries, totalVk) {
     lines.push('E-Mail: ' + (acc.email || ''));
     lines.push('IBAN: ' + (acc.iban || ''));
   }
-  if (state.buyer.name) lines.push('Name: ' + state.buyer.name);
-  if (state.buyer.adresse) lines.push('Adresse: ' + state.buyer.adresse);
-  if (state.buyer.bank) lines.push('Bankverbindung: ' + state.buyer.bank);
   lines.push('', 'Artikel-Nr. | Bezeichnung | Gebinde | Menge | Preis | Summe');
   entries.forEach(e => {
     lines.push(`${e.p.art} | ${e.p.bez} | ${formatGebinde(e.p.geb)} | ${e.qty} | ${money(e.vk)} | ${money(e.sum)}`);
@@ -905,7 +892,7 @@ function emailBestellung() {
   if (!entries.length) { showToast('Warenkorb ist leer.', true); return; }
   const acc = currentUserAccount();
   const totalVk = entries.reduce((s, e) => s + e.sum, 0);
-  const nameForSubject = acc ? [acc.vorname, acc.nachname].filter(Boolean).join(' ') : state.buyer.name;
+  const nameForSubject = acc ? [acc.vorname, acc.nachname].filter(Boolean).join(' ') : '';
   const subject = 'Bestellung FoodCoop Alte Eiche' + (nameForSubject ? ' – ' + nameForSubject : '');
   const body = buildOrderEmailBody(entries, totalVk);
   window.location.href = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -1194,12 +1181,9 @@ function bindGlobalEvents() {
     window.scrollTo(0, 0);
   });
 
-  ['checkoutName', 'checkoutAdresse', 'checkoutBank'].forEach(id => {
-    document.getElementById(id).addEventListener('input', e => {
-      const field = { checkoutName: 'name', checkoutAdresse: 'adresse', checkoutBank: 'bank' }[id];
-      state.buyer[field] = e.target.value;
-      saveJSON(LS_KEYS.buyer, state.buyer);
-    });
+  document.getElementById('goToMyAccountLink').addEventListener('click', () => {
+    state.view = 'profile';
+    renderAll();
   });
 
   document.getElementById('printBtn').addEventListener('click', () => window.print());
