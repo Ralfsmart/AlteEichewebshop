@@ -54,8 +54,11 @@
     </form>
 
     <form id="registerForm" class="auth-form hidden">
+      <label>Vorname<input id="regVorname" type="text" autocomplete="given-name" required></label>
+      <label>Nachname<input id="regNachname" type="text" autocomplete="family-name" required></label>
       <label>Benutzername<input id="regUser" type="text" autocomplete="username" required></label>
       <label>E-Mail-Adresse<input id="regEmail" type="email" autocomplete="email" required></label>
+      <label>IBAN (für Rücküberweisungen, optional)<input id="regIban" type="text" autocomplete="off" placeholder="DE12 3456 7890 1234 5678 90"></label>
       <label>Passwort<input id="regPass" type="password" autocomplete="new-password" required></label>
       <label>Passwort wiederholen<input id="regPass2" type="password" autocomplete="new-password" required></label>
       <div id="registerError" class="auth-error"></div>

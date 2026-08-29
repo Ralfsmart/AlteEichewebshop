@@ -695,8 +695,15 @@ function githubErrorMessage(status) {
 
 function exportBestellliste() {
   const entries = cartEntries();
-  const objs = entries.map(e => ({ artnr: e.p.art, menge: e.qty, kommentar: e.p.bez }));
-  downloadText('bestellliste.csv', objectsToCSV(objs, ['artnr', 'menge', 'kommentar']));
+  const acc = currentUserAccount();
+  const objs = entries.map(e => ({
+    artnr: e.p.art, menge: e.qty, kommentar: e.p.bez,
+    vorname: acc ? (acc.vorname || '') : '',
+    nachname: acc ? (acc.nachname || '') : '',
+    email: acc ? (acc.email || '') : '',
+    iban: acc ? (acc.iban || '') : ''
+  }));
+  downloadText('bestellliste.csv', objectsToCSV(objs, ['artnr', 'menge', 'kommentar', 'vorname', 'nachname', 'email', 'iban']));
 }
 
 // Bestellungen laufen über die Koordination, nicht direkt an Bodan -- die Mitglieder schicken
@@ -706,7 +713,14 @@ function exportBestellliste() {
 const ORDER_EMAIL = 'alteeiche.info@gmail.com';
 
 function buildOrderEmailBody(entries, totalVk) {
+  const acc = currentUserAccount();
   const lines = ['Bestellung FoodCoop Alte Eiche', ''];
+  if (acc) {
+    lines.push('Vorname: ' + (acc.vorname || ''));
+    lines.push('Nachname: ' + (acc.nachname || ''));
+    lines.push('E-Mail: ' + (acc.email || ''));
+    if (acc.iban) lines.push('IBAN: ' + acc.iban);
+  }
   if (state.buyer.name) lines.push('Name: ' + state.buyer.name);
   if (state.buyer.adresse) lines.push('Adresse: ' + state.buyer.adresse);
   if (state.buyer.bank) lines.push('Bankverbindung: ' + state.buyer.bank);
@@ -721,8 +735,10 @@ function buildOrderEmailBody(entries, totalVk) {
 function emailBestellung() {
   const entries = cartEntries();
   if (!entries.length) { showToast('Warenkorb ist leer.', true); return; }
+  const acc = currentUserAccount();
   const totalVk = entries.reduce((s, e) => s + e.sum, 0);
-  const subject = 'Bestellung FoodCoop Alte Eiche' + (state.buyer.name ? ' – ' + state.buyer.name : '');
+  const nameForSubject = acc ? [acc.vorname, acc.nachname].filter(Boolean).join(' ') : state.buyer.name;
+  const subject = 'Bestellung FoodCoop Alte Eiche' + (nameForSubject ? ' – ' + nameForSubject : '');
   const body = buildOrderEmailBody(entries, totalVk);
   window.location.href = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
@@ -805,7 +821,10 @@ function bindGlobalEvents() {
         document.getElementById('regUser').value,
         document.getElementById('regEmail').value,
         document.getElementById('regPass').value,
-        document.getElementById('regPass2').value
+        document.getElementById('regPass2').value,
+        document.getElementById('regVorname').value,
+        document.getElementById('regNachname').value,
+        document.getElementById('regIban').value
       );
       document.getElementById('registerForm').reset();
       onAuthSuccess('Konto erstellt – willkommen!');

@@ -49,9 +49,14 @@ function findUser(usernameOrEmail) {
   return getUsers().find(u => u.username.toLowerCase() === q || u.email.toLowerCase() === q);
 }
 
-async function registerUser(username, email, password, passwordRepeat) {
+async function registerUser(username, email, password, passwordRepeat, vorname, nachname, iban) {
   username = (username || '').trim();
   email = (email || '').trim();
+  vorname = (vorname || '').trim();
+  nachname = (nachname || '').trim();
+  iban = (iban || '').trim().toUpperCase().replace(/\s+/g, ' ');
+  if (!vorname) throw new Error('Bitte Vorname angeben.');
+  if (!nachname) throw new Error('Bitte Nachname angeben.');
   if (username.length < 3) throw new Error('Benutzername muss mindestens 3 Zeichen haben.');
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Bitte eine gültige E-Mail-Adresse angeben.');
   if (password.length < 6) throw new Error('Passwort muss mindestens 6 Zeichen haben.');
@@ -61,10 +66,19 @@ async function registerUser(username, email, password, passwordRepeat) {
   const salt = randomHex(16);
   const hash = await hashPassword(password, salt);
   const users = getUsers();
-  users.push({ username, email, salt, hash, createdAt: Date.now() });
+  users.push({ username, email, salt, hash, vorname, nachname, iban, createdAt: Date.now() });
   saveUsers(users);
   setSession({ type: 'customer', username });
   return { username, email };
+}
+
+// Liefert Vorname/Nachname/E-Mail/IBAN des aktuell angemeldeten Kontos (für CSV-Export und
+// E-Mail-Versand der Bestellung) -- oder null, falls niemand angemeldet ist bzw. das Konto
+// aus einer Zeit vor Einführung dieser Felder stammt.
+function currentUserAccount() {
+  const s = getSession();
+  if (!s || s.type !== 'customer') return null;
+  return findUser(s.username) || null;
 }
 
 async function loginUser(usernameOrEmail, password) {
@@ -102,8 +116,12 @@ async function resetPassword(username, email, newPassword, newPasswordRepeat) {
 function exportUsersCSV() {
   const users = getUsers();
   return objectsToCSV(
-    users.map(u => ({ Benutzername: u.username, EMail: u.email, Salt: u.salt, Hash: u.hash, Erstellt: new Date(u.createdAt).toISOString() })),
-    ['Benutzername', 'EMail', 'Salt', 'Hash', 'Erstellt']
+    users.map(u => ({
+      Benutzername: u.username, Vorname: u.vorname || '', Nachname: u.nachname || '',
+      EMail: u.email, IBAN: u.iban || '', Salt: u.salt, Hash: u.hash,
+      Erstellt: new Date(u.createdAt).toISOString()
+    })),
+    ['Benutzername', 'Vorname', 'Nachname', 'EMail', 'IBAN', 'Salt', 'Hash', 'Erstellt']
   );
 }
 
@@ -112,7 +130,10 @@ function importUsersCSV(text) {
   const objs = rowsToObjects(rows);
   const users = objs.map(o => ({
     username: o.Benutzername || o.username,
+    vorname: o.Vorname || o.vorname || '',
+    nachname: o.Nachname || o.nachname || '',
     email: o.EMail || o.email,
+    iban: o.IBAN || o.iban || '',
     salt: o.Salt || o.salt,
     hash: o.Hash || o.hash,
     createdAt: o.Erstellt ? Date.parse(o.Erstellt) || Date.now() : Date.now()
