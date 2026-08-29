@@ -22,7 +22,9 @@ function authLoadJSON(key, fallback) {
     return JSON.parse(raw);
   } catch (e) { return fallback; }
 }
-function authSaveJSON(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+function authSaveJSON(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* Speicher nicht verfügbar */ }
+}
 
 function randomHex(bytes) {
   const arr = crypto.getRandomValues(new Uint8Array(bytes));

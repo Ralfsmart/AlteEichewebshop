@@ -64,7 +64,20 @@ function loadJSON(key, fallback) {
     return JSON.parse(raw);
   } catch (e) { return fallback; }
 }
-function saveJSON(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+// try/catch, damit ein blockierter/voller Speicher (z. B. strikte Privatsphäre-Einstellungen,
+// manche Inapp-Browser) die Seite nicht mitten in init() abbrechen lässt -- die Seite läuft dann
+// eben nur ohne dauerhafte Speicherung weiter, statt komplett weiß zu bleiben.
+function saveJSON(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* Speicher nicht verfügbar */ }
+}
+
+function debounce(fn, delayMs) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delayMs);
+  };
+}
 
 function slugify(s) {
   return String(s).toLowerCase()
@@ -86,7 +99,8 @@ const state = {
   sort: 'name-asc',
   page: 1,
   pageSize: 60,
-  cartOpen: false
+  cartOpen: false,
+  checkoutPrevEntries: null  // Preise/Artikel vor dem letzten Bestellübersicht-Refresh (für Änderungs-Hervorhebung)
 };
 
 function init() {
@@ -213,15 +227,34 @@ function pctFmt(v) {
   return (Number(v) || 0).toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 2 }) + '%';
 }
 
+// Nur für die Anzeige: Leerzeichen zwischen Anzahl und ausgeschriebener Einheit ergänzen
+// ("10Stück" -> "10 Stück", "5Tüten" -> "5 Tüten"). Kurzabkürzungen wie "400g", "7KG" oder
+// "10ML" bleiben absichtlich eng dran, das ist übliche Schreibweise. Die Rohdaten in
+// state.products bleiben unverändert -- betrifft nur die Textdarstellung.
+const GEBINDE_TIGHT_UNITS = new Set(['g', 'kg', 'l', 'ml', 'st']);
+function formatGebinde(geb) {
+  if (!geb) return '';
+  return String(geb).replace(/(\d)([A-Za-zÄÖÜäöüß]+)$/, (match, digit, unit) =>
+    GEBINDE_TIGHT_UNITS.has(unit.toLowerCase()) ? match : digit + ' ' + unit
+  );
+}
+
 function parseGrundpreis(geb, verkPreis) {
   if (!geb) return null;
-  const m = String(geb).match(/^\s*(\d+)\s*[x×]\s*([\d.,]+)\s*(kg|g|l|ml|stk|stück|st)?/i);
+  // Multiplikator ("6x250g") ist optional, damit auch Einzelpackungen ohne "x"
+  // (z. B. "480g", "7kg") einen Grundpreis bekommen.
+  const m = String(geb).match(/^\s*(?:(\d+)\s*[x×]\s*)?([\d.,]+)\s*(kg|g|l|ml|stk|stück|st)\s*$/i);
   if (!m) return null;
-  const stueck = parseInt(m[1], 10);
+  const stueck = m[1] ? parseInt(m[1], 10) : 1;
   const menge = parseFloat(m[2].replace(',', '.'));
-  const einheit = (m[3] || 'Stk').toLowerCase();
+  let einheit = m[3].toLowerCase();
   if (!stueck || !menge) return null;
-  const gesamtMenge = stueck * menge;
+  let gesamtMenge = stueck * menge;
+  // Gramm/Milliliter auf die übliche Grundpreis-Einheit kg/l umrechnen, statt z. B.
+  // "0,02 € je g" anzuzeigen, wenn eigentlich "16,62 € je kg" gemeint ist.
+  if (einheit === 'g') { gesamtMenge /= 1000; einheit = 'kg'; }
+  else if (einheit === 'ml') { gesamtMenge /= 1000; einheit = 'l'; }
+  else if (einheit === 'stück' || einheit === 'st') { einheit = 'stk'; }
   const proEinheit = verkPreis / gesamtMenge;
   return { proEinheit, gesamtMenge, einheit };
 }
@@ -298,8 +331,30 @@ function renderAll() {
 
   renderCartBadge();
   renderCartDrawer();
-  document.getElementById('cartDrawer').classList.toggle('open', state.cartOpen && loggedIn);
-  document.getElementById('cartOverlay').classList.toggle('open', state.cartOpen && loggedIn);
+  const cartNowOpen = state.cartOpen && loggedIn;
+  document.getElementById('cartDrawer').classList.toggle('open', cartNowOpen);
+  document.getElementById('cartOverlay').classList.toggle('open', cartNowOpen);
+  updateCartDrawerFocus(cartNowOpen);
+}
+
+// Fokus beim Öffnen/Schließen des Warenkorb-Drawers verwalten (Tastatur-/Screenreader-Nutzung):
+// beim Öffnen in den Drawer springen, beim Schließen zurück zum auslösenden Element. Reagiert
+// nur auf den tatsächlichen Wechsel offen<->geschlossen, nicht auf jedes renderAll() währenddessen
+// (sonst würde z. B. jeder Mengenklick bei offenem Drawer den Fokus zurück auf "Schließen" reißen).
+let cartDrawerWasOpen = false;
+let cartDrawerTriggerEl = null;
+function updateCartDrawerFocus(cartNowOpen) {
+  if (cartNowOpen && !cartDrawerWasOpen) {
+    cartDrawerTriggerEl = document.activeElement;
+    const closeBtn = document.getElementById('cartClose');
+    if (closeBtn) closeBtn.focus();
+  } else if (!cartNowOpen && cartDrawerWasOpen) {
+    if (cartDrawerTriggerEl && document.body.contains(cartDrawerTriggerEl) && typeof cartDrawerTriggerEl.focus === 'function') {
+      cartDrawerTriggerEl.focus();
+    }
+    cartDrawerTriggerEl = null;
+  }
+  cartDrawerWasOpen = cartNowOpen;
 }
 
 function renderShop() {
@@ -335,7 +390,7 @@ function productCard(p, pct) {
     <div class="card-artnr">Art.-Nr. ${escapeHtml(p.art)}</div>
     <div class="card-meta">${escapeHtml(p.hers || '')}${p.land ? ' · ' + escapeHtml(p.land) : ''}</div>
     <div class="card-meta">${escapeHtml(p.qual || '')}</div>
-    <div class="card-geb">${escapeHtml(p.geb || '')}</div>
+    <div class="card-geb">${escapeHtml(formatGebinde(p.geb))}</div>
     <div class="card-price">
       <span class="vk">${money(vk)}</span>
       <span class="unit">/ Gebinde</span>
@@ -347,9 +402,9 @@ function productCard(p, pct) {
       <div class="pd-row pd-sub"><span>davon MwSt. (${pctFmt(p.mwst)})</span><span>${money(p.mwstb)}</span></div>
     </details>
     <div class="card-cart">
-      <button class="qty-btn" data-act="dec">−</button>
-      <input class="qty-input" type="number" min="0" step="1" value="${qty}" data-act="set">
-      <button class="qty-btn" data-act="inc">+</button>
+      <button class="qty-btn" data-act="dec" aria-label="Menge verringern für ${escapeHtml(p.bez)}">−</button>
+      <input class="qty-input" type="number" min="0" step="1" value="${qty}" data-act="set" aria-label="Menge für ${escapeHtml(p.bez)}">
+      <button class="qty-btn" data-act="inc" aria-label="Menge erhöhen für ${escapeHtml(p.bez)}">+</button>
     </div>
   </div>`;
 }
@@ -370,7 +425,10 @@ function cartEntries() {
 }
 
 function renderCartBadge() {
-  const count = Object.values(state.cart).reduce((a, b) => a + (Number(b) || 0), 0);
+  // Nur Artikel zählen, die noch im Katalog existieren -- sonst zeigt der Badge eine Menge an,
+  // die im geöffneten Warenkorb gar nicht auftaucht (cartEntries() lässt verschwundene Artikel
+  // ja bereits stillschweigend weg), was wie ein Anzeigefehler wirkt.
+  const count = cartEntries().reduce((a, e) => a + e.qty, 0);
   document.getElementById('cartCount').textContent = count;
 }
 
@@ -384,18 +442,22 @@ function renderCartDrawer() {
       <div class="cart-item" data-art="${escapeHtml(e.p.art)}">
         <div class="ci-info">
           <div class="ci-title">${escapeHtml(e.p.bez)}</div>
-          <div class="ci-meta">${money(e.vk)} · ${escapeHtml(e.p.geb || '')}</div>
+          <div class="ci-meta">${money(e.vk)} · ${escapeHtml(formatGebinde(e.p.geb))}</div>
         </div>
         <div class="ci-qty">
-          <button class="qty-btn" data-act="dec">−</button>
+          <button class="qty-btn" data-act="dec" aria-label="Menge verringern für ${escapeHtml(e.p.bez)}">−</button>
           <span>${e.qty}</span>
-          <button class="qty-btn" data-act="inc">+</button>
+          <button class="qty-btn" data-act="inc" aria-label="Menge erhöhen für ${escapeHtml(e.p.bez)}">+</button>
         </div>
         <div class="ci-sum">${money(e.sum)}</div>
-        <button class="ci-remove" data-act="remove" title="Entfernen">✕</button>
+        <button class="ci-remove" data-act="remove" aria-label="${escapeHtml(e.p.bez)} entfernen">✕</button>
       </div>
     `).join('');
   }
+  renderCartSummary(entries);
+}
+
+function renderCartSummary(entries) {
   const totalMwst = entries.reduce((s, e) => s + e.p.mwstb * e.qty, 0);
   const totalVk = entries.reduce((s, e) => s + e.sum, 0);
   document.getElementById('cartSummary').innerHTML = entries.length ? `
@@ -404,32 +466,94 @@ function renderCartDrawer() {
   ` : '';
 }
 
+// Ruft den Warenkorb auf: bevor die Bestellübersicht angezeigt wird, den Katalog frisch vom
+// Server laden und mit dem Stand vor dem Refresh vergleichen. So fallen Preisänderungen oder
+// inzwischen entfernte Artikel auf, auch wenn der Warenkorb schon länger (über mehrere Besuche)
+// im Browser lag, statt sie beim Bestellen stillschweigend zu übernehmen.
+async function openCheckout() {
+  const prevByArt = new Map(cartEntries().map(e => [e.p.art, {
+    vk: e.vk, bez: e.p.bez, geb: e.p.geb, mwst: e.p.mwst, art: e.p.art
+  }]));
+  state.cartOpen = false;
+  state.view = 'checkout';
+  state.checkoutPrevEntries = null;
+  renderAll();
+  await loadServerCatalog(true);
+  state.checkoutPrevEntries = prevByArt;
+  renderAll();
+}
+
 function renderCheckout() {
   const entries = cartEntries();
   const totalMwst = entries.reduce((s, e) => s + e.p.mwstb * e.qty, 0);
   const totalVk = entries.reduce((s, e) => s + e.sum, 0);
+  const prevByArt = state.checkoutPrevEntries;
 
   document.getElementById('checkoutName').value = state.buyer.name || '';
   document.getElementById('checkoutAdresse').value = state.buyer.adresse || '';
   document.getElementById('checkoutBank').value = state.buyer.bank || '';
 
+  // Artikel, die noch im Warenkorb liegen, aber inzwischen aus dem Katalog verschwunden sind
+  // (z. B. nicht mehr im Sortiment) -- werden einmalig durchgestrichen mit angezeigt.
+  const removedRows = [];
+  if (prevByArt) {
+    prevByArt.forEach((prev, art) => {
+      if (state.cart[art] && !entries.some(e => e.p.art === art)) {
+        removedRows.push(`
+          <tr class="row-removed">
+            <td>–</td>
+            <td>${escapeHtml(prev.art)}</td>
+            <td><s>${escapeHtml(prev.bez)}</s></td>
+            <td>${escapeHtml(formatGebinde(prev.geb))}</td>
+            <td><s>${money(prev.vk)}</s></td>
+            <td>${pctFmt(prev.mwst)}</td>
+            <td>${state.cart[art]}</td>
+            <td>nicht mehr verfügbar</td>
+          </tr>
+        `);
+      }
+    });
+  }
+
   const tbody = document.getElementById('checkoutRows');
-  if (!entries.length) {
+  if (!entries.length && !removedRows.length) {
     tbody.innerHTML = `<tr><td colspan="8" class="empty">Warenkorb ist leer.</td></tr>`;
   } else {
-    tbody.innerHTML = entries.map((e, i) => `
-      <tr>
+    tbody.innerHTML = entries.map((e, i) => {
+      const prev = prevByArt && prevByArt.get(e.p.art);
+      const priceChanged = prev && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+      const priceCell = priceChanged
+        ? `<span class="price-old"><s>${money(prev.vk)}</s></span> <span class="price-new">${money(e.vk)}</span>`
+        : money(e.vk);
+      return `
+      <tr class="${priceChanged ? 'row-price-changed' : ''}">
         <td>${i + 1}</td>
         <td>${escapeHtml(e.p.art)}</td>
         <td>${escapeHtml(e.p.bez)}</td>
-        <td>${escapeHtml(e.p.geb || '')}</td>
-        <td>${money(e.vk)}</td>
+        <td>${escapeHtml(formatGebinde(e.p.geb))}</td>
+        <td>${priceCell}</td>
         <td>${pctFmt(e.p.mwst)}</td>
         <td>${e.qty}</td>
         <td>${money(e.sum)}</td>
       </tr>
-    `).join('');
+    `;
+    }).join('') + removedRows.join('');
   }
+
+  const changedCount = prevByArt ? entries.filter(e => {
+    const prev = prevByArt.get(e.p.art);
+    return prev && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+  }).length : 0;
+  const notice = document.getElementById('checkoutChangesNotice');
+  if (changedCount || removedRows.length) {
+    const parts = [];
+    if (changedCount) parts.push(`${changedCount} Preis${changedCount === 1 ? '' : 'e'} wurde${changedCount === 1 ? '' : 'n'} seit deiner Auswahl aktualisiert`);
+    if (removedRows.length) parts.push(`${removedRows.length} Artikel ${removedRows.length === 1 ? 'ist' : 'sind'} nicht mehr verfügbar`);
+    notice.innerHTML = `<div class="checkout-changes-notice">⚠️ ${parts.join(' · ')} — bitte unten prüfen.</div>`;
+  } else {
+    notice.innerHTML = '';
+  }
+
   document.getElementById('checkoutTotals').innerHTML = `
     <div class="sum-row"><span>davon MwSt. gesamt</span><span>${money(totalMwst)}</span></div>
     <div class="sum-row sum-total"><span>Gesamt-Bestellbetrag</span><span>${money(totalVk)}</span></div>
@@ -497,13 +621,18 @@ function renderSurchargeEditor() {
   document.getElementById('surchargeSource').className = 'cat-csv-source cat-csv-source-' + src;
 
   const list = document.getElementById('surchargeList');
-  list.innerHTML = state.surcharges.map((s, i) => `
+  list.innerHTML = state.surcharges.map((s, i) => {
+    // Bei einem frisch mit "+ Zuschlag hinzufügen" angelegten Posten ist s.art noch leer --
+    // dann auf die Positionsnummer ausweichen, statt Screenreadern ein leeres Label zu geben.
+    const label = s.art || `Zuschlagsposten ${i + 1}`;
+    return `
     <div class="sc-edit-row" data-idx="${i}">
-      <input type="text" class="sc-name-input" value="${escapeHtml(s.art)}" placeholder="Bezeichnung">
-      <div class="sc-pct-wrap"><input type="number" step="0.1" class="sc-pct-input" value="${s.pct}"><span>%</span></div>
-      <button class="sc-remove-btn" title="Entfernen">✕</button>
+      <input type="text" class="sc-name-input" value="${escapeHtml(s.art)}" placeholder="Bezeichnung" aria-label="Bezeichnung für ${escapeHtml(label)}">
+      <div class="sc-pct-wrap"><input type="number" step="0.1" class="sc-pct-input" value="${s.pct}" aria-label="Prozentsatz für ${escapeHtml(label)}"><span>%</span></div>
+      <button class="sc-remove-btn" aria-label="${escapeHtml(label)} entfernen">✕</button>
     </div>
-  `).join('');
+  `;
+  }).join('');
   document.getElementById('computedTotalPct').textContent = pctFmt(totalSurchargePct());
 }
 
@@ -560,7 +689,10 @@ function hasUsablePrice(r) {
 // (Bodans aktuelles Bestellsystem, "bodan2-*.csv") -- EK ist laut Konvention netto, MwSt.
 // wird dann rechnerisch aufgeschlagen, um auf den Bruttopreis inkl. MwSt. zu kommen.
 function productFromMappedRow(kat, r) {
-  const mwst = parseFloat(String(r.mwst).replace(',', '.')) || 0;
+  let mwst = parseFloat(String(r.mwst).replace(',', '.')) || 0;
+  // Ein korrupter MwSt-Wert wie "-100" würde unten eine Division durch 0 auslösen und als
+  // "Infinity €"/"NaN €" beim Kunden landen -- auf einen sicheren Standardwert zurückfallen.
+  if (!isFinite(mwst) || mwst <= -100) mwst = 0;
   let preis, mwstb;
   if (r.preis !== undefined && String(r.preis).trim() !== '') {
     preis = parseFloat(String(r.preis).replace(',', '.')) || 0;
@@ -695,15 +827,32 @@ function githubErrorMessage(status) {
 
 function exportBestellliste() {
   const entries = cartEntries();
+  if (!entries.length) { showToast('Warenkorb ist leer.', true); return; }
   const acc = currentUserAccount();
+  const totalVk = entries.reduce((s, e) => s + e.sum, 0);
+  const lines = [];
+  if (acc) {
+    lines.push(['Vorname', acc.vorname || ''].map(toCSVField).join(','));
+    lines.push(['Nachname', acc.nachname || ''].map(toCSVField).join(','));
+    lines.push(['E-Mail', acc.email || ''].map(toCSVField).join(','));
+    if (acc.iban) lines.push(['IBAN', acc.iban].map(toCSVField).join(','));
+  }
+  if (state.buyer.name) lines.push(['Name', state.buyer.name].map(toCSVField).join(','));
+  if (state.buyer.adresse) lines.push(['Adresse', state.buyer.adresse].map(toCSVField).join(','));
+  if (state.buyer.bank) lines.push(['Bankverbindung', state.buyer.bank].map(toCSVField).join(','));
+  if (lines.length) lines.push('');
   const objs = entries.map(e => ({
-    artnr: e.p.art, menge: e.qty, kommentar: e.p.bez,
-    vorname: acc ? (acc.vorname || '') : '',
-    nachname: acc ? (acc.nachname || '') : '',
-    email: acc ? (acc.email || '') : '',
-    iban: acc ? (acc.iban || '') : ''
+    artnr: e.p.art,
+    bezeichnung: e.p.bez,
+    gebinde: formatGebinde(e.p.geb),
+    menge: e.qty,
+    preis: money(e.vk),
+    summe: money(e.sum)
   }));
-  downloadText('bestellliste.csv', objectsToCSV(objs, ['artnr', 'menge', 'kommentar', 'vorname', 'nachname', 'email', 'iban']));
+  lines.push(objectsToCSV(objs, ['artnr', 'bezeichnung', 'gebinde', 'menge', 'preis', 'summe']));
+  lines.push('');
+  lines.push(['Gesamt-Bestellbetrag', money(totalVk)].map(toCSVField).join(','));
+  downloadText('bestellliste.csv', lines.join('\r\n'));
 }
 
 // Bestellungen laufen über die Koordination, nicht direkt an Bodan -- die Mitglieder schicken
@@ -726,7 +875,7 @@ function buildOrderEmailBody(entries, totalVk) {
   if (state.buyer.bank) lines.push('Bankverbindung: ' + state.buyer.bank);
   lines.push('', 'Artikel-Nr. | Bezeichnung | Gebinde | Menge | Preis | Summe');
   entries.forEach(e => {
-    lines.push(`${e.p.art} | ${e.p.bez} | ${e.p.geb || ''} | ${e.qty} | ${money(e.vk)} | ${money(e.sum)}`);
+    lines.push(`${e.p.art} | ${e.p.bez} | ${formatGebinde(e.p.geb)} | ${e.qty} | ${money(e.vk)} | ${money(e.sum)}`);
   });
   lines.push('', 'Gesamt-Bestellbetrag: ' + money(totalVk));
   return lines.join('\n');
@@ -744,7 +893,9 @@ function emailBestellung() {
 }
 
 function downloadText(filename, text) {
-  const blob = new Blob([text], { type: 'text/csv;charset=utf-8' });
+  // BOM voranstellen: ohne sie erkennen Excel/Sheets bei lokalen CSV-Dateien die
+  // UTF-8-Kodierung nicht zuverlässig und zeigen Sonderzeichen wie "€" als "â¬" an.
+  const blob = new Blob(['\uFEFF' + text], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = filename;
@@ -770,7 +921,41 @@ function setQty(art, qty) {
   if (qty === 0) delete state.cart[art];
   else state.cart[art] = qty;
   saveJSON(LS_KEYS.cart, state.cart);
-  renderAll();
+  updateQtyUI(art, qty);
+}
+
+// Menge geändert: nur die betroffenen Stellen im DOM anfassen statt renderAll() aufzurufen.
+// filteredProducts()/renderShop() durchsucht+sortiert bei jedem Aufruf den kompletten
+// 10.486-Artikel-Katalog (gemessen ~15-50ms) und ersetzt alle sichtbaren Karten neu -- unnötig,
+// weil eine Mengenänderung weder Filter noch Sortierung beeinflusst. Ein voller Grid-Neubau
+// hätte außerdem aufgeklappte "Preisdetails" wieder zugeklappt und den Tastatur-/Screenreader-
+// Fokus vom gerade angeklickten Button gerissen (der alte DOM-Knoten wird durch einen neuen
+// ersetzt, der Fokus fällt dann auf <body> zurück).
+function updateQtyUI(art, qty) {
+  const card = Array.from(document.querySelectorAll('.card[data-art]')).find(el => el.dataset.art === String(art));
+  if (card) {
+    const input = card.querySelector('.qty-input');
+    if (input) input.value = qty;
+  }
+
+  renderCartBadge();
+
+  if (!state.cartOpen) return;
+
+  const row = Array.from(document.querySelectorAll('.cart-item[data-art]')).find(el => el.dataset.art === String(art));
+  if (qty > 0 && row) {
+    // Zeile bleibt bestehen -- nur Menge/Summe aktualisieren, nicht die ganze Liste neu aufbauen.
+    const entries = cartEntries();
+    const entry = entries.find(e => e.p.art === art);
+    if (entry) {
+      row.querySelector('.ci-qty span').textContent = entry.qty;
+      row.querySelector('.ci-sum').textContent = money(entry.sum);
+    }
+    renderCartSummary(entries);
+  } else {
+    // Zeile taucht neu auf oder verschwindet komplett -- dafür muss die Liste neu aufgebaut werden.
+    renderCartDrawer();
+  }
 }
 
 function switchAuthTab(which) {
@@ -798,6 +983,27 @@ function updateTopbarHeightVar() {
 function bindGlobalEvents() {
   updateTopbarHeightVar();
   window.addEventListener('resize', updateTopbarHeightVar);
+
+  // Escape schließt den Warenkorb-Drawer, Tab bleibt darin gefangen, solange er offen ist --
+  // liest den aktuellen state.cartOpen live statt einen Listener bei jedem Öffnen/Schließen an-
+  // und abzumelden, damit das auch bei Wegen funktioniert, die den Drawer ohne cartClose/cartOverlay
+  // schließen (z. B. "Zur Bestellübersicht").
+  document.addEventListener('keydown', e => {
+    if (!state.cartOpen) return;
+    if (e.key === 'Escape') {
+      state.cartOpen = false; renderAll();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const drawer = document.getElementById('cartDrawer');
+      const focusables = Array.from(drawer.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+        .filter(el => !el.disabled && el.offsetParent !== null);
+      if (!focusables.length) return;
+      const first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
 
   /* ---- Auth ---- */
   document.getElementById('tabLogin').addEventListener('click', () => switchAuthTab('login'));
@@ -857,8 +1063,13 @@ function bindGlobalEvents() {
   });
 
   /* ---- Shop ---- */
+  // Debounced: filteredProducts() durchsucht+sortiert bei jedem Aufruf alle 10.486 Artikel
+  // (gemessen ~15-50ms) -- ohne Debounce würde jeder einzelne Tastendruck das komplette Raster
+  // neu berechnen und spürbar ruckeln.
+  const debouncedShopSearch = debounce(() => { state.page = 1; renderShop(); }, 200);
   document.getElementById('searchInput').addEventListener('input', e => {
-    state.query = e.target.value; state.page = 1; renderShop();
+    state.query = e.target.value;
+    debouncedShopSearch();
   });
   document.getElementById('categorySelect').addEventListener('change', e => {
     state.category = e.target.value; state.page = 1; renderShop();
@@ -907,7 +1118,7 @@ function bindGlobalEvents() {
     state.cartOpen = false; renderAll();
   });
   document.getElementById('cartCheckoutBtn').addEventListener('click', () => {
-    state.cartOpen = false; state.view = 'checkout'; renderAll();
+    openCheckout();
   });
   document.getElementById('cartClearBtn').addEventListener('click', () => {
     if (confirm('Warenkorb wirklich leeren?')) { state.cart = {}; saveJSON(LS_KEYS.cart, state.cart); renderAll(); }
@@ -1163,6 +1374,9 @@ function bindGlobalEvents() {
 let toastTimer = null;
 function showToast(msg, isError) {
   const t = document.getElementById('toast');
+  // role="alert" (assertive) für Fehler, sonst role="status" (polite) -- damit Screenreader
+  // den Hinweis überhaupt vorlesen; vorher gab es keinerlei Ankündigung für blinde Nutzer.
+  t.setAttribute('role', isError ? 'alert' : 'status');
   t.textContent = msg;
   t.classList.toggle('error', !!isError);
   t.classList.add('show');

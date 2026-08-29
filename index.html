@@ -115,6 +115,8 @@
     <label>Eigene Bankverbindung (für Rücküberweisung)<input id="checkoutBank" type="text"></label>
   </div>
 
+  <div id="checkoutChangesNotice"></div>
+
   <div class="table-wrap">
     <table class="checkout-table">
       <thead>
@@ -211,7 +213,7 @@
       <div class="sc-row sc-total"><span>Gesamt-Zuschlag (berechnet)</span><span id="computedTotalPct">0%</span></div>
 
       <div class="override-row">
-        <label>Manueller Gesamt-Zuschlag % (überschreibt die Felder oben, leer = automatisch)</label>
+        <label for="overridePctInput">Manueller Gesamt-Zuschlag % (überschreibt die Felder oben, leer = automatisch)</label>
         <div class="override-controls">
           <input id="overridePctInput" type="number" step="0.1" min="0" placeholder="z. B. 8">
           <button id="resetOverrideBtn" class="btn-secondary">Zurücksetzen</button>
@@ -255,10 +257,10 @@
 
 <!-- ===================== CART DRAWER ===================== -->
 <div id="cartOverlay" class="cart-overlay"></div>
-<aside id="cartDrawer" class="cart-drawer">
+<aside id="cartDrawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle" tabindex="-1">
   <div class="cart-drawer-header">
-    <h3>Warenkorb</h3>
-    <button id="cartClose" class="btn-icon">✕</button>
+    <h3 id="cartDrawerTitle">Warenkorb</h3>
+    <button id="cartClose" class="btn-icon" aria-label="Warenkorb schließen">✕</button>
   </div>
   <div id="cartItems" class="cart-items"></div>
   <div id="cartSummary" class="cart-summary"></div>
@@ -268,7 +270,7 @@
   </div>
 </aside>
 
-<div id="toast" class="toast"></div>
+<div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <script src="js/csv.js"></script>
 <script src="js/auth.js"></script>
