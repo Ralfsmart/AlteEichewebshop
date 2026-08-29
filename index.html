@@ -17,6 +17,7 @@
     </div>
     <nav class="topnav auth-only hidden">
       <button data-nav="shop">Shop</button>
+      <button data-nav="profile">Mein Konto</button>
       <button data-nav="admin">Daten verwalten</button>
     </nav>
     <div class="topbar-right auth-only hidden">
@@ -137,6 +138,28 @@
     <button id="emailBestellungBtn" class="btn-primary">📧 Bestellung per E-Mail senden</button>
   </div>
   <p class="hint checkout-email-hint">Öffnet dein E-Mail-Programm mit einer vorausgefüllten Nachricht an <strong>alteeiche.info@gmail.com</strong>. Bitte vor dem Absenden kurz prüfen und ggf. die heruntergeladene CSV-Datei anhängen.</p>
+</main>
+
+<!-- ===================== MEIN KONTO ===================== -->
+<main id="view-profile" class="view hidden">
+  <div class="checkout-header">
+    <h2>Mein Konto</h2>
+    <button data-nav="shop" class="btn-secondary">← Zurück zum Shop</button>
+  </div>
+
+  <div class="admin-card">
+    <h3>Kontodaten bearbeiten</h3>
+    <p class="hint">Diese Angaben werden bei der Bestellung automatisch in die Bestellliste und die Bestell-E-Mail übernommen.</p>
+    <form id="profileForm" class="buyer-form">
+      <label>Vorname<input id="profileVorname" type="text" autocomplete="given-name" required></label>
+      <label>Nachname<input id="profileNachname" type="text" autocomplete="family-name" required></label>
+      <label>E-Mail-Adresse<input id="profileEmail" type="email" autocomplete="email" required></label>
+      <label>IBAN (für Rücküberweisungen, optional)<input id="profileIban" type="text" autocomplete="off" placeholder="DE12 3456 7890 1234 5678 90"></label>
+    </form>
+    <div id="profileError" class="auth-error"></div>
+    <div id="profileSuccess" class="hint"></div>
+    <button id="profileSaveBtn" class="btn-primary" form="profileForm" type="submit">Änderungen speichern</button>
+  </div>
 </main>
 
 <!-- ===================== ADMIN ===================== -->

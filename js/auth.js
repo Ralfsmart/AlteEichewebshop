@@ -83,6 +83,32 @@ function currentUserAccount() {
   return findUser(s.username) || null;
 }
 
+// Ermöglicht einem angemeldeten Kunden, die bei der Registrierung hinterlegten Daten
+// (Vorname, Nachname, E-Mail, IBAN) nachträglich zu ändern. Benutzername und Passwort
+// bleiben davon unberührt (dafür gibt es Login bzw. Passwort-zurücksetzen).
+function updateAccount(username, updates) {
+  const vorname = (updates.vorname || '').trim();
+  const nachname = (updates.nachname || '').trim();
+  const email = (updates.email || '').trim();
+  const iban = (updates.iban || '').trim().toUpperCase().replace(/\s+/g, ' ');
+  if (!vorname) throw new Error('Bitte Vorname angeben.');
+  if (!nachname) throw new Error('Bitte Nachname angeben.');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Bitte eine gültige E-Mail-Adresse angeben.');
+
+  const users = getUsers();
+  const user = users.find(u => u.username === username);
+  if (!user) throw new Error('Konto nicht gefunden.');
+  const emailTaken = users.some(u => u.username !== username && u.email.toLowerCase() === email.toLowerCase());
+  if (emailTaken) throw new Error('Diese E-Mail-Adresse wird bereits von einem anderen Konto verwendet.');
+
+  user.vorname = vorname;
+  user.nachname = nachname;
+  user.email = email;
+  user.iban = iban;
+  saveUsers(users);
+  return user;
+}
+
 async function loginUser(usernameOrEmail, password) {
   const user = findUser(usernameOrEmail || '');
   if (!user) throw new Error('Unbekannter Benutzername oder E-Mail.');

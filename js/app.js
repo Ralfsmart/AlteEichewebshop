@@ -315,6 +315,7 @@ function renderAll() {
   document.getElementById('view-auth').classList.toggle('hidden', state.view !== 'auth');
   document.getElementById('view-shop').classList.toggle('hidden', state.view !== 'shop');
   document.getElementById('view-checkout').classList.toggle('hidden', state.view !== 'checkout');
+  document.getElementById('view-profile').classList.toggle('hidden', state.view !== 'profile');
   document.getElementById('view-admin').classList.toggle('hidden', state.view !== 'admin');
   document.body.classList.toggle('bg-market', state.view === 'shop');
 
@@ -327,6 +328,7 @@ function renderAll() {
 
   if (state.view === 'shop') renderShop();
   if (state.view === 'checkout') renderCheckout();
+  if (state.view === 'profile') renderProfile();
   if (state.view === 'admin') { renderAdminGate(); if (isAdminUnlocked()) renderAdmin(); }
 
   renderCartBadge();
@@ -481,6 +483,17 @@ async function openCheckout() {
   await loadServerCatalog(true);
   state.checkoutPrevEntries = prevByArt;
   renderAll();
+}
+
+function renderProfile() {
+  const acc = currentUserAccount();
+  if (!acc) return;
+  document.getElementById('profileVorname').value = acc.vorname || '';
+  document.getElementById('profileNachname').value = acc.nachname || '';
+  document.getElementById('profileEmail').value = acc.email || '';
+  document.getElementById('profileIban').value = acc.iban || '';
+  document.getElementById('profileError').textContent = '';
+  document.getElementById('profileSuccess').textContent = '';
 }
 
 function renderCheckout() {
@@ -1034,6 +1047,22 @@ function bindGlobalEvents() {
       );
       document.getElementById('registerForm').reset();
       onAuthSuccess('Konto erstellt – willkommen!');
+    } catch (ex) { err.textContent = ex.message; }
+  });
+
+  document.getElementById('profileForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const err = document.getElementById('profileError');
+    const ok = document.getElementById('profileSuccess');
+    err.textContent = ''; ok.textContent = '';
+    try {
+      updateAccount(getSession().username, {
+        vorname: document.getElementById('profileVorname').value,
+        nachname: document.getElementById('profileNachname').value,
+        email: document.getElementById('profileEmail').value,
+        iban: document.getElementById('profileIban').value
+      });
+      ok.textContent = 'Gespeichert.';
     } catch (ex) { err.textContent = ex.message; }
   });
 
