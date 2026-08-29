@@ -837,6 +837,21 @@ function githubErrorMessage(status) {
   return 'GitHub-Fehler (HTTP ' + status + ').';
 }
 
+// Liefert "August 2026" (aktueller Bestellmonat) fuer Betreffzeile und Dateiname.
+function currentMonthYear() {
+  return new Date().toLocaleString('de-DE', { month: 'long', year: 'numeric' });
+}
+
+// Macht einen Text sicher fuer die Verwendung in Dateinamen (Umlaute transliteriert,
+// alles andere zu "_").
+function safeFilenamePart(str) {
+  return (str || '')
+    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .replace(/Ä/g, 'Ae').replace(/Ö/g, 'Oe').replace(/Ü/g, 'Ue')
+    .replace(/[^a-zA-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+
 function exportBestellliste() {
   const entries = cartEntries();
   if (!entries.length) { showToast('Warenkorb ist leer.', true); return; }
@@ -861,7 +876,10 @@ function exportBestellliste() {
   lines.push(objectsToCSV(objs, ['artnr', 'bezeichnung', 'gebinde', 'menge', 'preis', 'summe']));
   lines.push('');
   lines.push(['Gesamt-Bestellbetrag', money(totalVk)].map(toCSVField).join(','));
-  downloadText('bestellliste.csv', lines.join('\r\n'));
+
+  const nameParts = acc ? [acc.vorname, acc.nachname].filter(Boolean).map(safeFilenamePart) : [];
+  const filename = ['bestellliste', ...nameParts, safeFilenamePart(currentMonthYear())].filter(Boolean).join('_') + '.csv';
+  downloadText(filename, lines.join('\r\n'));
 }
 
 // Bestellungen laufen über die Koordination, nicht direkt an Bodan -- die Mitglieder schicken
@@ -893,7 +911,7 @@ function emailBestellung() {
   const acc = currentUserAccount();
   const totalVk = entries.reduce((s, e) => s + e.sum, 0);
   const nameForSubject = acc ? [acc.vorname, acc.nachname].filter(Boolean).join(' ') : '';
-  const subject = 'Bestellung FoodCoop Alte Eiche' + (nameForSubject ? ' – ' + nameForSubject : '');
+  const subject = 'Bestellung FoodCoop Alte Eiche – ' + currentMonthYear() + (nameForSubject ? ' – ' + nameForSubject : '');
   const body = buildOrderEmailBody(entries, totalVk);
   window.location.href = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
