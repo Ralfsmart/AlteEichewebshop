@@ -94,6 +94,7 @@ const state = {
   view: 'auth',     // auth | shop | checkout | admin
   category: '',
   query: '',
+  searchFallback: false,  // true, wenn die Suche auf ODER-Verknuepfung zurueckgefallen ist
   sort: 'name-asc',
   page: 1,
   pageSize: 60,
@@ -265,19 +266,45 @@ function categories() {
   return Array.from(set).sort((a, b) => a.localeCompare(b, 'de'));
 }
 
+function productMatchesTerm(p, term) {
+  return (p.bez && p.bez.toLowerCase().includes(term)) ||
+    (p.hers && p.hers.toLowerCase().includes(term)) ||
+    (p.art && String(p.art).toLowerCase().includes(term));
+}
+
+// Mehrere, mit Komma getrennte Suchbegriffe: zuerst UND (alle Begriffe muessen treffen);
+// liefert das keine Treffer, wird auf ODER zurueckgefallen (mindestens ein Begriff trifft),
+// sortiert nach Anzahl der getroffenen Begriffe. state.searchFallback zeigt an, ob dieser
+// Rueckfall gerade aktiv ist (fuer einen Hinweis in der Trefferanzeige).
 function filteredProducts() {
-  const q = state.query.trim().toLowerCase();
+  const terms = state.query.split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
   let list = state.products;
   if (state.category) list = list.filter(p => p.kat === state.category);
-  if (q) {
-    list = list.filter(p =>
-      (p.bez && p.bez.toLowerCase().includes(q)) ||
-      (p.hers && p.hers.toLowerCase().includes(q)) ||
-      (p.art && String(p.art).toLowerCase().includes(q))
-    );
+
+  state.searchFallback = false;
+  let matchCounts = null;
+
+  if (terms.length) {
+    const andList = list.filter(p => terms.every(t => productMatchesTerm(p, t)));
+    if (andList.length > 0 || terms.length === 1) {
+      list = andList;
+    } else {
+      matchCounts = new Map();
+      list.forEach(p => {
+        const n = terms.reduce((sum, t) => sum + (productMatchesTerm(p, t) ? 1 : 0), 0);
+        if (n > 0) matchCounts.set(p, n);
+      });
+      list = Array.from(matchCounts.keys());
+      state.searchFallback = list.length > 0;
+    }
   }
+
   const pct = totalSurchargePct();
   const sorted = list.slice().sort((a, b) => {
+    if (matchCounts) {
+      const diff = matchCounts.get(b) - matchCounts.get(a);
+      if (diff !== 0) return diff;
+    }
     switch (state.sort) {
       case 'name-asc': return (a.bez || '').localeCompare(b.bez || '', 'de');
       case 'name-desc': return (b.bez || '').localeCompare(a.bez || '', 'de');
@@ -367,6 +394,12 @@ function renderShop() {
 
   document.getElementById('resultCount').textContent =
     list.length === 0 ? 'Keine Artikel gefunden' : `${list.length} Artikel`;
+
+  const fallbackNotice = document.getElementById('searchFallbackNotice');
+  fallbackNotice.textContent = state.searchFallback
+    ? 'Keine Artikel mit allen Suchbegriffen gefunden – zeige Treffer für mindestens einen Begriff.'
+    : '';
+  fallbackNotice.classList.toggle('hidden', !state.searchFallback);
 
   const grid = document.getElementById('productGrid');
   grid.innerHTML = pageItems.map(p => productCard(p, pct)).join('');

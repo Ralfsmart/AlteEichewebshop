@@ -77,6 +77,11 @@ input, select { font-family: inherit; }
   background: rgba(226,240,217,.75); backdrop-filter: blur(2px);
 }
 
+.search-fallback-notice {
+  display: inline-block; margin: -4px 0 10px; padding: 5px 12px; border-radius: 999px;
+  background: rgba(255,255,255,.85); backdrop-filter: blur(2px);
+}
+
 /* ---------- Product grid ---------- */
 .product-grid {
   display: grid;

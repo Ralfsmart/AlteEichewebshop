@@ -87,7 +87,7 @@
   </div>
 
   <div class="toolbar">
-    <input id="searchInput" type="search" placeholder="Suche nach Artikel, Hersteller, Artikel-Nr. …">
+    <input id="searchInput" type="search" placeholder="Suche nach Artikel, Hersteller, Artikel-Nr. … (mehrere Begriffe mit Komma trennen)">
     <select id="categorySelect"></select>
     <select id="sortSelect">
       <option value="name-asc">Name A–Z</option>
@@ -99,6 +99,7 @@
   <div class="result-bar">
     <span id="resultCount"></span>
   </div>
+  <p id="searchFallbackNotice" class="hint search-fallback-notice hidden"></p>
   <div id="productGrid" class="product-grid"></div>
   <div id="pager" class="pager"></div>
 </main>
