@@ -1,40 +1,38 @@
 ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,MwstSatz
-280865,Allgäuer Emmentaler Heumilch in Scheib.BIOLAND 40%,Ökologische Molkerei Allgäu,Bayern,Bioland,8x150g,17.548,1.1479999999999997,7
-280835,Allgäuer Tilsiter in Scheiben BIOLAND 40%,Ökologische Molkerei Allgäu,Bayern,Bioland,8x150g,17.6336,1.1536000000000008,7
-289774,Allgäuer Zitronenpfefferkäse Heumilch BIOLAND50%Th,Gebrüder Baldauf,Deutschland,Bioland,3kg,57.234300000000005,3.7443000000000026,7
-282498,Alpenstolz 10 Monate 50% - Theke,Vallee Verte,Österreich,100% Biozutaten,2kg,34.775,2.2749999999999986,7
-576047,Artischockenherzen mariniert mit frischen Kräutern,Isana,Diverse,100% Biozutaten,4x150g,11.556000000000001,0.7560000000000002,7
-282051,Bergkäse 4 Mon. DEMETER 50% - Theke,Ökologische Molkerei Allgäu,Deutschland,Demeter (Deutschland),3kg,47.187000000000005,3.0870000000000033,7
-280875,Bergkäse in Scheiben BIOLAND 40%,Ökologische Molkerei Allgäu,Bayern,Bioland,8x150g,17.7192,1.159200000000002,7
-270051,ESL Alpen-Vollmilch NATURLAND FAIR - Tetratop,Berchtesgadener Land,Diverse,NF,8x400ml,5.992,0.39200000000000035,7
-76004,Frisches Pesto Bärlauch,Isana,Europäische Union,100% Biozutaten,6x165g,15.408000000000001,1.008000000000001,7
-76001,Frisches Pesto Genovese,Isana,Diverse,100% Biozutaten,6x165g,15.408000000000001,1.008000000000001,7
-76005,Frisches Pesto Pomodoro,Isana,Diverse,100% Biozutaten,6x165g,15.408000000000001,1.008000000000001,7
-271483,Frucht- und Knusperjoghurt Erdbeere mit Schokokrin,Berchtesgadener Land,Diverse,NF,10x137g,8.56,0.5600000000000005,7
-271482,Frucht- und Knusperjoghurt Vanille mit Schokolinse,Berchtesgadener Land,Diverse,NF,10x137g,8.56,0.5600000000000005,7
-278290,Fruchtjoghurt Heidelbeer-Cassis BIOLAND,Andechser,Diverse,Bioland,6x500g,9.886800000000001,0.6468000000000007,7
-7305,Fruchtjoghurt Mango-Vanille BIOLAND,Andechser,Diverse,Bioland,6x500g,9.886800000000001,0.6468000000000007,7
-576041,Oliven-Mix entsteint,Isana,Diverse,100% Biozutaten,4x150g,11.556000000000001,0.7560000000000002,7
-181205,Salamino al Tartufo ca.150g,ptn,Italien,100% Biozutaten,Stück,5.874300000000001,0.38430000000000053,7
-181215,Salamino alla Noce ca.150g,ptn,Italien,100% Biozutaten,Stück,5.874300000000001,0.38430000000000053,7
-181220,Salamino alla Salvia ca.150g,ptn,Italien,100% Biozutaten,Stück,5.874300000000001,0.38430000000000053,7
-283355,Scamorzetti geräuchert 45%,Ökologische Molkerei Allgäu,Diverse,EG-Bio,6x150g,13.995600000000001,0.9156000000000013,7
-275130,Schokoladen Milch NATURLAND FAIR,Berchtesgadener Land,Diverse,NF,8x250g,5.136,0.3360000000000003,7
-576046,Tomaten sonnengetrocknet,Isana,Türkei,100% Biozutaten,4x130g,11.556000000000001,0.7560000000000002,7
-282242,Uriger Allgäuer BIOLAND 50% - Theke,Schaukäserei Wiggensbach,Deutschland,Bioland,4kg,58.079600000000006,3.799600000000005,7
-280645,Wanderzyt 8 Monate 53% - Theke,Vallee Verte,Schweiz,100% Biozutaten,"2,1kg",46.2882,3.0282000000000053,7
-7048,"Weidemilch Joghurt mild BIOLAND 1,8%",Andechser,Bayern,Bioland,6x500g,7.8966,0.5166000000000004,7
-7041,"Weidemilch Joghurt mild BIOLAND 3,8%",Andechser,Bayern,Bioland,6x500g,7.8966,0.5166000000000004,7
-170844,Weiderind-Geschnetzeltes Gyros DEMETER WIR.,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",9.8226,0.6425999999999998,7
-170852,Weiderind-Hochrippensteak Kräuter WIR. 2St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",11.0852,0.725200000000001,7
-170851,Weiderind-Hochripppensteak Paprika WIR. 2St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",11.0852,0.725200000000001,7
-2745011,Fruchtjoghurt Erdbeere DEMETER - Becher,Schrozberger Milchbauern,Diverse,Demeter (Deutschland),150g,0.321,0.02100000000000002,7
-2702021,Schlagsahne DEMETER 32% - Glas,Schrozberger Milchbauern,Baden-Württemberg,Demeter (Deutschland),250g,0.9309000000000001,0.060900000000000065,7
-2717101,Weidemilch Vanillepudding BIOLAND,Söbbeke,Diverse,Bioland,150g,0.48150000000000004,0.03150000000000003,7
-2763601,Ziegentopfen 40%,Leeb,Österreich,100% Biozutaten,150g,1.1663000000000001,0.07630000000000003,7
+286475,Allgäuer Ziegen-Brie BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Deutschland,Bioland,1kg,21.8815,1.4314999999999998,7
+270311,Beschwipste Anna rot BIOKREIS 50% - Theke,Schaukäserei Wiggensbach,Bayern,Biokreis,"3,9kg",56.62440000000001,3.704400000000007,7
+8709,Duc de Bourgogne 72% - Theke,Vallee Verte,Frankreich,EG-Bio,"1,7kg",42.28640000000001,2.7664000000000044,7
+8042,Edler Weisser BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Österreich,Bioland,"1,1kg",13.717400000000001,0.8974000000000011,7
+280663,Erzherzog Johann Heumilch-Käse 6 Monate 50% -Theke,Vallee Verte,Österreich,100% Biozutaten,"3,5kg",57.416199999999996,3.7561999999999998,7
+575770,Frische Girasoli alla Carbonara,Isana,Italien,100% Biozutaten,8x250g,21.2288,1.3887999999999998,7
+291035,Frische Mezzelune Cacio e Pepe,Isana,Italien,100% Biozutaten,8x250g,21.2288,1.3887999999999998,7
+298033,Ganz Gut Aufgelegt Genießerrolle 4-Pfeffer vegan,Zwergenwiese,Diverse,100% Biozutaten,6x135g,10.914,0.7140000000000004,7
+298031,Ganz Gut Aufgelegt Genießerrolle Curry vegan,Zwergenwiese,Diverse,100% Biozutaten,6x135g,10.914,0.7140000000000004,7
+298032,Ganz Gut Aufgelegt Genießerrolle Toskana vegan,Zwergenwiese,Diverse,100% Biozutaten,6x135g,10.914,0.7140000000000004,7
+290036,Gemüse-Frikadellen XXL vegan 2St,Soto,Diverse,100% Biozutaten,4x300g,9.844,0.6440000000000001,7
+273832,"Joghurt griechische Art BIOLAND 0,2% - Becher",Andechser,Bayern,Bioland,6x400g,7.832400000000001,0.5124000000000004,7
+270874,Joghurt griechischer Art Honig BIOLAND,Söbbeke,Diverse,Bioland,6x500g,11.4276,0.7476000000000003,7
+270876,Joghurt griechischer Art Orange BIOLAND,Söbbeke,Diverse,Bioland,6x500g,11.4276,0.7476000000000003,7
+270875,Joghurt griechischer Art Zitrone BIOLAND,Söbbeke,Diverse,Bioland,6x500g,11.4276,0.7476000000000003,7
+270883,Lassi Mango BIOLAND,Söbbeke,Diverse,Bioland,10x250g,7.918000000000001,0.5180000000000007,7
+270882,Lassi Natur leicht gesüßt BIOLAND,Söbbeke,Deutschland,Bioland,10x250g,7.918000000000001,0.5180000000000007,7
+270881,Lassi Zitrone BIOLAND,Söbbeke,Diverse,Bioland,10x250g,7.918000000000001,0.5180000000000007,7
+9000,Mini Frühlingsrollen Thai-Style vegan 4St,Soto,Diverse,100% Biozutaten,6x200g,13.482000000000001,0.8820000000000014,7
+9249,Samosas India vegan 4St,Soto,Diverse,100% Biozutaten,4x250g,9.844,0.6440000000000001,7
+275130,Schokoladen Milch NATURLAND FAIR,Berchtesgadener Land,Diverse,NF,8x250g,4.8792,0.3192000000000004,7
+271552,Weidemilch Milchreis auf Zimt BIOLAND,Söbbeke,Diverse,Bioland,6x150g,5.3928,0.3528000000000002,7
+278750,Winterjoghurt Bratapfel BIOLAND,Andechser,Diverse,Bioland,6x500g,10.849800000000002,0.7098000000000013,7
+274871,Winterjoghurt Haselnuss-Karamell DEMETER,Schrozberger Milchbauern,Deutschland,Demeter (Deutschland),6x500g,10.272,0.6720000000000006,7
+274869,Winterjoghurt Orange-Schokosplits DEMETER,Schrozberger Milchbauern,Deutschland,Demeter (Deutschland),6x500g,10.272,0.6720000000000006,7
+274868,Winterjoghurt Pflaume-Vanille DEMETER,Schrozberger Milchbauern,Deutschland,Demeter (Deutschland),6x500g,10.272,0.6720000000000006,7
+278754,Winterjoghurt Pumpkin-Spice BIOLAND,Andechser,Diverse,Bioland,6x500g,10.849800000000002,0.7098000000000013,7
+270415,Ziegenjoghurt mild BIOLAND 6%,Andechser,Bayern,Bioland,6x500g,13.9314,0.9114000000000004,7
+2756601,Caffe Latte Macchiato,Molkerei Biedermann,Diverse,100% Biozutaten,230ml,0.7276000000000001,0.04760000000000009,7
+2717311,Weidemilch Bourbon Vanillesosse BIOLAND,Söbbeke,Diverse,Bioland,200g,0.6634,0.043399999999999994,7
+2709521,"Weidemilch Joghurt ABC 1,5 % BIOLAND",Söbbeke,Deutschland,Bioland,500g,0.7169000000000001,0.04690000000000005,7
 7002,Alpenmilch fettarm DEMETER - Flasche,Berchtesgadener Land,Bayern,Demeter (Deutschland),"6x1,0l",8.988000000000001,0.588000000000001,7
 7005,ESL Alpen-Vollmilch NATURLAND FAIR - Tetrapak,Berchtesgadener Land,Bayern,NF,"10x1,0l",14.98,0.9800000000000004,7
-270051,ESL Alpen-Vollmilch NATURLAND FAIR - Tetratop,Berchtesgadener Land,Diverse,NF,8x400ml,5.992,0.39200000000000035,7
+270051,ESL Alpen-Vollmilch NATURLAND FAIR - Tetratop,Berchtesgadener Land,Diverse,NF,8x400ml,6.5056,0.4256000000000002,7
 270001,ESL Heumilch g.t.S. aus Bayern - TetraPak,Bio Heumilch Bauern,Bayern,EG-Bio,"10x1,0l",19.367,1.2669999999999995,7
 272092,ESL-Alpen-Vollmilch laktosefrei NATURLAND FAIR,Berchtesgadener Land,Bayern,NF,"10x1,0l",16.157,1.0570000000000004,7
 272091,ESL-Alpenmilch fettarm laktosefrei - TetraEdge,Berchtesgadener Land,Bayern,NF,"10x1,0l",15.515,1.0150000000000006,7
@@ -54,7 +52,10 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 7401,Vollmilch Schwarzwälder BIOLAND - Flasche,Schwarzwaldmilch,Baden-Württemberg,Bioland,"6x1,0l",9.63,0.6300000000000008,7
 7194,Crème fraiche BIOLAND 30%,Söbbeke,Deutschland,Bioland,10x150g,11.770000000000001,0.7700000000000014,7
 270159,Crème fraiche DEMETER Glas,Schrozberger Milchbauern,Baden-Württemberg,Demeter (Deutschland),6x250g,12.0696,0.7896000000000001,7
+287986,FrischeCreme Asia India BIOLAND 70% F.i.Tr.,Weißenhorner Milch Manufaktur,Deutschland,Bioland,6x125g,11.6202,0.7602000000000011,7
+287987,FrischeCreme Asia Thai BIOLAND 70% F.i.Tr.,Weißenhorner Milch Manufaktur,Deutschland,Bioland,6x125g,11.6202,0.7602000000000011,7
 8521,FrischeCreme Bärlauch-Knoblauch BIOLAND 70% F.i.Tr,Weißenhorner Milch Manufaktur,Diverse,Bioland,6x150g,11.6202,0.7602000000000011,7
+287988,FrischeCreme Brotzeit BIOLAND 70% F.i.Tr.,Weißenhorner Milch Manufaktur,Deutschland,Bioland,6x125g,11.6202,0.7602000000000011,7
 285224,FrischeCreme Gartengemüse BIOLAND 70% F.i.Tr.,Weißenhorner Milch Manufaktur,Diverse,Bioland,6x150g,11.6202,0.7602000000000011,7
 8189,Frischecreme Kräuter BIOLAND 65%F.i.Tr. - Theke,Weißenhorner Milch Manufaktur,Diverse,Bioland,"1,5kg",23.561400000000003,1.541400000000003,7
 8192,Frischecreme Kräuter BIOLAND 70% F.i.Fr.,Weißenhorner Milch Manufaktur,Diverse,Bioland,6x150g,11.6202,0.7602000000000011,7
@@ -99,10 +100,10 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 275511,Lassi Drink Mango laktosefrei,Molkerei Biedermann,Diverse,100% Biozutaten,6x230ml,9.501600000000002,0.6216000000000008,7
 7822,Lassi Himbeere BIOLAND,Andechser,Diverse,Bioland,6x250g,6.7410000000000005,0.4410000000000007,7
 7320,Lassi Mango BIOLAND,Andechser,Diverse,Bioland,10x250g,11.235000000000001,0.7350000000000012,7
-270883,Lassi Mango BIOLAND,Söbbeke,Diverse,Bioland,10x250g,8.881000000000002,0.5810000000000013,7
-270882,Lassi Natur leicht gesüßt BIOLAND,Söbbeke,Deutschland,Bioland,10x250g,8.881000000000002,0.5810000000000013,7
-270881,Lassi Zitrone BIOLAND,Söbbeke,Diverse,Bioland,10x250g,8.881000000000002,0.5810000000000013,7
-275130,Schokoladen Milch NATURLAND FAIR,Berchtesgadener Land,Diverse,NF,8x250g,5.136,0.3360000000000003,7
+270883,Lassi Mango BIOLAND,Söbbeke,Diverse,Bioland,10x250g,7.918000000000001,0.5180000000000007,7
+270882,Lassi Natur leicht gesüßt BIOLAND,Söbbeke,Deutschland,Bioland,10x250g,7.918000000000001,0.5180000000000007,7
+270881,Lassi Zitrone BIOLAND,Söbbeke,Diverse,Bioland,10x250g,7.918000000000001,0.5180000000000007,7
+275130,Schokoladen Milch NATURLAND FAIR,Berchtesgadener Land,Diverse,NF,8x250g,4.8792,0.3192000000000004,7
 270511,Schwedenmilch DEMETER - Flasche,Schrozberger Milchbauern,Baden-Württemberg,Demeter (Deutschland),"6x0,5l",7.832400000000001,0.5124000000000004,7
 271511,Schwedenmilch Vanille fresh DEMETER - Flasche,Schrozberger Milchbauern,Diverse,Demeter (Deutschland),"6x0,5l",8.025,0.5250000000000004,7
 274681,Trink-Kefir Mango DEMETER - Flasche,Schrozberger Milchbauern,Diverse,Demeter (Deutschland),"6x0,5l",7.254600000000001,0.4746000000000006,7
@@ -117,7 +118,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 274975,Bura - Butter & Rapsöl laktosefrei,Züger Frischkäse,Schweiz,100% Biozutaten,5x200g,15.7825,1.0325000000000006,7
 280235,Butter gesalzen Beurre Demi-Sel,Vallee Verte,Frankreich,100% Biozutaten,10x200g,31.565,2.0650000000000013,7
 580647,Butterfett- lose,,Bayern,100% Biozutaten,10kg,186.91830000000002,12.228300000000019,7
-270019,Heumilch Butter mild gesäuert DEMETER,Demeter MilchBauern Süd,Regional,Demeter (Deutschland),16x250g,52.900800000000004,3.460800000000006,7
 288005,Kräuterbutter BIOLAND,Weißenhorner Milch Manufaktur,Bayern,Bioland,8x100g,16.5208,1.0808000000000018,7
 7107,Rohmilch-Bauernbutter,Strasser,Österreich,EG-Bio,200g,4.622400000000001,0.30240000000000045,7
 270281,Sauerrahmbutter BIOLAND - Thekenrolle,Käserei Bauhofer,Regional,Bioland,2kg,21.0362,1.3762000000000008,7
@@ -172,7 +172,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 270004,Heumilchjoghurt aus Bayern mild g.t.S.,Bio Heumilch Bauern,Bayern,EG-Bio,6x500g,10.849800000000002,0.7098000000000013,7
 270016,"Heumilchjoghurt DEMETER 3,8%",Die feine Linie,Baden-Württemberg,Demeter (Deutschland),6x500g,9.3732,0.6132000000000009,7
 7402,"Joghurt cremig gerührt 3,8% BIOLAND",Schwarzwaldmilch,Baden-Württemberg,Bioland,6x500g,8.667,0.5670000000000002,7
-273832,"Joghurt griechische Art BIOLAND 0,2% - Becher",Andechser,Bayern,Bioland,6x400g,8.667,0.5670000000000002,7
+273832,"Joghurt griechische Art BIOLAND 0,2% - Becher",Andechser,Bayern,Bioland,6x400g,7.832400000000001,0.5124000000000004,7
 273837,"Joghurt griechische Art BIOLAND 0,2%",Andechser,Bayern,Bioland,6x500g,12.711600000000002,0.8316000000000017,7
 7330,"Joghurt mild BIOLAND 3,8% - Becher",Andechser,Bayern,Bioland,10x150g,4.815,0.3150000000000004,7
 7064,Joghurt mild DEMETER,Andechser,Bayern,Demeter (Deutschland),6x500g,9.8226,0.6425999999999998,7
@@ -196,9 +196,9 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 7095,"Weidemilch Joghurt ABC 3,8% BIOLAND",Söbbeke,Deutschland,Bioland,6x500g,9.5658,0.6257999999999999,7
 7326,"Weidemilch Joghurt mild BIOLAND 0,1%",Andechser,Bayern,Bioland,6x500g,8.667,0.5670000000000002,7
 7332,"Weidemilch Joghurt mild BIOLAND 1,8% - Becher",Andechser,Bayern,Bioland,6x500g,6.997800000000001,0.45780000000000065,7
-7048,"Weidemilch Joghurt mild BIOLAND 1,8%",Andechser,Bayern,Bioland,6x500g,7.8966,0.5166000000000004,7
+7048,"Weidemilch Joghurt mild BIOLAND 1,8%",Andechser,Bayern,Bioland,6x500g,8.9238,0.5838000000000001,7
 7331,"Weidemilch Joghurt mild BIOLAND 3,8% - Becher",Andechser,Bayern,Bioland,6x500g,7.5114,0.4914000000000005,7
-7041,"Weidemilch Joghurt mild BIOLAND 3,8%",Andechser,Bayern,Bioland,6x500g,7.8966,0.5166000000000004,7
+7041,"Weidemilch Joghurt mild BIOLAND 3,8%",Andechser,Bayern,Bioland,6x500g,8.9238,0.5838000000000001,7
 7127,"Weidemilch Joghurt mild fettarm 1,5% - Becher",Söbbeke,Deutschland,Bioland,10x150g,5.243,0.34299999999999997,7
 7087,"Weidemilch Joghurt mild fettarm 1,5% BIOLAND",Söbbeke,Deutschland,Bioland,6x500g,8.2818,0.5418000000000003,7
 273828,"Weidemilch Naturjoghurt mild 3,8% - Eimer",Andechser,Bayern,Bioland,1kg,2.4289,0.15890000000000004,7
@@ -208,8 +208,8 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 271481,Frucht- & Knusperjoghurt Banane mit Schokoballs,Berchtesgadener Land,Diverse,NF,10x150g,9.523000000000001,0.6230000000000011,7
 7148,Frucht- & Knusperjoghurt Himbeer mit Schokoballs,Berchtesgadener Land,Diverse,NF,10x150g,9.523000000000001,0.6230000000000011,7
 7502,Frucht- & Knusperjoghurt Vanille mit Crunchy Müsli,Berchtesgadener Land,Diverse,Naturland,10x150g,9.416000000000002,0.6160000000000014,7
-271483,Frucht- und Knusperjoghurt Erdbeere mit Schokokrin,Berchtesgadener Land,Diverse,NF,10x137g,8.56,0.5600000000000005,7
-271482,Frucht- und Knusperjoghurt Vanille mit Schokolinse,Berchtesgadener Land,Diverse,NF,10x137g,8.56,0.5600000000000005,7
+271483,Frucht- und Knusperjoghurt Erdbeere mit Schokokrin,Berchtesgadener Land,Diverse,NF,10x137g,9.523000000000001,0.6230000000000011,7
+271482,Frucht- und Knusperjoghurt Vanille mit Schokolinse,Berchtesgadener Land,Diverse,NF,10x137g,9.523000000000001,0.6230000000000011,7
 270761,Frucht-Bioghurt Erdbeere,Berchtesgadener Land,Diverse,NF,10x150g,6.313000000000001,0.41300000000000026,7
 275123,Frucht-Bioghurt Heidelbeere,Berchtesgadener Land,Diverse,NF,10x150g,6.313000000000001,0.41300000000000026,7
 275150,Frucht-Bioghurt Himbeere laktosefrei,Berchtesgadener Land,Diverse,NF,10x150g,6.848000000000001,0.4480000000000004,7
@@ -220,7 +220,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 7035,Fruchtjoghurt Erdbeere BIOLAND,Andechser,Diverse,Bioland,6x500g,11.8128,0.7728000000000002,7
 274501,Fruchtjoghurt Erdbeere DEMETER - Becher,Schrozberger Milchbauern,Diverse,Demeter (Deutschland),6x150g,3.8520000000000003,0.2520000000000002,7
 275670,Fruchtjoghurt Erdbeere DEMETER Beerenbauern,Schrozberger Milchbauern,Diverse,Demeter (Deutschland),6x500g,11.4276,0.7476000000000003,7
-278290,Fruchtjoghurt Heidelbeer-Cassis BIOLAND,Andechser,Diverse,Bioland,6x500g,9.886800000000001,0.6468000000000007,7
+278290,Fruchtjoghurt Heidelbeer-Cassis BIOLAND,Andechser,Diverse,Bioland,6x500g,11.8128,0.7728000000000002,7
 278095,Fruchtjoghurt Heidelbeere DEMETER,Andechser,Diverse,Demeter (Deutschland),6x500g,12.005400000000002,0.785400000000001,7
 7470,Fruchtjoghurt Heidelbeere DEMETER,Schrozberger Milchbauern,Diverse,Demeter (Deutschland),6x500g,11.3634,0.7434000000000012,7
 278330,Fruchtjoghurt Himbeere BIOLAND - Becher,Andechser,Diverse,Bioland,10x150g,6.634,0.43400000000000016,7
@@ -235,7 +235,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 273341,Fruchtjoghurt Mango BIOLAND - Becher,Andechser,Diverse,Bioland,10x150g,6.634,0.43400000000000016,7
 278094,Fruchtjoghurt Mango DEMETER,Andechser,Diverse,Demeter (Deutschland),6x500g,12.005400000000002,0.785400000000001,7
 7477,Fruchtjoghurt Mango DEMETER,Schrozberger Milchbauern,Diverse,Demeter (Deutschland),6x500g,11.3634,0.7434000000000012,7
-7305,Fruchtjoghurt Mango-Vanille BIOLAND,Andechser,Diverse,Bioland,6x500g,9.886800000000001,0.6468000000000007,7
+7305,Fruchtjoghurt Mango-Vanille BIOLAND,Andechser,Diverse,Bioland,6x500g,11.8128,0.7728000000000002,7
 7316,Fruchtjoghurt Pfirsich-Maracuja BIOLAND,Andechser,Diverse,Bioland,6x500g,11.8128,0.7728000000000002,7
 7450,Fruchtjoghurt Pfirsich-Maracuja DEMETER - Becher,Schrozberger Milchbauern,Diverse,Demeter (Deutschland),6x150g,3.8520000000000003,0.2520000000000002,7
 7472,Fruchtjoghurt Pfirsich-Maracuja DEMETER,Schrozberger Milchbauern,Diverse,Demeter (Deutschland),6x500g,11.3634,0.7434000000000012,7
@@ -255,8 +255,9 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 273194,Joghurt griechischer Art auf Feige mit SB-kernen,Söbbeke,Diverse,Bioland,6x150g,5.2644,0.34440000000000026,7
 273192,Joghurt griechischer Art auf Honig,Söbbeke,Diverse,Bioland,6x150g,5.2644,0.34440000000000026,7
 273193,Joghurt griechischer Art auf Orange,Söbbeke,Diverse,Bioland,6x150g,5.2644,0.34440000000000026,7
-270874,Joghurt griechischer Art Honig BIOLAND,Söbbeke,Diverse,Bioland,6x500g,12.711600000000002,0.8316000000000017,7
-270876,Joghurt griechischer Art Orange BIOLAND,Söbbeke,Diverse,Bioland,6x500g,12.711600000000002,0.8316000000000017,7
+270874,Joghurt griechischer Art Honig BIOLAND,Söbbeke,Diverse,Bioland,6x500g,11.4276,0.7476000000000003,7
+270876,Joghurt griechischer Art Orange BIOLAND,Söbbeke,Diverse,Bioland,6x500g,11.4276,0.7476000000000003,7
+270875,Joghurt griechischer Art Zitrone BIOLAND,Söbbeke,Diverse,Bioland,6x500g,11.4276,0.7476000000000003,7
 278310,Rahmjoghurt Heidelbeere-Cassis 10% BIOLAND- Becher,Andechser,Diverse,Bioland,6x150g,5.5212,0.3612000000000002,7
 7341,Rahmjoghurt Mango-Vanille BIOLAND 10% - Becher,Andechser,Diverse,Bioland,6x150g,5.5212,0.3612000000000002,7
 7346,Rahmjoghurt Stracciatella BIOLAND 10% - Becher,Andechser,Diverse,Bioland,6x150g,5.5212,0.3612000000000002,7
@@ -271,7 +272,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 7766,"Weidemilch Cremejoghurt Himbeere BIOLAND 7,5%",Söbbeke,Diverse,Bioland,6x500g,13.096800000000002,0.8568000000000016,7
 7764,"Weidemilch Cremejoghurt Kokos BIOLAND 7,5%",Söbbeke,Diverse,Bioland,6x500g,12.711600000000002,0.8316000000000017,7
 272608,"Weidemilch Cremejoghurt Mango Mousse BIOLAND 7,5%",Söbbeke,Diverse,Bioland,6x500g,12.711600000000002,0.8316000000000017,7
-7773,"Weidemilch Cremejoghurt Zitrone BIOLAND 7,5%",Söbbeke,Diverse,Bioland,6x500g,12.711600000000002,0.8316000000000017,7
 273184,Weidemilch Sahnekefir auf Blaubeere 10%,Söbbeke,Diverse,Bioland,6x150g,5.328600000000001,0.34860000000000024,7
 272481,Weidemilch Sahnekefir auf Erdbeere10%,Söbbeke,Diverse,Bioland,6x150g,5.328600000000001,0.34860000000000024,7
 273183,Weidemilch Sahnekefir auf Himbeere 10%,Söbbeke,Diverse,Bioland,6x150g,5.328600000000001,0.34860000000000024,7
@@ -283,12 +283,12 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 272478,Weidemilchjoghurt Sommer Kiwi-Stachelbeere,Söbbeke,Diverse,Bioland,6x500g,12.1338,0.793800000000001,7
 272896,Weidemilchjoghurt Winter Moccachino BIOLAND,Söbbeke,Diverse,Bioland,6x500g,12.1338,0.793800000000001,7
 272891,Weidemilchjoghurt Winter Pflaume-Zimt BIOLAND,Söbbeke,Diverse,Bioland,6x500g,12.1338,0.793800000000001,7
-278750,Winterjoghurt Bratapfel BIOLAND,Andechser,Diverse,Bioland,6x500g,11.8128,0.7728000000000002,7
-274871,Winterjoghurt Haselnuss-Karamell DEMETER,Schrozberger Milchbauern,Deutschland,Demeter (Deutschland),6x500g,11.4276,0.7476000000000003,7
+278750,Winterjoghurt Bratapfel BIOLAND,Andechser,Diverse,Bioland,6x500g,10.849800000000002,0.7098000000000013,7
+274871,Winterjoghurt Haselnuss-Karamell DEMETER,Schrozberger Milchbauern,Deutschland,Demeter (Deutschland),6x500g,10.272,0.6720000000000006,7
 274867,Winterjoghurt Kirsche-Schokosplits DEMETER,Schrozberger Milchbauern,Deutschland,Demeter (Deutschland),6x500g,11.4276,0.7476000000000003,7
-274869,Winterjoghurt Orange-Schokosplits DEMETER,Schrozberger Milchbauern,Deutschland,Demeter (Deutschland),6x500g,11.4276,0.7476000000000003,7
-274868,Winterjoghurt Pflaume-Vanille DEMETER,Schrozberger Milchbauern,Deutschland,Demeter (Deutschland),6x500g,11.4276,0.7476000000000003,7
-278754,Winterjoghurt Pumpkin-Spice BIOLAND,Andechser,Diverse,Bioland,6x500g,11.8128,0.7728000000000002,7
+274869,Winterjoghurt Orange-Schokosplits DEMETER,Schrozberger Milchbauern,Deutschland,Demeter (Deutschland),6x500g,10.272,0.6720000000000006,7
+274868,Winterjoghurt Pflaume-Vanille DEMETER,Schrozberger Milchbauern,Deutschland,Demeter (Deutschland),6x500g,10.272,0.6720000000000006,7
+278754,Winterjoghurt Pumpkin-Spice BIOLAND,Andechser,Diverse,Bioland,6x500g,10.849800000000002,0.7098000000000013,7
 7651,Schaf-Sahnejoghurt griechische Art 10%,Bergerie,Frankreich,EG-Bio,6x250g,10.207799999999999,0.6677999999999997,7
 276471,"Schafjoghurt 4,5%",Bergerie,Frankreich,EG-Bio,6x400g,13.161000000000001,0.8610000000000007,7
 270738,Schafjoghurt Heidelbeere BIOLAND - Mehrwegglas,Reutebachhof,Baden-Württemberg,Bioland,6x250g,12.711600000000002,0.8316000000000017,7
@@ -297,7 +297,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 270735,"Schafjoghurt stichfest BIOLAND 6,6% - Glas",Reutebachhof,Baden-Württemberg,Bioland,6x250g,12.262200000000002,0.8022000000000009,7
 276370,"Schafmilchjoghurt 5,1%",Leeb,Österreich,EG-Bio,6x400g,14.124,0.9240000000000013,7
 7337,"Ziegenjoghurt mild BIOLAND 3,5%",Andechser,Bayern,Bioland,10x125g,8.988000000000001,0.588000000000001,7
-270415,Ziegenjoghurt mild BIOLAND 6%,Andechser,Bayern,Bioland,6x500g,15.921600000000002,1.0416000000000007,7
+270415,Ziegenjoghurt mild BIOLAND 6%,Andechser,Bayern,Bioland,6x500g,13.9314,0.9114000000000004,7
 7622,Ziegenjoghurt natur,Leeb,Österreich,100% Biozutaten,6x125g,6.355800000000001,0.41580000000000084,7
 276180,Ziegenjoghurt natur,Leeb,Österreich,EG-Bio,6x400g,15.0228,0.982800000000001,7
 7633,Ziegenjoghurt Vanille,Leeb,Diverse,100% Biozutaten,6x125g,7.5114,0.4914000000000005,7
@@ -316,14 +316,12 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 271731,Weidemilch Bourbon Vanillesosse BIOLAND,Söbbeke,Diverse,Bioland,6x200g,7.960800000000001,0.5208000000000004,7
 7166,Weidemilch Griesspudding traditionell BIOLAND,Söbbeke,Diverse,Bioland,6x150g,6.42,0.41999999999999993,7
 7167,Weidemilch Griesspudding Vanille BIOLAND,Söbbeke,Diverse,Bioland,6x150g,6.42,0.41999999999999993,7
-271552,Weidemilch Milchreis auf Zimt BIOLAND,Söbbeke,Diverse,Bioland,6x150g,6.0348,0.39480000000000004,7
+271552,Weidemilch Milchreis auf Zimt BIOLAND,Söbbeke,Diverse,Bioland,6x150g,5.3928,0.3528000000000002,7
 7155,Weidemilch Milchreis natur BIOLAND,Söbbeke,Diverse,Bioland,6x150g,6.0348,0.39480000000000004,7
 271551,Weidemilch Milchreis natur BIOLAND,Söbbeke,Diverse,Bioland,6x400g,12.005400000000002,0.785400000000001,7
 7170,Weidemilch Schokopudding BIOLAND,Söbbeke,Diverse,Bioland,6x150g,5.6496,0.36960000000000015,7
 7171,Weidemilch Vanillepudding BIOLAND,Söbbeke,Diverse,Bioland,6x150g,5.7138,0.37380000000000013,7
-2830081,Bufaleggio 64% - Theke,Ökologische Molkerei Allgäu,Italien,100% Biozutaten,kg,12.561800000000002,0.8218000000000014,7
-2822561,Isnyer Urbergkäs BIOLAND 48% - Theke,Käsküche Isny,Regional,Bioland,"1,5kg",17.1842,1.1242000000000019,7
-2848511,Ziegenrolle Senfsaat BIOLAND 45% - Theke,Ziegenkäserei Würnsreuth,Diverse,Bioland,"0,8kg",8.5172,0.5572000000000008,7
+2894501,Frischcreme Bunter Biogarten 25% BIOLAND - Th.,Roggenburger,Diverse,Bioland,"1,2kg",7.4365000000000006,0.4865000000000004,7
 286844,Capri ' Citron 45% - Theke,Vallee Verte,Frankreich,100% Biozutaten,4x80g,13.054,0.854000000000001,7
 8666,Capri `Figue 45% - Theke,Vallee Verte,Frankreich,100% Biozutaten,4x80g,13.054,0.854000000000001,7
 270151,Capri `Marone 45% - Theke,Vallee Verte,Frankreich,100% Biozutaten,4x80g,12.84,0.8399999999999999,7
@@ -365,7 +363,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 280018,Trakaya-Hirtenkäse gewürfelt BIOLAND 50% - Theke,Bergpracht,Deutschland,Bioland,2kg,18.639400000000002,1.2194000000000003,7
 8021,Allgäuer Backsteinkäse BIOLAND 48% - Theke,Ökologische Molkerei Allgäu,Baden-Württemberg,Bioland,"1,25kg",26.289900000000003,1.7199000000000026,7
 8012,Allgäuer Wieserbrie BIOLAND 48% - Theke,Ökologische Molkerei Allgäu,Deutschland,Bioland,"1,5kg",26.5467,1.7367000000000026,7
-286475,Allgäuer Ziegen-Brie BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Deutschland,Bioland,1kg,24.4281,1.5981000000000023,7
+286475,Allgäuer Ziegen-Brie BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Deutschland,Bioland,1kg,21.8815,1.4314999999999998,7
 270581,Bleu de Bourgogne 75% - Theke,Vallee Verte,Frankreich,EG-Bio,"0,7kg",23.7754,1.5554000000000023,7
 283004,Blue Truffle aus Gorgonzola 48% - Theke,Ökologische Molkerei Allgäu,Italien,100% Biozutaten,"1,5kg",35.3742,2.3141999999999996,7
 8723,Brie blanc 50% - Theke,Vallee Verte,Frankreich,EG-Bio,kg,13.171700000000001,0.8617000000000008,7
@@ -373,15 +371,17 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 280658,Brie Main'Or 50% - Theke,Vallee Verte,Frankreich,EG-Bio,1kg,16.0393,1.0493000000000006,7
 8654,Brie Montsurs 45% - Theke,Vallee Verte,Frankreich,EG-Bio,"1,1kg",18.1151,1.185100000000002,7
 296215,Brie vom Lehenhof DEMETER 50% - Theke,Lehenhof,Regional,Demeter (Deutschland),"1,3kg",28.087500000000002,1.8375000000000021,7
+279542,Brillat Savarin IGP 72%,Vallee Verte,Frankreich,100% Biozutaten,"0,5kg",14.6911,0.9611000000000001,7
 283008,Bufaleggio 64% - Theke,Ökologische Molkerei Allgäu,Italien,100% Biozutaten,"1,1kg",27.6381,1.8081000000000031,7
+279545,Ca'Bri Ziegenbrie 45% - Theke,Vallee Verte,Frankreich,100% Biozutaten,"0,8kg",23.3153,1.5253000000000014,7
 8840,Camembert Isigny 45%,Vallee Verte,Frankreich,100% Biozutaten,250g,5.9706,0.39060000000000006,7
 296210,Camembert vom Lehenhof DEMETER 50%,Lehenhof,Regional,Demeter (Deutschland),"0,22kg",4.8471,0.31709999999999994,7
 8354,Chavré Ziegenbrie Kräuter d. Provence 45% - Theke,Vallee Verte,Belgien,100% Biozutaten,"1,8kg",46.5129,3.042900000000003,7
 8353,Chavré Ziegenbrie natur 45% - Theke,Vallee Verte,Belgien,EG-Bio,"1,8kg",45.68900000000001,2.9890000000000043,7
 8678,Coeur de Neufchâtel AOP 45%,Vallee Verte,Frankreich,100% Biozutaten,6x200g,25.936799999999998,1.6967999999999996,7
 8144,Coeur de Paille 45% - Theke,Vallee Verte,Frankreich,EG-Bio,"1,1kg",32.1963,2.106300000000001,7
-8709,Duc de Bourgogne 72% - Theke,Vallee Verte,Frankreich,EG-Bio,"1,7kg",46.962300000000006,3.0723000000000056,7
-8042,Edler Weisser BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Österreich,Bioland,"1,1kg",16.7562,1.0961999999999996,7
+8709,Duc de Bourgogne 72% - Theke,Vallee Verte,Frankreich,EG-Bio,"1,7kg",42.28640000000001,2.7664000000000044,7
+8042,Edler Weisser BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Österreich,Bioland,"1,1kg",13.717400000000001,0.8974000000000011,7
 8004,Edler Weisser bunte Schote BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Österreich,Bioland,kg,16.381700000000002,1.0717000000000017,7
 280042,Edler Weisser Gartentraum BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Österreich,Bioland,1kg,16.381700000000002,1.0717000000000017,7
 280041,Edler Weisser Kürbis-Kernbeißer BIOLAND 50% -Theke,Ökologische Molkerei Allgäu,Österreich,Bioland,kg,15.8146,1.034600000000001,7
@@ -424,6 +424,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 8865,Schafbrie mit Kräutern 45% - Theke,Anderlbauer,Deutschland,Bioland,"0,7kg",17.2591,1.129100000000001,7
 8864,Schafbrie pur 45% - Theke,Anderlbauer,Bayern,Bioland,"0,7kg",17.0772,1.1172000000000004,7
 288651,Schafbrie Schwarzkümmel 45% - Theke,Anderlbauer,Deutschland,Bioland,"0,7kg",18.906900000000004,1.236900000000002,7
+281054,Schwarzer Höllwanger Brie Pfeffer DEMETER WIR 50%,Hofkäserei Heggelbach WIR.,Regional,Demeter (Deutschland),"1,3kg",29.628300000000003,1.9383000000000017,7
 280245,Taleggio DOP 48% - Theke,Vallee Verte,Italien,100% Biozutaten,"2,2kg",40.11430000000001,2.624300000000005,7
 280247,Taleggio DOP DEMETER 48% - Theke,Ökologische Molkerei Allgäu,Italien,Demeter (Deutschland),"2,2kg",42.3506,2.7706000000000017,7
 8024,Taleggio DOP La Cascina 48% - Theke,Ökologische Molkerei Allgäu,Italien,100% Biozutaten,"2,2kg",40.2962,2.6362000000000023,7
@@ -435,6 +436,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 8010,Valleray BIOLAND 52% - Spandose,Ökologische Molkerei Allgäu,Baden-Württemberg,Bioland,"0,6kg",13.342900000000002,0.8729000000000013,7
 8040,Valleray BIOLAND 52% - Theke,Ökologische Molkerei Allgäu,Regional,Bioland,"0,6kg",13.1503,0.8603000000000005,7
 296101,Weißer Bärlauchrebell 50% - Theke,Käserebellen,Diverse,Naturland,"1,1kg",22.8124,1.4924,7
+281053,Weißer Höllwanger Brie natur DEMETER WIR 50% - The,Hofkäserei Heggelbach WIR.,Regional,Demeter (Deutschland),"1,3kg",27.9591,1.8291000000000004,7
 296109,Weißer Walnuss Rebell 50% - Theke,Käserebellen,Diverse,Naturland,"1,1kg",22.8124,1.4924,7
 283329,Ziegen Weichkäserolle DEMETER 45% - Theke,Käserei Monte Ziego,Deutschland,Demeter (Deutschland),1kg,21.282300000000003,1.3923000000000023,7
 283327,Ziegenbrie DEMETER 45% - Theke,Käserei Monte Ziego,Baden-Württemberg,Demeter (Deutschland),1kg,23.9787,1.5686999999999998,7
@@ -461,7 +463,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 8949,Allgäuer Wildkräuterkäse a.Heumilch BIOLAND50%-Th.,Gebrüder Baldauf,Deutschland,Bioland,3kg,63.558,4.158000000000001,7
 282732,Allgäuer Ziegenkäse Kräuter 45% - Theke,Ökologische Molkerei Allgäu,Deutschland,Naturland,"1,3kg",35.7808,2.3408000000000015,7
 282731,Allgäuer Ziegenkäse natur 45% - Theke,Ökologische Molkerei Allgäu,Bayern,Naturland,"1,3kg",33.833400000000005,2.2134000000000036,7
-289774,Allgäuer Zitronenpfefferkäse Heumilch BIOLAND50%Th,Gebrüder Baldauf,Deutschland,Bioland,3kg,57.234300000000005,3.7443000000000026,7
+289774,Allgäuer Zitronenpfefferkäse Heumilch BIOLAND50%Th,Gebrüder Baldauf,Deutschland,Bioland,3kg,65.61240000000001,4.292400000000008,7
 8605,Alpenblumenkäse BIOLAND 50% - Theke,Andechser,Österreich,Bioland,3kg,60.8295,3.9795000000000016,7
 8163,Alpenländer Butterkäse BIOLAND 50% - Theke,Andechser,Deutschland,Bioland,"1,5kg",23.9038,1.5638000000000005,7
 284542,Alpikoner mit Eichenrinde 52% - Theke,Ökologische Molkerei Allgäu,Schweiz,Bio-Suisse,"2,5kg",55.6079,3.637900000000002,7
@@ -470,13 +472,14 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 296108,Bärlauch Rebell aus Heumilch 50% - Theke,Käserebellen,Deutschland,Naturland,3kg,65.805,4.305000000000007,7
 280281,Bartholomäus BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Bayern,Bioland,3kg,47.187000000000005,3.0870000000000033,7
 280291,Bartholomäus GewürzBlüte BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Bayern,Bioland,3kg,50.3328,3.2927999999999997,7
+280485,Bastiaansen Blau Kakao 60% - Theke,Bastiaansen,Niederlande,100% Biozutaten,"3,5kg",64.7885,4.238500000000002,7
 282165,Bergraclette Surchoix kräftig 6 Monate 48% - Theke,Vallee Verte,Schweiz,Bio-Suisse,3kg,63.3012,4.141200000000005,7
-270311,Beschwipste Anna rot BIOKREIS 50% - Theke,Schaukäserei Wiggensbach,Bayern,Biokreis,"3,9kg",65.71940000000001,4.299400000000006,7
+270311,Beschwipste Anna rot BIOKREIS 50% - Theke,Schaukäserei Wiggensbach,Bayern,Biokreis,"3,9kg",56.62440000000001,3.704400000000007,7
 288352,Bio Lisa 4 Monate 50% - Theke,Vallee Verte,FL,100% Biozutaten,3kg,71.3262,4.6662000000000035,7
 8170,Blaue Kornblume 60% - Theke,Thise Mejeri,Dänemark,EG-Bio,kg,22.3416,1.4616000000000007,7
 280024,Bodenseer BIOLAND 50% - Theke,Bergpracht,Deutschland,Bioland,"1,3kg",13.6425,0.8925000000000001,7
 288475,Brebis des Basques 50% - Theke,Vallee Verte,Frankreich,EG-Bio,"2,25kg",71.262,4.662000000000006,7
-281731,Brebis des Basques Grand Affinage 60% - Theke,Vallee Verte,Frankreich,EG-Bio,"2,5kg",81.32000000000001,5.320000000000007,7
+281731,Brebis des Basques Grand Affinage 60% - Theke,Vallee Verte,Frankreich,EG-Bio,"2,5kg",82.497,5.397000000000006,7
 279588,Britchon 50% - Theke,Vallee Verte,Schweiz,100% Biozutaten,"2,25kg",66.8108,4.370800000000003,7
 280036,Brummbär Bärlauchkäse BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Bayern,Bioland,4kg,66.7252,4.3652000000000015,7
 8210,Butterkäse 45% - Theke,Ökologische Molkerei Allgäu,Deutschland,Biokreis,"1,5kg",17.2912,1.1311999999999998,7
@@ -484,6 +487,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 286944,Charmeux mit 3 Sorten Pfeffer 50% - Theke,Bastiaansen,Niederlande,100% Biozutaten,"3,5kg",59.8451,3.9151000000000025,7
 8440,Charmeux mit Bockshornklee 50% - Theke,Bastiaansen,Niederlande,100% Biozutaten,"3,5kg",59.8451,3.9151000000000025,7
 8694,Charmeux mit Röstzwiebeln 50% - Theke,Bastiaansen,Niederlande,100% Biozutaten,"3,5kg",59.8451,3.9151000000000025,7
+286941,Charmeux mit schwarzen Zwiebeln 50% - Theke,Bastiaansen,Niederlande,100% Biozutaten,"3,5kg",62.167,4.067,7
 8446,Charmeux mit Schwarzkümmel 50% - Theke,Bastiaansen,Niederlande,100% Biozutaten,"3,5kg",59.8451,3.9151000000000025,7
 286948,Charmeux mit Steinpilzen 50% - Theke,Bastiaansen,Niederlande,100% Biozutaten,"3,5kg",64.75640000000001,4.23640000000001,7
 296118,Chili Rebell 50% - Theke,Käserebellen,Diverse,Naturland,3kg,65.805,4.305000000000007,7
@@ -495,6 +499,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 8100,Feuerkäse BIOLAND 50% - Theke,Söbbeke,Diverse,Bioland,"4,5kg",87.77210000000001,5.742100000000008,7
 270211,Fourme d`Ambert AOP 50% - Theke,Vallee Verte,Frankreich,100% Biozutaten,2kg,39.2476,2.5675999999999988,7
 288258,Frühlingskäse Aurora DEMETER 50% - Theke,Aurora,Niederlande,Demeter (Deutschland),"4,5kg",75.3494,4.929400000000001,7
+281055,Gelber Höllwanger Schnittkäse DEMETER WIR 50% - Th,Hofkäserei Heggelbach WIR.,Regional,Demeter (Deutschland),4kg,75.756,4.956000000000003,7
 270255,Gold Butterkäse BIOLAND 50%,Aurora,Deutschland,Bioland,3kg,42.051,2.7510000000000048,7
 8630,Gouda 45% - Theke,Ökologische Molkerei Allgäu,Bayern,Biokreis,"1,5kg",17.2912,1.1311999999999998,7
 8825,Gouda Aurora jung DEMETER 50% - Theke,Aurora,Niederlande,Demeter (Deutschland),"4,5kg",64.3284,4.208400000000005,7
@@ -546,11 +551,13 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 8981,Roggenburger Räucherkäse 50% - Theke,Roggenburger,Deutschland,Biokreis,"0,9kg",14.7339,0.9639000000000006,7
 8237,Roquefort Roquebelle AOC 3 Monate 50% - Theke,Vallee Verte,Frankreich,100% Biozutaten,"1,4kg",48.1286,3.148600000000002,7
 282235,Roter Casanova BIOLAND 70% - Theke,Schaukäserei Wiggensbach,Bayern,Bioland,"2,7kg",51.627500000000005,3.377500000000005,7
+281056,Roter Höllwanger Chili-Schnittkäse DEMETER WIR 50%,Hofkäserei Heggelbach WIR.,Regional,Demeter (Deutschland),4kg,80.46400000000001,5.26400000000001,7
 280072,Rudis Ziegenbergler BIOLAND 45% - Theke,Ökologische Molkerei Allgäu,Deutschland,Bioland,"2,25kg",69.1862,4.526200000000003,7
 281743,Salva Cremasco DOP 50% - Theke,Vallee Verte,Italien,100% Biozutaten,1kg,22.7054,1.485400000000002,7
 280929,Schaf-Ribeaupierre 50% - Theke,Bastiaansen,Niederlande,100% Biozutaten,"3,5kg",95.6473,6.257300000000001,7
 270251,Schafbutterkäse AURORA 50%,Aurora,Deutschland,EG-Bio,"1,5kg",35.919900000000005,2.349900000000005,7
 8406,Schafgouda Brébelle jung 50% - Theke,Bastiaansen,Niederlande,EG-Bio,4kg,105.88719999999999,6.927199999999999,7
+270125,Schafkäse Wildblume aus Heumilch 50% - Theke,Gebrüder Baldauf,Bayern,Bioland,"1,5kg",41.409000000000006,2.709000000000003,7
 282125,Schweizer Bergfrühling 57% - Theke,Ökologische Molkerei Allgäu,Schweiz,Bio-Suisse,"2,4kg",47.2512,3.0912000000000006,7
 280033,Signor Paradeiser BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Bayern,Bioland,4kg,67.0676,4.387599999999999,7
 296145,Sommer Rebell 50% - Theke,Käserebellen,Diverse,Naturland,3kg,65.805,4.305000000000007,7
@@ -561,13 +568,13 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 280746,Tommette de Yenne 50% - Theke,Vallee Verte,Frankreich,100% Biozutaten,"0,8kg",16.5101,1.0801000000000016,7
 283369,Trüffelschwein 6Wo. BIOLAND 50% - Theke,Ökologische Molkerei Allgäu,Diverse,Bioland,2kg,42.7786,2.7986000000000004,7
 280657,Urgestein Reserve 50% - Theke,Vallee Verte,Schweiz,Bio-Suisse,"2,1kg",54.13130000000001,3.5413000000000068,7
-282242,Uriger Allgäuer BIOLAND 50% - Theke,Schaukäserei Wiggensbach,Deutschland,Bioland,4kg,58.079600000000006,3.799600000000005,7
+282242,Uriger Allgäuer BIOLAND 50% - Theke,Schaukäserei Wiggensbach,Deutschland,Bioland,4kg,67.79520000000001,4.435200000000009,7
 282243,Uriger Allgäuer leicht BIOLAND 25% -Theke,Schaukäserei Wiggensbach,Bayern,Bioland,4kg,67.79520000000001,4.435200000000009,7
 284706,Uriger Hannes DEMETER 50% - Theke,Söbbeke,Deutschland,Demeter (Deutschland),"3,8kg",84.4872,5.527200000000008,7
 280262,Waldkäse 50% - Theke,Söbbeke,Deutschland,Bioland,"4,5kg",86.5737,5.663700000000006,7
 296113,Walnuss Rebell 50% - Theke,Käserebellen,Österreich,Naturland,3kg,65.805,4.305000000000007,7
 280389,Walnusskäse BIOLAND 50% - Theke,Gebrüder Baldauf,Deutschland,Bioland,3kg,65.3556,4.275599999999997,7
-280645,Wanderzyt 8 Monate 53% - Theke,Vallee Verte,Schweiz,100% Biozutaten,"2,1kg",46.2882,3.0282000000000053,7
+280645,Wanderzyt 8 Monate 53% - Theke,Vallee Verte,Schweiz,100% Biozutaten,"2,1kg",51.616800000000005,3.376800000000003,7
 8470,Weißbierkäse BIOLAND 50% - Theke,Söbbeke,Deutschland,Bioland,"3,8kg",77.6606,5.080600000000004,7
 8473,Wilder Bernd BIOLAND 50% - Theke,Söbbeke,Deutschland,Bioland,"3,8kg",75.4671,4.937100000000001,7
 284675,Zarte Butter-Hexe 50% - Theke,Söbbeke,Belgien,Naturland,"3,1kg",60.7974,3.977400000000003,7
@@ -586,12 +593,13 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 283892,Allgäuer Emmentaler g.U. BIOLAND 45% - Theke,Ökologische Molkerei Allgäu,Baden-Württemberg,Bioland,"2,5kg",34.796400000000006,2.2764000000000024,7
 281225,Allgäuer Emmentaler Rösslerhof g.U.BIOLAND45%Theke,Käserei Bauhofer,Regional,Bioland,"3,2kg",43.795100000000005,2.8651000000000053,7
 281224,Allgäuer Emmentaler Rösslerhof g.U.BIOLAND45%Theke,Käserei Bauhofer,Regional,Bioland,5kg,67.83800000000001,4.4380000000000095,7
-282498,Alpenstolz 10 Monate 50% - Theke,Vallee Verte,Österreich,100% Biozutaten,2kg,34.775,2.2749999999999986,7
+282498,Alpenstolz 10 Monate 50% - Theke,Vallee Verte,Österreich,100% Biozutaten,2kg,39.95380000000001,2.613800000000005,7
 289135,Alpkäsle BIOLAND 50% - Theke,Gebrüder Baldauf,Deutschland,Bioland,"0,9kg",18.2863,1.1963000000000008,7
+284735,Alter Bernd BIOLAND 50% - Theke,Söbbeke,Deutschland,Bioland,"3,8kg",77.1363,5.046300000000002,7
 280685,Appenzeller Classic mild würzig 48% - Theke,Vallee Verte,Schweiz,Bio-Suisse,3kg,83.39580000000001,5.455800000000011,7
 289115,Baldauf 1862 Meisterstück 8 Mon. BIOLAND50%-Theke,Gebrüder Baldauf,Deutschland,Bioland,"3,25kg",66.9392,4.379199999999997,7
 289112,Baldauf Alpkäse Reifegold 16 Mon.BIOLAND 50%-Theke,Gebrüder Baldauf,Deutschland,Bioland,"3,25kg",73.69090000000001,4.820900000000009,7
-282051,Bergkäse 4 Mon. DEMETER 50% - Theke,Ökologische Molkerei Allgäu,Deutschland,Demeter (Deutschland),3kg,47.187000000000005,3.0870000000000033,7
+282051,Bergkäse 4 Mon. DEMETER 50% - Theke,Ökologische Molkerei Allgäu,Deutschland,Demeter (Deutschland),3kg,53.6712,3.5112000000000023,7
 280313,Bergkäse Alm-Riegel BIOLAND 45% - Theke,Ökologische Molkerei Allgäu,Deutschland,Bioland,"2,3kg",33.8655,2.2154999999999987,7
 281941,Bergkäse Monte DEMETER 50% - Theke,Ökologische Molkerei Allgäu,Baden-Württemberg,Demeter (Deutschland),3kg,59.192400000000006,3.872400000000006,7
 280302,Bergkäse Sechsender 6 Mon.52% - Theke,Ökologische Molkerei Allgäu,Deutschland,Naturland,"2,5kg",46.8981,3.068100000000001,7
@@ -600,7 +608,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 279562,Cheddar mild aus Somerset 50% | Block - Theke,Vallee Verte,Großbritannien+Insel Man,EG-Bio,"2,5kg",52.697500000000005,3.447500000000005,7
 8158,Comté AOP 5 Monate 45% - Theke,Vallee Verte,Frankreich,EG-Bio,"4,5kg",107.03210000000001,7.002100000000013,7
 282181,Comté Petite AOP 8 Monate 45% - Theke,Vallee Verte,Frankreich,100% Biozutaten,"2,5kg",68.266,4.466000000000008,7
-280663,Erzherzog Johann Heumilch-Käse 6 Monate 50% -Theke,Vallee Verte,Österreich,100% Biozutaten,"3,5kg",65.8692,4.309200000000004,7
+280663,Erzherzog Johann Heumilch-Käse 6 Monate 50% -Theke,Vallee Verte,Österreich,100% Biozutaten,"3,5kg",57.416199999999996,3.7561999999999998,7
 279572,Extra Mature Cheddar 50% - Theke,Vallee Verte,Großbritannien+Insel Man,100% Biozutaten,400g,11.6095,0.759500000000001,7
 8442,Gouda Bastiaansen alt 10 Mon. 50% - Theke,Bastiaansen,Niederlande,EG-Bio,4kg,63.34400000000001,4.1440000000000055,7
 280259,Gouda Bastiaansen uralt 16 M. 50%|1/2 Laib - Theke,Bastiaansen,Niederlande,100% Biozutaten,2kg,36.8936,2.4136000000000024,7
@@ -634,13 +642,14 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 8178,Pecorino Romano DOP 50% - Theke,Ökologische Molkerei Allgäu,Italien,IA,"1,7kg",44.8009,2.930900000000001,7
 8177,Pecorino Stagionato 3 Mon. 45% - Theke,Ökologische Molkerei Allgäu,Italien,IA,"2,6kg",63.3975,4.147500000000001,7
 280255,Piénibon 12 Monate 50% - Theke,Vallee Verte,Schweiz,100% Biozutaten,"3,2kg",86.1778,5.637799999999999,7
+280475,Prima Donna 45%|1/4 Laib-Theke,Bastiaansen,Niederlande,100% Biozutaten,"2,5kg",43.6025,2.852499999999999,7
 8411,Rigatino 45% - Theke,Ökologische Molkerei Allgäu,Bayern,Naturland,"1,5kg",24.4602,1.600200000000001,7
 282575,Schweizer Bergkristall 8 Monate 52% - Theke,Ökologische Molkerei Allgäu,Schweiz,Bio-Suisse,"2,4kg",54.3132,3.553200000000004,7
 280653,Schweizer Emmentaler AOP 12 Monate 45% - Theke,Vallee Verte,Schweiz,Bio-Suisse,"2,5kg",73.4341,4.804100000000005,7
 280652,Schweizer Emmentaler AOP 5 Monate 49% - Theke,Vallee Verte,Schweiz,Bio-Suisse,"2,5kg",68.2446,4.464600000000004,7
 279567,Smoked Cheney's Fortune Cheddar 50% - Theke,Vallee Verte,Großbritannien+Insel Man,100% Biozutaten,1kg,37.4072,2.4472000000000023,7
 282253,Sternschnuppe BIOLAND 48% - Theke,Käsküche Isny,Regional,Bioland,"1,5kg",28.825800000000005,1.8858000000000033,7
-7957,Tête de Moine AOP 50% - Theke,Vallee Verte,Schweiz,Bio-Suisse,"0,8kg",24.5779,1.6079000000000008,7
+7957,Tête de Moine AOP 50% - Theke,Vallee Verte,Schweiz,Bio-Suisse,"0,8kg",25.3697,1.6597000000000008,7
 280705,Tiroler Bergkäse mild g.U. 3 Monate 50% - Theke,Biokäserei Walchsee,Österreich,Bio Austria,4kg,56.025200000000005,3.665200000000006,7
 280725,Tiroler Bergkäse sehr würzig g.U.10 Mon.50% -Theke,Biokäserei Walchsee,Österreich,Bio Austria,4kg,76.39800000000001,4.998000000000005,7
 286891,Viamala Bündner Bergkäse 10 Mon. 48% - Theke,Bruno Schilcher,Schweiz,Bio-Suisse,"4,5kg",117.0473,7.657300000000006,7
@@ -650,9 +659,8 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 270381,Zillertaler Bergkäse 3 Mon. 50% - Theke,Vallee Verte,Österreich,100% Biozutaten,4kg,70.14920000000001,4.589200000000005,7
 270391,Zillertaler Bergkäse 6 Monate 50% - Theke,Vallee Verte,Österreich,100% Biozutaten,4kg,77.04,5.040000000000006,7
 282499,Zillertaler Bergkäse. 9 Mon. 50% - Theke,Vallee Verte,Österreich,100% Biozutaten,"1,9kg",42.37200000000001,2.7720000000000056,7
-2974921,Mozzarella-Kugel 45%,Züger Frischkäse,Schweiz,EG-Bio,100g,0.5564,0.03639999999999999,7
-2975121,Mozzarella-Kugel laktosefrei 45%,Züger Frischkäse,Schweiz,EG-Bio,100g,0.642,0.04200000000000004,7
-2960471,Vegane Alternative zu Rahm- & Grill-Käse natur,Soyana,Burkina Faso,100% Biozutaten,200g,1.8511000000000002,0.12110000000000021,7
+2864651,Allgäuer Ziegen-Camembert BIOLAND 50%,Ökologische Molkerei Allgäu,Deutschland,Bioland,100g,1.4445000000000001,0.09450000000000003,7
+2974951,Mozzarella-Kugel-Duo 45% | 2St,Züger Frischkäse,Schweiz,EG-Bio,2x100g,1.0807,0.07069999999999999,7
 281405,BioBauernmarkt Feiner Frischkäse natur 70%,Andechser,Österreich,EG-Bio,12x200g,23.754,1.554000000000002,7
 282935,Burrata 50%,Ökologische Molkerei Allgäu,Italien,IA,6x125g,13.2894,0.8694000000000006,7
 282945,Burrata di Bufala 60%,Ökologische Molkerei Allgäu,Italien,IA,6x125g,15.2154,0.9954000000000001,7
@@ -702,7 +710,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 8184,Ricotta 40%,Isana,Italien,EG-Bio,6x250g,13.161000000000001,0.8610000000000007,7
 298431,Ricotta 45%,Züger Frischkäse,Schweiz,EG-Bio,4x250g,8.774,0.5739999999999998,7
 284175,Sahne-Schmelzkäse-Creme 50%,Isana,Deutschland,100% Biozutaten,10x175g,28.783,1.8830000000000027,7
-283355,Scamorzetti geräuchert 45%,Ökologische Molkerei Allgäu,Diverse,EG-Bio,6x150g,13.995600000000001,0.9156000000000013,7
+283355,Scamorzetti geräuchert 45%,Ökologische Molkerei Allgäu,Diverse,EG-Bio,6x150g,16.6278,1.0878000000000014,7
 296678,Schaf-Fetacreme Fanti DEMETER 45%,Jakobsberger Milchhandwerker,Diverse,Demeter (Deutschland),4x135g,13.225200000000001,0.8652000000000015,7
 7645,Schaf-Frischkäse Brebis frais 50%,Bergerie,Frankreich,EG-Bio,6x100g,12.3264,0.8064,7
 289255,Schaffrischkäse Bärlauch-Pesto TöpfchBIOLAND45%,Anderlbauer,Bayern,Bioland,6x150g,24.075000000000003,1.5750000000000028,7
@@ -795,6 +803,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 297610,Hirtenkäse aus Kuhmilch laktosefrei 49%,Züger Frischkäse,Schweiz,100% Biozutaten,6x150g,13.482000000000001,0.8820000000000014,7
 270565,Mini Duc Trüffel 73%,Vallee Verte,Frankreich,100% Biozutaten,5x100g,31.7255,2.0755000000000017,7
 284795,Monsieur Jean Bernard würzig 60%,Söbbeke,Frankreich,EG-Bio,8x200g,29.96,1.9600000000000009,7
+279544,Munster AOP Chaud Ofenkäse 50%,Vallee Verte,Frankreich,100% Biozutaten,6x220g,30.4308,1.9908000000000001,7
 8043,Rahmbrie-Ecken BIOLAND 50%,Ökologische Molkerei Allgäu,Diverse,Bioland,4x125g,8.0892,0.5292000000000003,7
 285401,Roquefort Papillon AOP 52%,Vallee Verte,Frankreich,100% Biozutaten,6x100g,28.248,1.8480000000000025,7
 8863,Schafbert pur BIOLAND 45%,Anderlbauer,Bayern,Bioland,"0,15kg",3.7022000000000004,0.24220000000000041,7
@@ -805,7 +814,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 8870,Ziegenbert pur BIOLAND 45%,Anderlbauer,Deutschland,Bioland,"0,15kg",3.9269000000000003,0.25690000000000035,7
 8737,Ziegencamembert 55%,Andechser,Europäische Union,EG-Bio,5x100g,11.877,0.777000000000001,7
 281215,Allgäuer Raclette würzig BIOLAND in Scheiben50%,Ökologische Molkerei Allgäu,Deutschland,Bioland,6x300g,27.413400000000003,1.7934000000000019,7
-280835,Allgäuer Tilsiter in Scheiben BIOLAND 40%,Ökologische Molkerei Allgäu,Bayern,Bioland,8x150g,17.6336,1.1536000000000008,7
+280835,Allgäuer Tilsiter in Scheiben BIOLAND 40%,Ökologische Molkerei Allgäu,Bayern,Bioland,8x150g,20.2016,1.3216,7
 289155,Allgäuer Wildblumenkäse a.Heumilch 50% -Portion,Gebrüder Baldauf,Deutschland,Bioland,6x180g,25.615800000000004,1.6758000000000024,7
 8751,Alpenblumenkäse in Scheiben BIOLAND 50%,Andechser,Deutschland,Bioland,10x125g,28.034000000000002,1.8340000000000032,7
 8165,Alpenländer Butterkäse in Scheiben BIOLAND 50%,Andechser,Österreich,Bioland,10x150g,24.075000000000003,1.5750000000000028,7
@@ -843,12 +852,13 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 281136,Zarte Butterhexe-Käse in Scheiben 50%,Söbbeke,Belgien,100% Biozutaten,8x110g,17.548,1.1479999999999997,7
 281415,Ziegen-Butterkäse in Scheiben BIOLAND 48%,Andechser,Bayern,Bioland,10x100g,25.145000000000003,1.6450000000000031,7
 286024,Ziegenreibekäse BIOLAND 48%,Andechser,Bayern,Bioland,10x100g,15.194,0.9940000000000015,7
-280865,Allgäuer Emmentaler Heumilch in Scheib.BIOLAND 40%,Ökologische Molkerei Allgäu,Bayern,Bioland,8x150g,17.548,1.1479999999999997,7
+280865,Allgäuer Emmentaler Heumilch in Scheib.BIOLAND 40%,Ökologische Molkerei Allgäu,Bayern,Bioland,8x150g,19.3456,1.2656000000000027,7
 286311,Bergkäse DEMETER 50% - Portion,Ökologische Molkerei Allgäu,Baden-Württemberg,Demeter (Deutschland),10x200g,40.446,2.646000000000001,7
 287106,Bergkäse in Scheiben 45%,Blauer Engel,Österreich,Bio Austria,10x100g,19.795,1.2950000000000017,7
 286015,Bergkäse in Scheiben 50%,Andechser,Bayern,Biokreis,10x125g,26.215,1.7149999999999999,7
-280875,Bergkäse in Scheiben BIOLAND 40%,Ökologische Molkerei Allgäu,Bayern,Bioland,8x150g,17.7192,1.159200000000002,7
+280875,Bergkäse in Scheiben BIOLAND 40%,Ökologische Molkerei Allgäu,Bayern,Bioland,8x150g,20.3728,1.3328000000000024,7
 286884,Cheddar in Scheiben 46%,Vallee Verte,Lettland,100% Biozutaten,12x100g,18.7464,1.2264000000000017,7
+279546,Comté AOP in Scheiben 45%,Vallee Verte,Frankreich,100% Biozutaten,8x160g,42.628800000000005,2.788800000000002,7
 287185,Emmentaler in Scheiben 45%,Blauer Engel,Österreich,EG-Bio,10x100g,19.153,1.2530000000000001,7
 281086,Herzige Marie BIOLAND 50% - Portion,Söbbeke,Deutschland,Bioland,6x150g,23.2404,1.5204000000000022,7
 287516,Heumilch-Bergkäse g.t.S. 50% - Portion,Bio Heumilch Bauern,Deutschland,EG-Bio,10x180g,36.915,2.414999999999999,7
@@ -905,7 +915,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 170780,Wiener Würstchen 4St,Metzgerei Fairfleisch,Regional,100% Biozutaten,200g,5.339300000000001,0.3493000000000004,7
 19202,"Ente bratfertig BIOLAND 2,2kg",Ulrich Unterweger,Baden-Württemberg,Bioland,2kg,42.586,2.7860000000000014,7
 19222,"Ente bratfertig NATURLAND 2,2-2,8kg",Die Eiermacher,Österreich,Naturland,"2,5kg",39.99660000000001,2.6166000000000054,7
-19184,Entenbrust mit Haut NATURLAND 1St,Die Eiermacher,Österreich,Naturland,"0,35kg",12.1552,0.7952000000000012,7
+19184,Entenbrust mit Haut NATURLAND 1St,Die Eiermacher,Österreich,Naturland,"0,35kg",12.262200000000002,0.8022000000000009,7
 19185,Entenkeule mit Haut und Knochen NATURLAND 1St,Die Eiermacher,Österreich,Naturland,"0,25kg",5.874300000000001,0.38430000000000053,7
 19208,Gans bratfertig BIOLAND 4-5kg,Ulrich Unterweger,Baden-Württemberg,Bioland,"4,5kg",100.8689,6.5989,7
 19206,Gans bratfertig NATURLAND 4-5kg,Stauß,Deutschland,Naturland,"4,5kg",99.9166,6.536600000000007,7
@@ -914,11 +924,8 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 19215,"Hähnchen bratfertig BIOLAND 1,5-2kg",Ulrich Unterweger,Baden-Württemberg,Bioland,"1,5kg",19.099500000000003,1.2495000000000012,7
 191810,"Perlhuhn bratfertig 1,2-1,8kg",Le Picoreur,Frankreich,EG-Bio,"1,4kg",21.3465,1.3964999999999996,7
 19200,Pute bratfertig BIOLAND 4-5kg,Ulrich Unterweger,Baden-Württemberg,Bioland,"4,5kg",95.8185,6.268500000000003,7
-19981,Schweinenackensteaks Paprika 2St,Chiemgauer Naturfleisch,Diverse,Bioland,"0,4kg",6.0348,0.39480000000000004,7
-1943501,Chorizo-Salami mit Edelschimmel luftgetrocknet 1St,Ökoland,Deutschland,100% Biozutaten,150g,2.3433,0.1533000000000002,7
-1937101,Lachsschinken fein geräuchert geschnitten BIOLAND,Ökoland,Deutschland,Bioland,80g,2.0972,0.1372,7
-1946021,Salami-Snack natur geräuchert 3St,Ökoland,Deutschland,100% Biozutaten,120g,1.7869,0.1169,7
-1949121,Südtiroler Speck 1St,Salumeria Galloni,Italien,100% Biozutaten,"0,35kg",5.9813,0.3913000000000002,7
+1709001,Leberkäse geschnitten,Bio vom Berg,Österreich,Biokreis,80g,0.749,0.049000000000000044,7
+1711231,Tiroler Bacon-Streifenspeck geschnitten,Biometzgerei Juffinger,Österreich,Biokreis,100g,1.3375000000000001,0.08750000000000013,7
 1720991,Wiener Würstchen 4St,Tagwerk,Bayern,100% Biozutaten,200g,1.7120000000000002,0.1120000000000001,7
 19445,Bacon-Schinkenspeck geräuchert geschnitten BIOLAND,Ökoland,Deutschland,Bioland,3x80g,8.8275,0.5775000000000006,7
 181515,Bauchspeck Pancetta Tesa geschnitten,PrimaVera,Italien,100% Biozutaten,70g,2.7820000000000005,0.18200000000000038,7
@@ -1000,9 +1007,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 181424,Salami Volterrana Fenchel geschnitten,PrimaVera,Italien,100% Biozutaten,70g,3.0174,0.19740000000000002,7
 194602,Salami-Snack natur geräuchert 3St,Ökoland,Deutschland,100% Biozutaten,3x120g,10.689300000000001,0.6993000000000009,7
 194606,Salami-Snack Pfeffer geräuchert 3St,Ökoland,Deutschland,100% Biozutaten,3x120g,10.689300000000001,0.6993000000000009,7
-181205,Salamino al Tartufo ca.150g,ptn,Italien,100% Biozutaten,Stück,5.874300000000001,0.38430000000000053,7
-181215,Salamino alla Noce ca.150g,ptn,Italien,100% Biozutaten,Stück,5.874300000000001,0.38430000000000053,7
-181220,Salamino alla Salvia ca.150g,ptn,Italien,100% Biozutaten,Stück,5.874300000000001,0.38430000000000053,7
 170936,Tiroler Kaminwurzen 2St,Biometzgerei Juffinger,Österreich,Biokreis,5x140g,15.461500000000001,1.0115000000000016,7
 170944,Tiroler Lammwurzen mit Rind 2St,Biometzgerei Juffinger,Österreich,Biokreis,5x120g,15.996500000000001,1.0465000000000018,7
 170942,Tiroler Ländjäger 2St,Biometzgerei Juffinger,Österreich,Biokreis,3x100g,7.992900000000001,0.5229000000000008,7
@@ -1056,7 +1060,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 192292,Fondue-Fleischmischung Pute & Hähnchen,Biometzgerei Juffinger,Österreich,Biokreis,"0,9kg",34.1865,2.236500000000003,7
 199425,Hähnchenbrustfilet 1St,Chiemgauer Naturfleisch,Bayern,Bioland,"0,25kg",7.5435,0.49350000000000005,7
 19265,Hähnchenbrustfilet 2St,Freilandhähnchen Fahrenzhausen,Deutschland,Biokreis,"0,35kg",10.0901,0.6600999999999999,7
-199895,Hähnchenbrustfilet Paprika1St,Chiemgauer Naturfleisch,Bayern,Bioland,"0,26kg",8.6563,0.5663,7
 19266,Hähnchenkeulen 2St,Freilandhähnchen Fahrenzhausen,Deutschland,Biokreis,"0,6kg",7.832400000000001,0.5124000000000004,7
 19255,"Kelly-Bronzepute bratfertig BIOKREIS 4,5-6kg",Freilandputen Fahrenzhausen,Deutschland,Biokreis,5kg,73.5625,4.8125,7
 19245,Landgockel groß bratfertig DEMETER 2-3kg,Brunnenhof,Baden-Württemberg,Demeter (Deutschland),"2,5kg",51.499100000000006,3.369100000000003,7
@@ -1086,18 +1089,17 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 192918,Rehbraten aus der Keule 1St,Chiemgauer Naturfleisch,Bayern,WILD,"1,5kg",49.96900000000001,3.2690000000000055,7
 192920,Rehrücken mit Knochen 1St,Chiemgauer Naturfleisch,Bayern,WILD,"0,8kg",44.1482,2.8882000000000048,7
 192916,Rehschulter ohne Knochen 1St,Chiemgauer Naturfleisch,Bayern,WILD,"0,8kg",20.116000000000003,1.3160000000000025,7
-19226,Rinder-Rotweinschnetzeltes zum Kurzbraten,Biometzgerei Juffinger,Österreich,Biokreis,"0,3kg",9.148500000000002,0.5985000000000014,7
 192264,Rinderbraten Almkräuter 1St,Biometzgerei Juffinger,Österreich,Biokreis,"1,2kg",40.381800000000005,2.6418000000000035,7
 170873,Schweinebauchscheiben Paprika 4St,Metzgerei Fairfleisch,Regional,EG-Bio,"0,4kg",5.671,0.37100000000000044,7
 170870,Schweinehalssteak Paprika 2St,Metzgerei Fairfleisch,Regional,EG-Bio,"0,3kg",5.3713999999999995,0.35139999999999993,7
 170871,Schweinerückensteak Paprika 2St,Metzgerei Fairfleisch,Regional,EG-Bio,"0,3kg",6.3344000000000005,0.41440000000000055,7
 170834,Weiderind-Filetsteak DEMETER WIR. 1St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,2kg",11.8128,0.7728000000000002,7
 170838,Weiderind-Geschnetzeltes DEMETER WIR.,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",10.5288,0.6888000000000005,7
-170844,Weiderind-Geschnetzeltes Gyros DEMETER WIR.,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",9.8226,0.6425999999999998,7
+170844,Weiderind-Geschnetzeltes Gyros DEMETER WIR.,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",10.5288,0.6888000000000005,7
 170806,Weiderind-Gulasch DEMETER WIR.,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",9.6942,0.6341999999999999,7
 170836,Weiderind-Hochrippensteak DEMETER WIR. 1St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,2kg",5.4891000000000005,0.35910000000000064,7
-170852,Weiderind-Hochrippensteak Kräuter WIR. 2St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",11.0852,0.725200000000001,7
-170851,Weiderind-Hochripppensteak Paprika WIR. 2St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",11.0852,0.725200000000001,7
+170852,Weiderind-Hochrippensteak Kräuter WIR. 2St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",11.9412,0.7812000000000001,7
+170851,Weiderind-Hochripppensteak Paprika WIR. 2St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,4kg",11.9412,0.7812000000000001,7
 170830,Weiderind-Hüftsteak DEMETER WIR. 2St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,32kg",12.84,0.8399999999999999,7
 170849,Weiderind-Hüftsteak Kräuter DEMETER WIR. 2St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,32kg",12.84,0.8399999999999999,7
 170848,Weiderind-Hüftsteak Paprika DEMETER WIR. 2St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,32kg",12.84,0.8399999999999999,7
@@ -1107,6 +1109,9 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 170808,Weiderind-Rib Eye Steak DEMETER WIR. 1St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,3kg",11.7165,0.7665000000000006,7
 170802,Weiderind-Rumpsteak DEMETER WIR. 1St,WIR. Bio Power Bodensee,Regional,Demeter (Deutschland),"0,2kg",10.2934,0.6734000000000009,7
 192922,Wildschweinbraten aus der Keule 1St,Chiemgauer Naturfleisch,Bayern,WILD,"1,5kg",48.481700000000004,3.1717000000000013,7
+1915441,Biomare Lachswürfel geräuchert,Bio Mare,Irland,100% Biozutaten,100g,2.3433,0.1533000000000002,7
+1915321,Biomare Wildlachs geräuchert geschnitten,Bio Mare,USA,Naturland,75g,2.5466,0.1666000000000003,7
+1911751,Räucherlachs-Tatar,Isana,Irland,100% Biozutaten,125g,1.0593000000000001,0.06930000000000014,7
 275874,Heringshäppchen MSC in Dillsauce,Grünhof,Deutschland,S#,6x150g,12.904200000000001,0.8442000000000007,7
 275894,Heringssalat MSC mit roter Bete,Grünhof,Deutschland,S#,6x150g,11.1708,0.7308000000000003,7
 279957,Küstenfischer Heringssalat in Senf-Marinade,Isana,Diverse,S#,4x150g,10.058000000000002,0.6580000000000013,7
@@ -1120,10 +1125,9 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 191105,Delikatess-Räucherforellenfilet fein geräuchert,Isana,Europäische Union,Naturland,4x100g,22.7268,1.4868000000000023,7
 191552,Forellenfilets geräuchert NATURLAND 2St,Bio Mare,Diverse,Naturland,5x100g,23.968,1.5680000000000014,7
 191135,Räucherlachs Irland NATURLAND geschnitten,Isana,Irland,Naturland,4x100g,26.450400000000002,1.730400000000003,7
-191225,Räucherlachs Nordatlantik geschnitten,Isana,Diverse,EG-Bio,4x100g,24.6956,1.6156000000000006,7
 191227,Räucherlachs Nordatlantik geschnitten,Isana,Diverse,7,4x75g,17.0772,1.1172000000000004,7
 160005,V! Lachsfilet mariniert frisch mit Haut 1St,Walter Geiger,Irland,Naturland,"0,3kg",10.7535,0.7035,7
-191354,Wildlachs Griller MSC frisch 3St,Pur Alpen Rauch,CDN,S#,5x210g,28.355,1.8550000000000004,7
+191354,Wildlachs Griller MSC frisch 3St,Pur Alpen Rauch,Kanada,S#,5x210g,28.355,1.8550000000000004,7
 191166,Wildlachs Red MSC geräuchert & geschnitten gravad,Youkon,USA,S#,3x75g,19.9662,1.3062000000000005,7
 191544,Biomare Lachswürfel geräuchert,Bio Mare,Irland,100% Biozutaten,5x100g,23.4865,1.5365000000000002,7
 191542,Biomare Sommerlachs geräuchert geschnitten,Bio Mare,Irland,100% Biozutaten,5x100g,30.067000000000004,1.9670000000000023,7
@@ -1136,24 +1140,24 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 191565,Räucherlachs mit Limone geschnitten NATURLAND,Bio Mare,Deutschland,Naturland,100g,6.2488,0.4088000000000003,7
 191175,Räucherlachs-Tatar,Isana,Irland,100% Biozutaten,125g,3.1886,0.20860000000000012,7
 191573,Stremel Lachsfilet geräuchert NATURLAND,Bio Mare,Diverse,Naturland,100g,5.874300000000001,0.38430000000000053,7
-191352,Wildlachs Red MSC geräuchert & geschnitten,Youkon,CDN,S#,4x100g,40.617200000000004,2.657200000000003,7
-191187,Wildlachs Wild & Pink MSC geräuchert & geschnitten,Youkon,CDN,S#,3x50g,12.4869,0.8169000000000004,7
-191185,Wildlachs Wild & Pink MSC geräuchert & geschnitten,Youkon,CDN,S#,4x50g,16.6492,1.0892,7
-191212,Wildlachs Wild & Red MSC geräuchert & geschnitten,Youkon,CDN,S#,3x75g,19.227899999999998,1.2578999999999994,7
-19121,Wildlachs Wild & Red MSC geräuchert & geschnitten,Youkon,CDN,S#,4x75g,25.637200000000004,1.6772000000000027,7
-191192,Wildlachs Wild & Silver MSC geräuchert & geschn.,Youkon,CDN,S#,3x75g,20.190900000000003,1.3209000000000017,7
-19119,Wildlachs Wild & Silver MSC geräuchert & geschn.,Youkon,CDN,S#,4x75g,26.921200000000002,1.7612000000000023,7
-19132,Wildlachsstreifen Indian Candy MSC heißgeräuchert,Youkon,CDN,S#,4x114g,29.9172,1.9572000000000003,7
+191348,Wildlachs Red MSC geräuchert & geschnitten,Youkon,Kanada,S#,3x100g,30.4629,1.9929000000000023,7
+191352,Wildlachs Red MSC geräuchert & geschnitten,Youkon,Kanada,S#,4x100g,40.617200000000004,2.657200000000003,7
+191187,Wildlachs Wild & Pink MSC geräuchert & geschnitten,Youkon,Kanada,S#,3x50g,12.4869,0.8169000000000004,7
+191185,Wildlachs Wild & Pink MSC geräuchert & geschnitten,Youkon,Kanada,S#,4x50g,16.6492,1.0892,7
+191212,Wildlachs Wild & Red MSC geräuchert & geschnitten,Youkon,Kanada,S#,3x75g,19.227899999999998,1.2578999999999994,7
+19121,Wildlachs Wild & Red MSC geräuchert & geschnitten,Youkon,Kanada,S#,4x75g,25.637200000000004,1.6772000000000027,7
+191192,Wildlachs Wild & Silver MSC geräuchert & geschn.,Youkon,Kanada,S#,3x75g,20.190900000000003,1.3209000000000017,7
+19119,Wildlachs Wild & Silver MSC geräuchert & geschn.,Youkon,Kanada,S#,4x75g,26.921200000000002,1.7612000000000023,7
+19132,Wildlachsstreifen Indian Candy MSC heißgeräuchert,Youkon,Kanada,S#,4x114g,29.9172,1.9572000000000003,7
 8931,BIOLAND Bruderhahn-Eier L 63-73g | 6St,Schaut,Regional,Bioland,15x6Stück,42.532500000000006,2.782500000000006,7
-8930,BIOLAND Bruderhahn-Eier L 63-73g | lose,Schaut,Regional,Bioland,180Stück,82.81800000000001,5.418000000000006,7
-289295,BIOLAND Bruderhahn-Eier L 63-73g | lose,Schaut,Regional,Bioland,90Stück,41.409000000000006,2.709000000000003,7
+8930,BIOLAND Bruderhahn-Eier M / L 53-73g | lose,Schaut,Regional,Bioland,180Stück,82.81800000000001,5.418000000000006,7
+289295,BIOLAND Bruderhahn-Eier M / L 53-73g | lose,Schaut,Regional,Bioland,90Stück,41.409000000000006,2.709000000000003,7
 8941,BIOLAND Bruderhahn-Eier M 53-63g | 6St,Schaut,Regional,Bioland,15x6Stück,42.532500000000006,2.782500000000006,7
 8940,BIOLAND Bruderhahn-Eier M 53-63g | lose,Schaut,Regional,Bioland,180Stück,82.81800000000001,5.418000000000006,7
 289395,BIOLAND Bruderhahn-Eier M 53-63g | lose,Schaut,Regional,Bioland,90Stück,41.409000000000006,2.709000000000003,7
-8932,BIOLAND HennenGockel-Eier L 63-73g | 10St,Halder,Regional,Bioland,9x10Stück,42.8535,2.8034999999999997,7
+8932,BIOLAND HennenGockel-Eier M / L 53-73g | 10St,Halder,Regional,Bioland,9x10Stück,42.8535,2.8034999999999997,7
 289325,BIOLAND HennenGockel-Eier M / L 53-73g | 4St,Halder,Regional,Bioland,24x4St,44.940000000000005,2.940000000000005,7
 289326,BIOLAND HennenGockel-Eier M / L 53-73g | lose,Halder,Regional,Bioland,90Stück,41.409000000000006,2.709000000000003,7
-8942,BIOLAND HennenGockel-Eier M 53-63g | 10St,Halder,Regional,Bioland,9x10Stück,42.8535,2.8034999999999997,7
 8950,BIOLAND-Eier gefärbt & hartgekocht M 53-58g | lose,Halder,Deutschland,Bioland,90Stück,47.187000000000005,3.0870000000000033,7
 289532,Brotzeiteier gefärbt & gekocht M 53-63g | lose,Schaut,Deutschland,EG-Bio,90Stück,52.965,3.4650000000000034,7
 289534,Brotzeiteier gefärbt & gekocht M 53-63g,Schaut,Deutschland,EG-Bio,15x6Stück,55.3725,3.6225000000000023,7
@@ -1191,9 +1195,11 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 98389,Tomaten getrocknet mariniert - Theke,Il Cesto,Italien,100% Biozutaten,kg,24.353200000000005,1.593200000000003,7
 698288,Tomaten sonnengetrocknet gekräutert - Theke,Isana,Europäische Union,100% Biozutaten,2x600g,19.9234,1.3034,7
 698265,Toskana-Mix - Theke,Isana,Diverse,100% Biozutaten,2x600g,19.024600000000003,1.244600000000002,7
-2757071,Delikatess Tzatziki,Grünhof,Deutschland,100% Biozutaten,200g,1.0593000000000001,0.06930000000000014,7
-2936931,Nudel- & Lasagne-Teig frisch,Donaustrudel,Bayern,100% Biozutaten,500g,1.6371000000000002,0.1071000000000002,7
-6200351,Sauerkraut frisch BIOLAND Schweizer - Beutel,Schweizer,Deutschland,Bioland,520g,0.7062,0.04620000000000002,7
+5753701,Dinkel-Schupfnudeln frisch,Alb Natur Alb Gold,Diverse,100% Biozutaten,400g,1.3375000000000001,0.08750000000000013,7
+5756981,Maultaschen vegan mit Gemüsefüllung,Alb Natur Alb Gold,Diverse,100% Biozutaten,300g,1.4766,0.09660000000000002,7
+5666101,smoky sriracha,Completeorganics,Diverse,100% Biozutaten,200g,2.1186000000000003,0.13860000000000028,7
+566595,Bayrisches Kimchi,Completeorganics,Diverse,100% Biozutaten,6x230g,20.0304,1.3104000000000013,7
+566560,daikon kimchi,Completeorganics,Diverse,100% Biozutaten,6x230g,19.902,1.3019999999999996,7
 567244,Sauerkraut frisch bioaktiv DEMETER - Glas,Nordseeküstengenuss,Deutschland,Demeter (Deutschland),8x410g,29.018400000000003,1.8984000000000023,7
 620035,Sauerkraut frisch BIOLAND Schweizer - Beutel,Schweizer,Deutschland,Bioland,12x520g,16.820400000000003,1.1004000000000023,7
 698280,Algen-Salat mit Sesam & Ingwer vegan,Isana,Diverse,Naturland,4x100g,9.886800000000001,0.6468000000000007,7
@@ -1211,7 +1217,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 275757,Fleischsalat ohne NPS,Grünhof,Diverse,100% Biozutaten,3x150g,5.6496,0.36960000000000015,7
 275797,Geflügelsalat,Grünhof,Diverse,100% Biozutaten,3x125g,5.7780000000000005,0.3780000000000001,7
 566545,goji rote beete,Completeorganics,Diverse,100% Biozutaten,6x230g,19.902,1.3019999999999996,7
-576039,Guacamole Avocado-Creme vegan,Isana,Mexiko,100% Biozutaten,4x150g,13.738800000000001,0.8988000000000014,7
+576039,Guacamole Avocado-Creme vegan,Isana,Mexico,100% Biozutaten,4x150g,13.738800000000001,0.8988000000000014,7
 701712,Guacamole,Bio Company,Diverse,100% Biozutaten,6x125g,17.334,1.1340000000000003,7
 566590,gurken kimchi,Completeorganics,Diverse,100% Biozutaten,6x240g,26.001,1.7010000000000005,7
 576052,Kimchi mit frischem Ingwer,Isana,Diverse,100% Biozutaten,4x125g,8.1748,0.5347999999999997,7
@@ -1228,12 +1234,13 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 292031,VO-Bazza vegan - Aufstrich nach Obazda Art,Vitaquell,Diverse,100% Biozutaten,6x150g,12.5832,0.8231999999999999,7
 566585,white kimchi,Completeorganics,Diverse,100% Biozutaten,6x240g,19.902,1.3019999999999996,7
 701708,Artischocken mit Kräutern,Bio Company,Diverse,100% Biozutaten,6x125g,16.6278,1.0878000000000014,7
-576047,Artischockenherzen mariniert mit frischen Kräutern,Isana,Diverse,100% Biozutaten,4x150g,11.556000000000001,0.7560000000000002,7
+576047,Artischockenherzen mariniert mit frischen Kräutern,Isana,Diverse,100% Biozutaten,4x150g,13.268,0.8680000000000003,7
 698255,Artischockenherzen mariniert mit frischen Kräutern,Isana,Diverse,100% Biozutaten,4x80g,9.0736,0.5936000000000003,7
 698134,Artischockenherzen natur cotto,Il Cesto,Italien,100% Biozutaten,150g,4.4619,0.29190000000000005,7
 599170,Bella di Cerignola-Oliven grün mariniert,Il Cesto,Italien,100% Biozutaten,170g,3.5631000000000004,0.2331000000000003,7
 98373,Feta-Oliven-Mix mariniert,Il Cesto,Griechenland,100% Biozutaten,170g,4.3014,0.28140000000000054,7
 701704,Grüne Oliven mit Kräutern ohne Stein,Bio Company,Diverse,100% Biozutaten,6x125g,14.124,0.9240000000000013,7
+594888,Leccino Oliven schwarz mariniert,Il Cesto,Italien,100% Biozutaten,170g,4.066,0.266,7
 98382,Oliven grün entsteint mariniert,Il Cesto,Griechenland,100% Biozutaten,150g,3.6915000000000004,0.24150000000000027,7
 98384,Oliven Kalamata entsteint mariniert,Il Cesto,Griechenland,100% Biozutaten,150g,3.6915000000000004,0.24150000000000027,7
 98383,Oliven Kalamata mariniert,Il Cesto,Griechenland,100% Biozutaten,170g,3.6915000000000004,0.24150000000000027,7
@@ -1241,10 +1248,10 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 98385,Oliven Mix schwarz & grün mariniert,Il Cesto,Griechenland,100% Biozutaten,170g,3.6915000000000004,0.24150000000000027,7
 698254,Oliven-Mix entsteint mariniert mit frischen Kräut.,Isana,Europäische Union,100% Biozutaten,4x80g,7.5756000000000006,0.4956000000000005,7
 598856,Oliven-Mix entsteint mariniert,Il Cesto,Griechenland,100% Biozutaten,150g,3.6915000000000004,0.24150000000000027,7
-576041,Oliven-Mix entsteint,Isana,Diverse,100% Biozutaten,4x150g,11.556000000000001,0.7560000000000002,7
+576041,Oliven-Mix entsteint,Isana,Diverse,100% Biozutaten,4x150g,13.268,0.8680000000000003,7
 701710,Schwarze Oliven mit Kräutern ohne Stein,Bio Company,Diverse,100% Biozutaten,6x125g,17.398200000000003,1.1382000000000012,7
 98390,Tomaten getrocknet mariniert,Il Cesto,Italien,100% Biozutaten,150g,3.7878000000000003,0.24780000000000024,7
-576046,Tomaten sonnengetrocknet,Isana,Türkei,100% Biozutaten,4x130g,11.556000000000001,0.7560000000000002,7
+576046,Tomaten sonnengetrocknet,Isana,Türkei,100% Biozutaten,4x130g,12.84,0.8399999999999999,7
 576031,Aioli Classico - Prepack,Isana,Europäische Union,100% Biozutaten,4x90g,5.820800000000001,0.3808000000000007,7
 285866,Alge & Ingwer frischer Brotaufstrich,Isana,Diverse,Naturland,4x100g,9.801200000000001,0.6412000000000013,7
 293025,Auberginencreme Baba Ganoush,Jooti,Diverse,100% Biozutaten,150g,1.9581000000000002,0.1281000000000001,7
@@ -1258,13 +1265,13 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 76010,Frische Aioli Knoblauch-Mayonaise,Isana,Diverse,100% Biozutaten,6x165g,14.7018,0.9618000000000002,7
 76007,Frischer Bärlauch in Öl vegan,Isana,Diverse,100% Biozutaten,6x165g,17.976000000000003,1.176000000000002,7
 576028,Frisches Bärlauch Pesto - Prepack,Isana,Europäische Union,100% Biozutaten,4x125g,6.1632,0.4032,7
-76004,Frisches Pesto Bärlauch,Isana,Europäische Union,100% Biozutaten,6x165g,15.408000000000001,1.008000000000001,7
+76004,Frisches Pesto Bärlauch,Isana,Europäische Union,100% Biozutaten,6x165g,17.976000000000003,1.176000000000002,7
 576020,Frisches Pesto Basilikum vegan,Isana,Diverse,100% Biozutaten,6x165g,17.976000000000003,1.176000000000002,7
 576026,Frisches Pesto Genovese - Prepack,Isana,Europäische Union,100% Biozutaten,4x125g,6.1632,0.4032,7
-76001,Frisches Pesto Genovese,Isana,Diverse,100% Biozutaten,6x165g,15.408000000000001,1.008000000000001,7
+76001,Frisches Pesto Genovese,Isana,Diverse,100% Biozutaten,6x165g,17.976000000000003,1.176000000000002,7
 576018,Frisches Pesto Koriander mit Ingwer vegan,Isana,Diverse,100% Biozutaten,6x165g,17.976000000000003,1.176000000000002,7
 576027,Frisches Pesto Pomodoro - Prepack,Isana,Europäische Union,100% Biozutaten,4x125g,6.1632,0.4032,7
-76005,Frisches Pesto Pomodoro,Isana,Diverse,100% Biozutaten,6x165g,15.408000000000001,1.008000000000001,7
+76005,Frisches Pesto Pomodoro,Isana,Diverse,100% Biozutaten,6x165g,17.976000000000003,1.176000000000002,7
 76002,Frisches Pesto Puttanesca vegan,Isana,Diverse,100% Biozutaten,6x165g,17.976000000000003,1.176000000000002,7
 76006,Frisches Pesto Rucola,Isana,Diverse,100% Biozutaten,6x165g,17.976000000000003,1.176000000000002,7
 285839,Hummus Ginger,Isana,Diverse,100% Biozutaten,4x150g,7.6184,0.4984000000000002,7
@@ -1311,7 +1318,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 575890,Frische Dinkel-Schupfnudeln,Pasta Nuova,Diverse,100% Biozutaten,6x400g,15.408000000000001,1.008000000000001,7
 575865,Frische Dinkel-Spätzle,Pasta Nuova,Baden-Württemberg,100% Biozutaten,6x500g,15.2796,0.9996000000000009,7
 9101,Frische Eier-Spätzle,Isana,Baden-Württemberg,100% Biozutaten,6x400g,14.3808,0.9408000000000012,7
-575770,Frische Girasoli alla Carbonara,Isana,Italien,100% Biozutaten,8x250g,24.824,1.6240000000000023,7
+575770,Frische Girasoli alla Carbonara,Isana,Italien,100% Biozutaten,8x250g,21.2288,1.3887999999999998,7
 75925,Frische Gnocchetti / Nockerl,Pasta Nuova,Europäische Union,100% Biozutaten,6x400g,12.519,0.8190000000000008,7
 9103,Frische Gnocchi originale vegan,Isana,Italien,100% Biozutaten,6x400g,14.7018,0.9618000000000002,7
 575975,Frische Kürbis-Gnocchi,Pasta Nuova,Deutschland,100% Biozutaten,6x350g,13.161000000000001,0.8610000000000007,7
@@ -1321,7 +1328,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 575877,Frische Linsen-Gnocchi,Pasta Nuova,Deutschland,100% Biozutaten,6x350g,14.252400000000002,0.9324000000000012,7
 9111,Frische Maultaschen mit Fleisch,Isana,Europäische Union,100% Biozutaten,6x250g,15.0228,0.982800000000001,7
 291125,Frische Maultaschen mit Gemüse,Isana,Diverse,100% Biozutaten,6x250g,15.0228,0.982800000000001,7
-291035,Frische Mezzelune Cacio e Pepe,Isana,Italien,100% Biozutaten,8x250g,24.824,1.6240000000000023,7
+291035,Frische Mezzelune Cacio e Pepe,Isana,Italien,100% Biozutaten,8x250g,21.2288,1.3887999999999998,7
 575976,Frische Mezzelune mit Steinpilzen,Pasta Nuova,Deutschland,100% Biozutaten,6x250g,12.904200000000001,0.8442000000000007,7
 9121,Frische Nockerl / Gnocchetti,Isana,Italien,100% Biozutaten,6x400g,15.921600000000002,1.0416000000000007,7
 75765,Frische Ravioli 4 Formaggi,Isana,Italien,100% Biozutaten,6x250g,18.618,1.218,7
@@ -1371,11 +1378,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 9366,Pizzateig frisch,Donaustrudel,Bayern,100% Biozutaten,8x400g,19.5168,1.2768000000000015,7
 293673,Strudelteig frisch,Donaustrudel,Bayern,100% Biozutaten,6x300g,15.921600000000002,1.0416000000000007,7
 293692,Tartes- & Quiche-Teig frisch,Donaustrudel,Österreich,100% Biozutaten,8x270g,19.3456,1.2656000000000027,7
-2980211,Gut Aufgelegt Tomate Basilikum Aufschnitt vegan,Zwergenwiese,Diverse,100% Biozutaten,100g,1.0165,0.0665,7
 2990141,Hermann Fungi Pad Mare,Hermann Fleischlos,Europäische Union,100% Biozutaten,150g,1.4231000000000003,0.09310000000000018,7
-2913301,Sticks Toskana-Style vegan 5St,Soto,Diverse,100% Biozutaten,175g,1.1663000000000001,0.07630000000000003,7
-2907721,Tempeh Zwiebel,Abeentoo,Diverse,100% Biozutaten,200g,1.4338000000000002,0.0938000000000001,7
-2907311,Tofu Spinacia,Taifun,Diverse,100% Biozutaten,200g,1.2305,0.08050000000000002,7
 299141,Atlantik Tofu vegan,Lord of Tofu,Diverse,100% Biozutaten,150g,2.568,0.16800000000000015,7
 290588,Black Forest Tofu,Taifun,Diverse,100% Biozutaten,8x200g,19.688,1.2880000000000003,7
 290712,BlackBean-Tempeh Tamari,Tempehmanufaktur,Diverse,100% Biozutaten,200g,2.9425000000000003,0.19250000000000034,7
@@ -1451,13 +1454,12 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 292525,Falafel traditionell vegan 12St,Soto,Diverse,100% Biozutaten,6x200g,14.059800000000001,0.9198000000000004,7
 9006,Frühlingsrollen China-Style vegan 2St,Soto,Diverse,100% Biozutaten,5x220g,13.161000000000001,0.8610000000000007,7
 9005,Frühlingsrollen Thai-Style vegan 2St,Soto,Diverse,100% Biozutaten,5x220g,13.161000000000001,0.8610000000000007,7
-290036,Gemüse-Frikadellen XXL vegan 2St,Soto,Diverse,100% Biozutaten,4x300g,11.128000000000002,0.7280000000000015,7
+290036,Gemüse-Frikadellen XXL vegan 2St,Soto,Diverse,100% Biozutaten,4x300g,9.844,0.6440000000000001,7
 9252,Gemüse-Reis Taler vegan 8St,Soto,Diverse,100% Biozutaten,4x250g,9.9724,0.6524000000000001,7
 9253,Glücks-Sterne vegan 8St,Soto,Diverse,100% Biozutaten,4x250g,10.143600000000001,0.6636000000000006,7
 292762,Golden Tofu-Nuggets,Lord of Tofu,Diverse,100% Biozutaten,170g,2.6750000000000003,0.17500000000000027,7
 9254,Gute Laune-Sterne vegan 8St,Soto,Diverse,100% Biozutaten,4x250g,10.058000000000002,0.6580000000000013,7
 292503,Hanf-Emmer-Bällchen vegan 15St,Soto,Diverse,100% Biozutaten,6x180g,14.059800000000001,0.9198000000000004,7
-299012,Hermann Fungi Pad Italy Style,Hermann Fleischlos,Europäische Union,100% Biozutaten,4x150g,11.342,0.7420000000000009,7
 299014,Hermann Fungi Pad Mare,Hermann Fleischlos,Europäische Union,100% Biozutaten,4x150g,11.342,0.7420000000000009,7
 299011,Hermann Fungi Pad natur,Hermann Fleischlos,Europäische Union,100% Biozutaten,4x150g,11.342,0.7420000000000009,7
 299013,Hermann Fungi Pad Spicy,Hermann Fleischlos,Europäische Union,100% Biozutaten,4x150g,11.342,0.7420000000000009,7
@@ -1470,12 +1472,12 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 292501,Mediterran Bällchen 14St,Soto,Diverse,100% Biozutaten,5x250g,12.6795,0.8295000000000012,7
 9021,Mini Frühlingsrollen China-Style vegan 4St,Soto,Diverse,100% Biozutaten,6x200g,14.9586,0.9786000000000001,7
 290211,Mini Frühlingsrollen Golden Sun vegan 4St,Soto,Diverse,100% Biozutaten,6x190g,17.013,1.1130000000000013,7
-9000,Mini Frühlingsrollen Thai-Style vegan 4St,Soto,Diverse,100% Biozutaten,6x200g,15.151200000000001,0.991200000000001,7
+9000,Mini Frühlingsrollen Thai-Style vegan 4St,Soto,Diverse,100% Biozutaten,6x200g,13.482000000000001,0.8820000000000014,7
 290001,Mini-Frühlingsrollen süß-sauer vegan 4St,Soto,Diverse,100% Biozutaten,6x200g,15.151200000000001,0.991200000000001,7
 292512,Quinoa-Taler vegan 6St,Soto,Diverse,100% Biozutaten,6x195G,14.9586,0.9786000000000001,7
 290005,Rote Linse Burger vegan 2St,Soto,Diverse,100% Biozutaten,8x160g,19.5168,1.2768000000000015,7
 292489,Samosas Himalaya vegan 4St,Soto,Diverse,100% Biozutaten,4x230g,11.2992,0.7392000000000003,7
-9249,Samosas India vegan 4St,Soto,Diverse,100% Biozutaten,4x250g,11.2992,0.7392000000000003,7
+9249,Samosas India vegan 4St,Soto,Diverse,100% Biozutaten,4x250g,9.844,0.6440000000000001,7
 9911,Specky Räucher Tofu - Bacon Style,Lord of Tofu,Baden-Württemberg,100% Biozutaten,170g,2.3219,0.15189999999999992,7
 292507,Spinat-Cashew-Röllchen im Dinkelteig vegan 4St,Soto,Diverse,100% Biozutaten,6x200g,15.151200000000001,0.991200000000001,7
 290071,Spinat-Käse Taler 6St,Soto,Diverse,100% Biozutaten,6x180g,15.664800000000001,1.0248000000000008,7
@@ -1504,7 +1506,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 291551,WHEATY Mini Super Griller vegan 9St,Wheaty,Diverse,95%,8x200g,25.1664,1.6463999999999999,7
 295986,WHEATY Scharfe Merguez 2.0 vegan 3St,Wheaty,Diverse,95%,5x120g,8.2925,0.5425000000000004,7
 295987,WHEATY Super Griller 2.0 vegan 2St,Wheaty,Diverse,100% Biozutaten,5x180g,9.8975,0.6475000000000009,7
-9161,WHEATY Super Griller vegan 2St,Wheaty,Diverse,100% Biozutaten,5x200g,15.7825,1.0325000000000006,7
 295581,WHEATY Vegane Thaiwurst 4St,Wheaty,Diverse,95%,5x120g,9.5765,0.6265000000000001,7
 295662,WHEATY Vegane Weiße - wie Weißwurst 2St,Wheaty,Diverse,95%,5x130g,11.128000000000002,0.7280000000000015,7
 9154,WHEATY Veganwurst Bauernknacker 3St,Wheaty,Diverse,100% Biozutaten,5x150g,12.7865,0.8365000000000009,7
@@ -1513,9 +1514,9 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 295985,WHEATY Veganwurst Weenies 2.0 3St,Wheaty,Diverse,95%,8x150g,15.836000000000002,1.0360000000000014,7
 292661,WHEATY Veganwurst Weenies 4St,Wheaty,Diverse,95%,8x200g,25.1664,1.6463999999999999,7
 292701,WHEATY Winzi-Weenies vegan 10St,Wheaty,Diverse,95%,8x200g,21.7424,1.4223999999999997,7
-298033,Ganz Gut Aufgelegt Genießerrolle 4-Pfeffer vegan,Zwergenwiese,Diverse,100% Biozutaten,6x135g,12.1338,0.793800000000001,7
-298031,Ganz Gut Aufgelegt Genießerrolle Curry vegan,Zwergenwiese,Diverse,100% Biozutaten,6x135g,12.1338,0.793800000000001,7
-298032,Ganz Gut Aufgelegt Genießerrolle Toskana vegan,Zwergenwiese,Diverse,100% Biozutaten,6x135g,12.1338,0.793800000000001,7
+298033,Ganz Gut Aufgelegt Genießerrolle 4-Pfeffer vegan,Zwergenwiese,Diverse,100% Biozutaten,6x135g,10.914,0.7140000000000004,7
+298031,Ganz Gut Aufgelegt Genießerrolle Curry vegan,Zwergenwiese,Diverse,100% Biozutaten,6x135g,10.914,0.7140000000000004,7
+298032,Ganz Gut Aufgelegt Genießerrolle Toskana vegan,Zwergenwiese,Diverse,100% Biozutaten,6x135g,10.914,0.7140000000000004,7
 298023,Gut Aufgelegt Rote Bete-Meerrettich Aufschn. vegan,Zwergenwiese,Diverse,100% Biozutaten,6x100g,12.198,0.798,7
 298022,Gut Aufgelegt Senf Dill Aufschnitt vegan,Zwergenwiese,Diverse,100% Biozutaten,6x100g,12.198,0.798,7
 298021,Gut Aufgelegt Tomate Basilikum Aufschnitt vegan,Zwergenwiese,Diverse,100% Biozutaten,6x100g,12.198,0.798,7
@@ -1537,7 +1538,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 297761,Protein Iced Coffee Moccachino vegan,Harvest Moon,Diverse,100% Biozutaten,10x220ml,17.612,2.8119999999999976,19
 285325,Greenhorn vegane Mousse au Chocolat,Greenhorn,Diverse,6,6x100g,8.5386,0.5586000000000002,7
 285315,Greenhorn veganer Griessbrei Dinkel,Greenhorn,Diverse,6,6x150g,8.5386,0.5586000000000002,7
-285305,Greenhorn veganer M.lchreis natur,Greenhorn,Diverse,6,6x150g,8.5386,0.5586000000000002,7
 297723,Hafer mit Joghurtkulturen Blaubeere-Vanilla,Harvest Moon,Diverse,100% Biozutaten,6x275g,12.3264,0.8064,7
 297741,Hafer mit Joghurtkulturen Himbeere,Harvest Moon,Diverse,100% Biozutaten,6x275g,12.3264,0.8064,7
 297724,Hafer mit Joghurtkulturen Mango-Maracuja,Harvest Moon,Diverse,100% Biozutaten,6x275g,12.3264,0.8064,7
@@ -1556,9 +1556,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 297713,Kokosdessert Schokolade,Harvest Moon,Diverse,100% Biozutaten,8x2x80g,15.322400000000002,1.0024000000000015,7
 296127,Mandel Alternative zu Joghurt,Soyana,Italien,100% Biozutaten,3x400g,7.992900000000001,0.5229000000000008,7
 297535,MascarVone vegane Altern.a.Erbsen-& Pflanzenf.bas.,Züger Frischkäse,Schweiz,100% Biozutaten,4x250g,12.369200000000001,0.8092000000000006,7
-297756,Mini Moments Apfel-Zimt vegan,Harvest Moon,Diverse,100% Biozutaten,6x100g,7.383000000000001,0.48300000000000054,7
-297754,Mini Moments Himbeere vegan,Harvest Moon,Diverse,100% Biozutaten,6x100g,7.383000000000001,0.48300000000000054,7
-297755,Mini Moments Mango vegan,Harvest Moon,Diverse,100% Biozutaten,6x100g,7.383000000000001,0.48300000000000054,7
 297420,MyLove MyLife Hafer Bifidus Mango-Maracuja,My love My life,Österreich,100% Biozutaten,6x400g,12.4548,0.8148,7
 297418,MyLove MyLife Hafer Bifidus natur,My love My life,Österreich,100% Biozutaten,6x400g,11.106600000000002,0.7266000000000012,7
 297412,MyLove MyLife Hafercreme ungesüßt,My love My life,Österreich,100% Biozutaten,6x400g,10.593000000000002,0.6930000000000014,7
@@ -1588,6 +1585,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 297073,Sojade Sommersorte Limette-Kokos,Sojade,Frankreich,100% Biozutaten,6x400g,13.803,0.9030000000000005,7
 297091,Sojade Vanille,Sojade,Diverse,100% Biozutaten,6x400g,13.161000000000001,0.8610000000000007,7
 297072,Sojade Wintersorte Apfel-Zimt,Sojade,Frankreich,100% Biozutaten,6x400g,13.4178,0.8778000000000006,7
+285335,V! Greenhorn Coco Vegan Pur,Greenhorn,Diverse,6,6x125g,8.5386,0.5586000000000002,7
 296996,La Fraiche - Alternative zu Creme fraiche,Sojade,Frankreich,100% Biozutaten,6x200g,11.0424,0.7224000000000004,7
 275854,La Fraiche Creme-Fraiche-Alternative,New Roots / Heiderbeck,Schweiz,100% Biozutaten,180g,2.3861000000000003,0.15610000000000035,7
 580296,Leinöl aus Oberschwaben COOLLINE gekühlt BIOLAND,Rösslerhof,Regional,Bioland,4x250ml,31.5436,2.063600000000001,7
