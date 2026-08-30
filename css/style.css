@@ -266,7 +266,7 @@ input, select { font-family: inherit; }
   .table-wrap { border: none; }
 }
 
-.checkout-account-info p { margin: 4px 0; }
+.checkout-account-info p, .checkout-payment-info p { margin: 4px 0; }
 
 /* ---------- Marktfrüchte-Hintergrund (Shop-Hauptseite) ---------- */
 body.bg-market {

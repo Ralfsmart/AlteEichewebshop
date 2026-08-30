@@ -504,6 +504,7 @@ function renderCheckout() {
   document.getElementById('checkoutVorname').textContent = acc ? (acc.vorname || '') : '';
   document.getElementById('checkoutNachname').textContent = acc ? (acc.nachname || '') : '';
   document.getElementById('checkoutIban').textContent = acc ? (acc.iban || '') : '';
+  document.getElementById('checkoutPaymentReason').textContent = 'Bestellung - ' + currentMonthYear();
 
   // Artikel, die noch im Warenkorb liegen, aber inzwischen aus dem Katalog verschwunden sind
   // (z. B. nicht mehr im Sortiment) -- werden einmalig durchgestrichen mit angezeigt.
