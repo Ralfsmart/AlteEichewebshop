@@ -14,6 +14,18 @@ const LS_KEYS = {
   githubConfig: 'ws_github_config'
 };
 
+// Der Warenkorb wird pro Benutzerkonto gespeichert (eigener localStorage-Key je Benutzername),
+// nicht mehr unter einem einzigen globalen Schlüssel. Sonst teilen sich mehrere Kundenkonten auf
+// demselben Gerät denselben Warenkorb -- und das Löschen irgendeines Kontos hätte (wie
+// beobachtet) den Warenkorb aller anderen Konten auf diesem Gerät mitgelöscht.
+function cartKeyForUser(username) {
+  return 'ws_cart_' + username;
+}
+function currentCartKey() {
+  const s = getSession();
+  return s && s.username ? cartKeyForUser(s.username) : LS_KEYS.cart;
+}
+
 const CATEGORY_LIST = [
   'Trockenware',
   'Drogerie Kosmetik Nonfood',
@@ -106,7 +118,7 @@ function init() {
   state.products = loadJSON(LS_KEYS.products, null) || (window.DEFAULT_PRODUCTS || []);
   state.surcharges = loadJSON(LS_KEYS.surcharges, null) || (window.DEFAULT_SURCHARGES || []);
   state.overridePct = loadJSON(LS_KEYS.overridePct, null);
-  state.cart = loadJSON(LS_KEYS.cart, {});
+  state.cart = loadJSON(currentCartKey(), {});
   state.catMeta = loadJSON(LS_KEYS.catMeta, {});
   state.dataSource = loadJSON(LS_KEYS.dataSource, {});
 
@@ -978,7 +990,7 @@ function setQty(art, qty) {
   qty = Math.max(0, Math.floor(Number(qty) || 0));
   if (qty === 0) delete state.cart[art];
   else state.cart[art] = qty;
-  saveJSON(LS_KEYS.cart, state.cart);
+  saveJSON(currentCartKey(), state.cart);
   updateQtyUI(art, qty);
 }
 
@@ -1026,6 +1038,10 @@ function switchAuthTab(which) {
 }
 
 function onAuthSuccess(msg) {
+  // Warenkorb für das jetzt angemeldete Konto laden -- ohne das würde nach einem Kontowechsel
+  // innerhalb derselben Sitzung (Abmelden -> anderes Konto anmelden, ohne Neuladen der Seite)
+  // noch der Warenkorb des vorherigen Kontos im Speicher stehen bleiben.
+  state.cart = loadJSON(currentCartKey(), {});
   state.view = 'shop';
   switchAuthTab('login');
   renderCategoryOptions();
@@ -1115,9 +1131,11 @@ function bindGlobalEvents() {
     if (!confirm('Konto wirklich endgültig löschen? Alle hinterlegten Daten (Benutzername, Passwort, Vorname, Nachname, E-Mail, IBAN) werden aus diesem Browser entfernt. Das kann nicht rückgängig gemacht werden.')) return;
     const s = getSession();
     if (!s) return;
+    // Nur den eigenen Warenkorb entfernen -- den Schlüssel vor deleteAccount() ermitteln, weil
+    // das darin enthaltene clearSession() sonst currentCartKey() schon auf niemanden mehr zeigt.
+    localStorage.removeItem(cartKeyForUser(s.username));
     deleteAccount(s.username);
     state.cart = {};
-    saveJSON(LS_KEYS.cart, state.cart);
     state.cartOpen = false;
     state.view = 'auth';
     renderAll();
@@ -1144,6 +1162,7 @@ function bindGlobalEvents() {
 
   document.getElementById('logoutBtn').addEventListener('click', () => {
     clearSession();
+    state.cart = {};
     state.cartOpen = false;
     state.view = 'auth';
     renderAll();
@@ -1208,7 +1227,7 @@ function bindGlobalEvents() {
     openCheckout();
   });
   document.getElementById('cartClearBtn').addEventListener('click', () => {
-    if (confirm('Warenkorb wirklich leeren?')) { state.cart = {}; saveJSON(LS_KEYS.cart, state.cart); renderAll(); }
+    if (confirm('Warenkorb wirklich leeren?')) { state.cart = {}; saveJSON(currentCartKey(), state.cart); renderAll(); }
   });
 
   document.querySelectorAll('[data-nav]').forEach(btn => {
