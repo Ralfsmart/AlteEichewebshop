@@ -331,6 +331,17 @@
     <button id="cartClearBtn" class="btn-secondary">Leeren</button>
     <button id="cartCheckoutBtn" class="btn-primary">Zur Bestellübersicht</button>
   </div>
+
+  <details id="cartImportBox" class="cart-import-box">
+    <summary>📄 Bestellliste aus Backup wiederherstellen</summary>
+    <div class="cart-import-body">
+      <label class="file-btn">📤 Datei hochladen (CSV)<input id="cartImportFile" type="file" accept=".csv,.txt" hidden></label>
+      <p class="cart-import-or">oder Artikelnummern einfügen (kommagetrennt):</p>
+      <textarea id="cartImportText" rows="2" placeholder="z. B. 15118, 25031, 25043"></textarea>
+      <button id="cartImportTextBtn" class="btn-secondary btn-small">Übernehmen</button>
+      <p class="hint">Ergänzt den Warenkorb, ersetzt ihn nicht. Preise werden immer aktuell aus dem Katalog übernommen, unabhängig davon, was im Backup stand.</p>
+    </div>
+  </details>
 </aside>
 
 <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>

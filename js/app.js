@@ -982,6 +982,80 @@ function readFile(file) {
   });
 }
 
+// Liest eine Bestellliste-Sicherung (die App-eigene Export-CSV aus exportBestellliste(), oder
+// eine einfache Liste von Artikelnummern) und liefert erkannte {artikelnummer: menge}-Paare
+// sowie die Anzahl nicht erkannter Zeilen/Einträge zurück. Reine Text-Analyse, fasst den
+// Warenkorb selbst nicht an -- das übernimmt importCartFromBackup().
+function parseCartImportText(text) {
+  const lines = String(text || '').split(/\r\n|\n|\r/);
+
+  // Fall 1: App-eigene Bestellliste-CSV -- die Datei enthält davor/danach noch Käuferdaten und
+  // die Gesamtsumme (keine einheitliche Tabelle), deshalb nur den Tabellenblock ab der erkannten
+  // Kopfzeile bis zur nächsten Leerzeile auswerten.
+  const headerIdx = lines.findIndex(l => /^\s*artnr\s*,\s*bezeichnung\s*,\s*gebinde\s*,\s*menge\b/i.test(l));
+  if (headerIdx !== -1) {
+    const tableLines = [lines[headerIdx]];
+    for (let i = headerIdx + 1; i < lines.length && lines[i].trim() !== ''; i++) tableLines.push(lines[i]);
+    const rows = rowsToObjects(parseCSV(tableLines.join('\n')));
+    const entries = {};
+    let unrecognized = 0;
+    rows.forEach(r => {
+      const art = (r.artnr || '').trim();
+      const menge = parseInt(r.menge, 10);
+      if (art && menge > 0) entries[art] = (entries[art] || 0) + menge;
+      else unrecognized++;
+    });
+    return { entries, unrecognized };
+  }
+
+  // Fall 2: keine erkannte Tabelle -- Text als einfache Liste von Artikelnummern behandeln,
+  // getrennt durch Komma, Semikolon, Zeilenumbruch oder Leerzeichen. Menge 1 je Nennung,
+  // Mehrfachnennung derselben Nummer wird aufaddiert.
+  const entries = {};
+  let unrecognized = 0;
+  String(text || '').split(/[,;\s]+/).map(t => t.trim()).filter(Boolean).forEach(t => {
+    if (/^\d+$/.test(t)) entries[t] = (entries[t] || 0) + 1;
+    else unrecognized++;
+  });
+  return { entries, unrecognized };
+}
+
+// Ergänzt den Warenkorb um die aus dem Backup erkannten Artikel -- addiert Mengen zu bereits
+// vorhandenen Positionen, ersetzt den Warenkorb nie (ein bewusstes Ersetzen erreicht man selbst
+// über "Leeren" + Import). Artikelnummern, die nicht mehr im Katalog existieren, werden gezählt
+// und gemeldet statt sie unkommentiert wegzulassen.
+function importCartFromBackup(text) {
+  const { entries } = parseCartImportText(text);
+  const arts = Object.keys(entries);
+  if (!arts.length) { showToast('Keine Artikelnummern erkannt.', true); return; }
+
+  const validArts = new Set(state.products.map(p => String(p.art)));
+  let addedCount = 0, unknownCount = 0;
+  arts.forEach(art => {
+    if (!validArts.has(art)) { unknownCount++; return; }
+    state.cart[art] = (state.cart[art] || 0) + entries[art];
+    addedCount++;
+  });
+  saveJSON(currentCartKey(), state.cart);
+  renderAll();
+
+  // Nicht-numerischer Text (z. B. Produktnamen, falls jemand mehr als nur Artikelnummern
+  // einfügt) wird bewusst NICHT gezählt/gemeldet -- das ist kein Fehler, nur Begleittext, und
+  // eine hohe Zahl "X nicht erkannt" wirkt alarmierender, als es ist.
+  const parts = [];
+  if (addedCount) parts.push(`${addedCount} Position${addedCount === 1 ? '' : 'en'} zum Warenkorb hinzugefügt`);
+  if (unknownCount) parts.push(`${unknownCount} Artikelnummer${unknownCount === 1 ? '' : 'n'} nicht im Katalog gefunden`);
+  showToast(parts.join(' · '), !addedCount);
+
+  // Nur bei mindestens einer tatsächlich übernommenen Position zuklappen -- bei "nichts erkannt"
+  // bleibt die Box offen, damit direkt ein neuer Versuch möglich ist, ohne sie erst wieder
+  // aufklappen zu müssen.
+  if (addedCount) {
+    const box = document.getElementById('cartImportBox');
+    if (box) box.open = false;
+  }
+}
+
 /* ------------------------------------------------------------------ *
  *  Events                                                             *
  * ------------------------------------------------------------------ */
@@ -1228,6 +1302,20 @@ function bindGlobalEvents() {
   });
   document.getElementById('cartClearBtn').addEventListener('click', () => {
     if (confirm('Warenkorb wirklich leeren?')) { state.cart = {}; saveJSON(currentCartKey(), state.cart); renderAll(); }
+  });
+
+  document.getElementById('cartImportFile').addEventListener('change', async e => {
+    const file = e.target.files[0]; if (!file) return;
+    try {
+      const text = await readFile(file);
+      importCartFromBackup(text);
+    } catch (err) { showToast('Fehler beim Lesen der Datei: ' + err.message, true); }
+    e.target.value = '';
+  });
+  document.getElementById('cartImportTextBtn').addEventListener('click', () => {
+    const field = document.getElementById('cartImportText');
+    importCartFromBackup(field.value);
+    field.value = '';
   });
 
   document.querySelectorAll('[data-nav]').forEach(btn => {
