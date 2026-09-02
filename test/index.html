@@ -3,19 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FoodCoop Alte Eiche · Webshop (TESTVERSION)</title>
+<title>FoodCoop Alte Eiche · Webshop</title>
 <link rel="icon" href="img/logo.png">
 <link rel="stylesheet" href="css/style.css">
-<style>
-  #testBanner {
-    background: #b3413b; color: #fff; text-align: center; font-weight: 700;
-    padding: 6px 12px; font-size: .85rem; position: sticky; top: 0; z-index: 100;
-  }
-</style>
 </head>
 <body>
-
-<div id="testBanner">🧪 TESTVERSION – nicht die Live-Seite. Änderungen hier haben keine Auswirkung auf den echten Shop.</div>
 
 <header class="topbar">
   <div class="topbar-inner">
@@ -340,7 +332,7 @@
     <button id="cartCheckoutBtn" class="btn-primary">Zur Bestellübersicht</button>
   </div>
 
-  <details class="cart-import-box">
+  <details id="cartImportBox" class="cart-import-box">
     <summary>📄 Bestellliste aus Backup wiederherstellen</summary>
     <div class="cart-import-body">
       <label class="file-btn">📤 Datei hochladen (CSV)<input id="cartImportFile" type="file" accept=".csv,.txt" hidden></label>
@@ -359,7 +351,7 @@
 <script src="js/data-default.js"></script>
 <script src="js/app.js"></script>
 
-<!-- Analytics bewusst nicht eingebunden: das hier ist die Testversion in /test/, ihre
-     Aufrufe sollen nicht in die echte Besucherstatistik der Live-Seite einfließen. -->
+<script data-goatcounter="https://foodcoopalteeiche.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -1044,6 +1044,14 @@ function importCartFromBackup(text) {
   if (unknownCount) parts.push(`${unknownCount} Artikelnummer${unknownCount === 1 ? '' : 'n'} nicht im Katalog gefunden`);
   if (unrecognized) parts.push(`${unrecognized} Eintrag${unrecognized === 1 ? '' : 'e'} nicht erkannt`);
   showToast(parts.join(' · '), !addedCount);
+
+  // Nur bei mindestens einer tatsächlich übernommenen Position zuklappen -- bei "nichts erkannt"
+  // bleibt die Box offen, damit direkt ein neuer Versuch möglich ist, ohne sie erst wieder
+  // aufklappen zu müssen.
+  if (addedCount) {
+    const box = document.getElementById('cartImportBox');
+    if (box) box.open = false;
+  }
 }
 
 /* ------------------------------------------------------------------ *
