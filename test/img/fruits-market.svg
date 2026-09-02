@@ -1,0 +1,96 @@
+<svg viewBox="0 0 1600 1000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff6e0"/>
+      <stop offset="100%" stop-color="#ffe9c2"/>
+    </linearGradient>
+    <linearGradient id="crateWood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c98a4b"/>
+      <stop offset="100%" stop-color="#a6672f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bgGrad)"/>
+
+  <!-- ============ Wiederkehrbare Elemente ============ -->
+  <defs>
+    <g id="crate">
+      <rect x="0" y="0" width="220" height="140" rx="6" fill="url(#crateWood)"/>
+      <rect x="0" y="0" width="220" height="140" rx="6" fill="none" stroke="#7a4a20" stroke-width="4"/>
+      <line x1="0" y1="35" x2="220" y2="35" stroke="#7a4a20" stroke-width="3" opacity=".5"/>
+      <line x1="0" y1="105" x2="220" y2="105" stroke="#7a4a20" stroke-width="3" opacity=".5"/>
+      <line x1="55" y1="0" x2="55" y2="140" stroke="#7a4a20" stroke-width="3" opacity=".35"/>
+      <line x1="165" y1="0" x2="165" y2="140" stroke="#7a4a20" stroke-width="3" opacity=".35"/>
+    </g>
+
+    <g id="orange"><circle r="26" fill="#f5941f"/><circle r="26" fill="#ffab3d" opacity=".45" cx="-7" cy="-7"/><circle r="4" fill="#7a4a10" cy="-24"/></g>
+    <g id="lemon"><ellipse rx="24" ry="18" fill="#f4d51c"/><ellipse rx="24" ry="18" fill="#fce463" opacity=".5" cx="-6" cy="-4"/></g>
+    <g id="apple-red"><circle r="24" fill="#d1272c"/><circle r="24" fill="#ea4b4f" opacity=".45" cx="-7" cy="-7"/><path d="M0,-24 q4,-10 12,-10" stroke="#4c7a3f" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+    <g id="apple-green"><circle r="24" fill="#7fae3e"/><circle r="24" fill="#9dc95f" opacity=".45" cx="-7" cy="-7"/><path d="M0,-24 q4,-10 12,-10" stroke="#4c7a3f" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+    <g id="grape-cluster">
+      <circle cx="0" cy="0" r="11" fill="#6a3d8f"/><circle cx="14" cy="8" r="11" fill="#7a4aa0"/>
+      <circle cx="-14" cy="8" r="11" fill="#6a3d8f"/><circle cx="0" cy="18" r="11" fill="#7a4aa0"/>
+      <circle cx="14" cy="26" r="11" fill="#6a3d8f"/><circle cx="-14" cy="26" r="11" fill="#7a4aa0"/>
+      <circle cx="0" cy="36" r="11" fill="#8a5ab0"/>
+      <path d="M0,-11 q4,-14 16,-16" stroke="#4c7a3f" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </g>
+    <g id="strawberry">
+      <path d="M0,-14 C-16,-14 -20,10 0,26 C20,10 16,-14 0,-14 Z" fill="#e2314a"/>
+      <path d="M-8,-6 q8,6 16,0" stroke="#f7a0ab" stroke-width="3" fill="none" opacity=".7"/>
+      <path d="M-10,-14 l-6,-10 M0,-16 l0,-12 M10,-14 l6,-10" stroke="#4c7a3f" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <g id="watermelon-slice">
+      <path d="M-30,20 A30,30 0 0 1 30,20 Z" fill="#3f7d2f"/>
+      <path d="M-25,20 A25,25 0 0 1 25,20 Z" fill="#eafbe0"/>
+      <path d="M-19,20 A19,19 0 0 1 19,20 Z" fill="#e2314a"/>
+      <circle cx="-6" cy="10" r="2.4" fill="#2c2c2c"/><circle cx="6" cy="10" r="2.4" fill="#2c2c2c"/><circle cx="0" cy="4" r="2.4" fill="#2c2c2c"/>
+    </g>
+    <g id="banana-bunch">
+      <path d="M-16,20 C-24,0 -14,-24 10,-28 C6,-20 4,-12 6,-4 C-2,4 -10,12 -16,20 Z" fill="#f6d13a"/>
+      <path d="M2,22 C-8,4 2,-22 26,-26 C20,-18 16,-10 16,-2 C8,6 2,14 2,22 Z" fill="#f8de5f"/>
+      <path d="M20,24 C10,6 18,-18 40,-24 C34,-16 30,-8 30,0 C22,8 20,16 20,24 Z" fill="#f6d13a"/>
+    </g>
+    <g id="pomegranate">
+      <circle r="24" fill="#a8283f"/><circle r="24" fill="#c04155" opacity=".45" cx="-7" cy="-7"/>
+      <path d="M-6,-24 l6,-8 6,8 Z" fill="#4c7a3f"/>
+    </g>
+    <g id="pepper-red">
+      <path d="M0,-18 C-16,-16 -18,10 -4,26 C-2,30 2,30 4,26 C18,10 16,-16 0,-18 Z" fill="#d1272c"/>
+      <path d="M-2,-18 q-2,-10 6,-14" stroke="#4c7a3f" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </g>
+  </defs>
+
+  <!-- ============ Marktstand: Reihen von Kisten ============ -->
+  <!-- Reihe 1 -->
+  <g transform="translate(30,60)"><use href="#crate"/><use href="#orange" x="55" y="45"/><use href="#orange" x="105" y="45"/><use href="#orange" x="155" y="45"/><use href="#orange" x="80" y="85"/><use href="#orange" x="130" y="85"/></g>
+  <g transform="translate(270,60)"><use href="#crate"/><use href="#apple-red" x="55" y="45"/><use href="#apple-green" x="105" y="45"/><use href="#apple-red" x="155" y="45"/><use href="#apple-green" x="80" y="85"/><use href="#apple-red" x="130" y="85"/></g>
+  <g transform="translate(510,60)"><use href="#crate"/><use href="#lemon" x="55" y="45"/><use href="#lemon" x="105" y="45"/><use href="#lemon" x="155" y="45"/><use href="#lemon" x="80" y="85"/><use href="#lemon" x="130" y="85"/></g>
+  <g transform="translate(750,60)"><use href="#crate"/><use href="#pomegranate" x="55" y="45"/><use href="#pomegranate" x="110" y="50"/><use href="#pomegranate" x="160" y="45"/></g>
+  <g transform="translate(990,60)"><use href="#crate"/><use href="#pepper-red" x="55" y="55"/><use href="#pepper-red" x="105" y="50"/><use href="#pepper-red" x="150" y="58"/><use href="#pepper-red" x="80" y="90"/></g>
+  <g transform="translate(1230,60)"><use href="#crate"/><use href="#watermelon-slice" x="60" y="65"/><use href="#watermelon-slice" x="130" y="65"/><use href="#watermelon-slice" x="95" y="105"/></g>
+  <g transform="translate(1450,60)"><use href="#crate"/><use href="#apple-red" x="55" y="45"/><use href="#apple-red" x="105" y="45"/><use href="#apple-red" x="80" y="85"/><use href="#apple-red" x="130" y="85"/></g>
+
+  <!-- Reihe 2 -->
+  <g transform="translate(150,290)"><use href="#crate"/><use href="#grape-cluster" x="65" y="45"/><use href="#grape-cluster" x="130" y="45"/></g>
+  <g transform="translate(390,290)"><use href="#crate"/><use href="#strawberry" x="45" y="50"/><use href="#strawberry" x="80" y="45"/><use href="#strawberry" x="115" y="55"/><use href="#strawberry" x="150" y="48"/><use href="#strawberry" x="65" y="85"/><use href="#strawberry" x="135" y="85"/></g>
+  <g transform="translate(630,290)"><use href="#crate"/><use href="#banana-bunch" x="70" y="60"/><use href="#banana-bunch" x="140" y="55"/></g>
+  <g transform="translate(870,290)"><use href="#crate"/><use href="#orange" x="55" y="45"/><use href="#orange" x="105" y="45"/><use href="#orange" x="155" y="45"/><use href="#orange" x="80" y="85"/><use href="#orange" x="130" y="85"/></g>
+  <g transform="translate(1110,290)"><use href="#crate"/><use href="#apple-green" x="55" y="45"/><use href="#apple-green" x="105" y="45"/><use href="#apple-green" x="155" y="45"/><use href="#apple-green" x="80" y="85"/><use href="#apple-green" x="130" y="85"/></g>
+  <g transform="translate(1350,290)"><use href="#crate"/><use href="#grape-cluster" x="65" y="45"/><use href="#grape-cluster" x="130" y="45"/></g>
+
+  <!-- Reihe 3 -->
+  <g transform="translate(30,520)"><use href="#crate"/><use href="#lemon" x="55" y="45"/><use href="#lemon" x="105" y="45"/><use href="#lemon" x="155" y="45"/></g>
+  <g transform="translate(270,520)"><use href="#crate"/><use href="#strawberry" x="45" y="50"/><use href="#strawberry" x="90" y="45"/><use href="#strawberry" x="135" y="52"/><use href="#strawberry" x="65" y="88"/><use href="#strawberry" x="115" y="88"/></g>
+  <g transform="translate(510,520)"><use href="#crate"/><use href="#watermelon-slice" x="60" y="65"/><use href="#watermelon-slice" x="130" y="65"/></g>
+  <g transform="translate(750,520)"><use href="#crate"/><use href="#banana-bunch" x="70" y="60"/><use href="#banana-bunch" x="140" y="55"/></g>
+  <g transform="translate(990,520)"><use href="#crate"/><use href="#pomegranate" x="55" y="45"/><use href="#pomegranate" x="110" y="50"/><use href="#pomegranate" x="160" y="45"/></g>
+  <g transform="translate(1230,520)"><use href="#crate"/><use href="#apple-red" x="55" y="45"/><use href="#apple-green" x="105" y="45"/><use href="#apple-red" x="155" y="45"/><use href="#apple-green" x="80" y="85"/><use href="#apple-red" x="130" y="85"/></g>
+  <g transform="translate(1450,520)"><use href="#crate"/><use href="#grape-cluster" x="65" y="45"/><use href="#grape-cluster" x="130" y="45"/></g>
+
+  <!-- Reihe 4 (unten, teils angeschnitten) -->
+  <g transform="translate(150,750)"><use href="#crate"/><use href="#orange" x="55" y="45"/><use href="#orange" x="105" y="45"/><use href="#orange" x="155" y="45"/></g>
+  <g transform="translate(390,750)"><use href="#crate"/><use href="#pepper-red" x="55" y="55"/><use href="#pepper-red" x="105" y="50"/><use href="#pepper-red" x="150" y="58"/></g>
+  <g transform="translate(630,750)"><use href="#crate"/><use href="#strawberry" x="45" y="50"/><use href="#strawberry" x="90" y="45"/><use href="#strawberry" x="135" y="52"/></g>
+  <g transform="translate(870,750)"><use href="#crate"/><use href="#lemon" x="55" y="45"/><use href="#lemon" x="105" y="45"/><use href="#lemon" x="155" y="45"/></g>
+  <g transform="translate(1110,750)"><use href="#crate"/><use href="#watermelon-slice" x="60" y="65"/><use href="#watermelon-slice" x="130" y="65"/></g>
+  <g transform="translate(1350,750)"><use href="#crate"/><use href="#apple-red" x="55" y="45"/><use href="#apple-red" x="105" y="45"/><use href="#apple-red" x="155" y="45"/></g>
+</svg>
