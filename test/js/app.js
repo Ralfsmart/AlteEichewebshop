@@ -1025,7 +1025,7 @@ function parseCartImportText(text) {
 // über "Leeren" + Import). Artikelnummern, die nicht mehr im Katalog existieren, werden gezählt
 // und gemeldet statt sie unkommentiert wegzulassen.
 function importCartFromBackup(text) {
-  const { entries, unrecognized } = parseCartImportText(text);
+  const { entries } = parseCartImportText(text);
   const arts = Object.keys(entries);
   if (!arts.length) { showToast('Keine Artikelnummern erkannt.', true); return; }
 
@@ -1039,10 +1039,12 @@ function importCartFromBackup(text) {
   saveJSON(currentCartKey(), state.cart);
   renderAll();
 
+  // Nicht-numerischer Text (z. B. Produktnamen, falls jemand mehr als nur Artikelnummern
+  // einfügt) wird bewusst NICHT gezählt/gemeldet -- das ist kein Fehler, nur Begleittext, und
+  // eine hohe Zahl "X nicht erkannt" wirkt alarmierender, als es ist.
   const parts = [];
   if (addedCount) parts.push(`${addedCount} Position${addedCount === 1 ? '' : 'en'} zum Warenkorb hinzugefügt`);
   if (unknownCount) parts.push(`${unknownCount} Artikelnummer${unknownCount === 1 ? '' : 'n'} nicht im Katalog gefunden`);
-  if (unrecognized) parts.push(`${unrecognized} Eintrag${unrecognized === 1 ? '' : 'e'} nicht erkannt`);
   showToast(parts.join(' · '), !addedCount);
 
   // Nur bei mindestens einer tatsächlich übernommenen Position zuklappen -- bei "nichts erkannt"
