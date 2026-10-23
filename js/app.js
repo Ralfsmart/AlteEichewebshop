@@ -220,7 +220,12 @@ async function loadServerCatalog(force) {
   });
 
   if (anyOk) {
-    const others = state.products.filter(p => !byKat[p.kat]);
+    // "others" sind Artikel aus Kategorien, die in diesem Durchlauf nicht neu abgerufen wurden
+    // (z. B. weil gerade eine lokale, noch unveröffentlichte Vorschau existiert). Zusätzlich
+    // gegen CATEGORY_LIST filtern, nicht nur gegen byKat: sonst bleiben Artikel einer im
+    // Admin-Bereich entfernten Kategorie für immer im lokalen Cache (localStorage) hängen und
+    // tauchen im Kategorie-Filter weiter auf, obwohl die Kategorie serverseitig längst weg ist.
+    const others = state.products.filter(p => !byKat[p.kat] && CATEGORY_LIST.includes(p.kat));
     state.products = Object.values(byKat).flat().concat(others);
     saveJSON(LS_KEYS.products, state.products);
   }
