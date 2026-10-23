@@ -14,5 +14,9 @@
   {
     "name": "Getränke",
     "file": "data/getraenke.csv"
+  },
+  {
+    "name": "Weihnachten",
+    "file": "data/weihnachten.csv"
   }
 ]
