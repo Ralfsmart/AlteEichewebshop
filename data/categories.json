@@ -10,5 +10,9 @@
   {
     "name": "Feinkost Veganer Ersatz",
     "file": "data/feinkost-veganer-ersatz.csv"
+  },
+  {
+    "name": "Getränke",
+    "file": "data/getraenke.csv"
   }
 ]
