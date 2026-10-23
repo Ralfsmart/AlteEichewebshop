@@ -511,10 +511,29 @@ function renderCartBadge() {
 function renderCartDrawer() {
   const entries = cartEntries();
   const body = document.getElementById('cartItems');
+
+  // Artikel, die noch mit Menge > 0 im Warenkorb stehen, aber zu keinem cartEntries()-Eintrag
+  // mehr aufgelöst werden konnten (z. B. weil ihre Kategorie entfernt wurde oder der Artikel
+  // einzeln aus dem Katalog verschwunden ist) -- werden sonst von cartEntries() stillschweigend
+  // weggelassen. Ohne Name/Preis lassen sie sich hier nicht mehr anzeigen (die Katalogdaten sind
+  // ja weg), daher nur ein Hinweis mit Artikel-Nr., kein eigener Eintrag in der Liste. Die
+  // ausführliche Einzelansicht mit durchgestrichenem Artikel gibt es weiterhin erst beim Öffnen
+  // der Bestellübersicht (siehe openCheckout/renderCheckout).
+  const knownArts = new Set(entries.map(e => String(e.p.art)));
+  const staleArts = Object.entries(state.cart)
+    .filter(([art, qty]) => qty && !knownArts.has(String(art)))
+    .map(([art]) => art);
+
+  let noticeHtml = '';
+  if (staleArts.length) {
+    const plural = staleArts.length > 1;
+    noticeHtml = `<div class="cart-stale-notice">⚠️ ${staleArts.length} Artikel (Artikel-Nr. ${staleArts.map(escapeHtml).join(', ')}) ${plural ? 'sind' : 'ist'} nicht mehr im Katalog und ${plural ? 'werden' : 'wird'} daher hier nicht mehr angezeigt.</div>`;
+  }
+
   if (!entries.length) {
-    body.innerHTML = '<p class="empty">Warenkorb ist leer.</p>';
+    body.innerHTML = noticeHtml + '<p class="empty">Warenkorb ist leer.</p>';
   } else {
-    body.innerHTML = entries.map(e => `
+    body.innerHTML = noticeHtml + entries.map(e => `
       <div class="cart-item" data-art="${escapeHtml(e.p.art)}">
         <div class="ci-info">
           <div class="ci-title">${escapeHtml(e.p.bez)}</div>
@@ -973,21 +992,23 @@ async function addCategoryFromFile(name, file) {
   }
   const newItems = mapped.map(r => productFromMappedRow(name, r)).filter(p => p.art && p.bez);
   const filePath = uniqueCategoryFilePath(name);
-
-  CATEGORY_LIST = CATEGORY_LIST.concat([name]);
-  CATEGORY_FILES = { ...CATEGORY_FILES, [name]: filePath };
+  const newConfig = currentCategoryConfig().concat([{ name, file: filePath }]);
 
   // Neue CSV-Datei und die aktualisierte Kategorienliste in einem Zug veröffentlichen --
   // nie nur eine von beiden, sonst stünde kurzzeitig eine Kategorie ohne Datei (oder eine
-  // Datei ohne gelistete Kategorie) auf dem Server.
+  // Datei ohne gelistete Kategorie) auf dem Server. CATEGORY_LIST/CATEGORY_FILES erst NACH
+  // erfolgreichem Veröffentlichen übernehmen (applyCategoryConfig unten) -- schlägt einer der
+  // beiden Publish-Aufrufe fehl (z. B. Netzwerkfehler), bleibt der In-Memory-Zustand sonst mit
+  // einer "Phantom-Kategorie" zurück, die serverseitig gar nicht existiert.
   const csv = objectsToCSV(newItems.map(p => ({
     ArtikelNr: p.art, Bezeichnung: p.bez, Hersteller: p.hers, Land: p.land,
     Qualitaet: p.qual, Gebinde: p.geb, PreisInklMwst: p.preis, EntMwst: p.mwstb, MwstSatz: p.mwst
   })), CATEGORY_CSV_HEADERS);
   await publishToGitHub(filePath, csv, 'Neue Kategorie "' + name + '" angelegt (Admin-Panel)');
-  await publishToGitHub(CATEGORIES_FILE, JSON.stringify(currentCategoryConfig(), null, 2),
+  await publishToGitHub(CATEGORIES_FILE, JSON.stringify(newConfig, null, 2),
     'Kategorie "' + name + '" zur Kategorienliste hinzugefügt (Admin-Panel)');
 
+  applyCategoryConfig(newConfig);
   state.products = state.products.concat(newItems);
   state.catMeta[name] = { updated: Date.now(), source: file.name };
   state.dataSource[name] = 'server';
@@ -1002,18 +1023,17 @@ async function addCategoryFromFile(name, file) {
 async function removeCategory(kat) {
   if (!hasGithubConfig()) throw new Error('Kein GitHub-Zugang hinterlegt. Bitte zuerst unter „Veröffentlichung" speichern.');
   const filePath = CATEGORY_FILES[kat];
-
-  const newList = CATEGORY_LIST.filter(k => k !== kat);
-  const newFiles = { ...CATEGORY_FILES };
-  delete newFiles[kat];
+  const newConfig = currentCategoryConfig().filter(c => c.name !== kat);
 
   // Erst die Kategorienliste veröffentlichen: sobald das durch ist, sehen Besucher die
-  // Kategorie beim nächsten Laden nicht mehr -- das Entfernen der (dann verwaisten)
-  // CSV-Datei danach ist nur noch Aufräumarbeit und nicht mehr zeitkritisch.
-  CATEGORY_LIST = newList;
-  CATEGORY_FILES = newFiles;
-  await publishToGitHub(CATEGORIES_FILE, JSON.stringify(currentCategoryConfig(), null, 2),
+  // Kategorie beim nächsten Laden nicht mehr. CATEGORY_LIST/CATEGORY_FILES erst NACH Erfolg
+  // übernehmen (applyCategoryConfig unten), sonst würde ein fehlgeschlagener Publish die
+  // Kategorie im Admin-Bereich bereits verschwinden lassen, obwohl sie serverseitig noch da ist.
+  await publishToGitHub(CATEGORIES_FILE, JSON.stringify(newConfig, null, 2),
     'Kategorie "' + kat + '" entfernt (Admin-Panel)');
+  applyCategoryConfig(newConfig);
+  // Das Entfernen der (jetzt verwaisten) CSV-Datei danach ist nur noch Aufräumarbeit und
+  // nicht mehr zeitkritisch -- die Kategorie ist für Besucher bereits weg.
   try {
     await deleteFromGitHub(filePath, 'Kategorie-Datei "' + kat + '" entfernt (Admin-Panel)');
   } catch (e) {

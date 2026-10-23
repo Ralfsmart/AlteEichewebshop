@@ -160,6 +160,10 @@ input, select { font-family: inherit; }
   min-width: 36px; min-height: 36px; display: flex; align-items: center; justify-content: center;
 }
 .cart-items .empty { color: var(--muted); text-align: center; margin-top: 30px; }
+.cart-stale-notice {
+  background: #fbeae9; color: var(--danger); font-size: .82rem;
+  padding: 8px 12px; border-radius: var(--radius); margin: 10px 16px 0;
+}
 
 .cart-summary { padding: 10px 16px; border-top: 1px solid var(--border); }
 .sum-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: .9rem; }
