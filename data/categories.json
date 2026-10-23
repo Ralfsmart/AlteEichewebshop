@@ -8,10 +8,6 @@
     "file": "data/drogerie-kosmetik-nonfood.csv"
   },
   {
-    "name": "Getränke Alkohol",
-    "file": "data/getraenke-alkohol.csv"
-  },
-  {
     "name": "Feinkost Veganer Ersatz",
     "file": "data/feinkost-veganer-ersatz.csv"
   }
