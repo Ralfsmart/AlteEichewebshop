@@ -238,6 +238,16 @@
       <p class="hint">Zwei Formate werden erkannt: entweder die Spalten <code>ArtikelNr, Bezeichnung, Hersteller, Land, Qualitaet, Gebinde, PreisInklMwst, EntMwst, MwstSatz</code> — oder direkt der Export aus Bodans Bestellsystem mit <code>ArtNr, Bezeichnung, Hersteller, Land, Qualität, Gebinde, EK Ladeneinheit, EK VPE, UVP, EAN, MwSt</code> (der Netto-Einkaufspreis „EK VPE" wird dann automatisch um die MwSt. hochgerechnet). Ein Upload ersetzt nur die jeweilige Kategorie.</p>
       <div id="categoryCsvList" class="category-csv-list"></div>
       <button id="reloadServerBtn" class="btn-secondary" style="margin-top:12px;">🔄 Alle Kategorien vom Server neu laden</button>
+
+      <h4 style="margin-top:20px;">Neue Kategorie anlegen</h4>
+      <p class="hint">Name vergeben und eine CSV-Datei mit dem Inhalt auswählen (gleiches Format wie oben). Anders als ein normaler Katalog-Upload wird eine neue Kategorie beim Anlegen <strong>sofort veröffentlicht</strong> (benötigt einen hinterlegten GitHub-Zugang oben) — nur so taucht sie gleich im Kategorie-Filter aller Mitglieder auf.</p>
+      <form id="addCategoryForm" class="gh-form">
+        <label>Name der neuen Kategorie<input id="newCategoryName" type="text" placeholder="z. B. Haushaltswaren" required></label>
+        <label>CSV-Datei mit Inhalt<input id="newCategoryFile" type="file" accept=".csv" required></label>
+      </form>
+      <div class="admin-actions">
+        <button id="addCategoryBtn" type="submit" form="addCategoryForm" class="btn-publish">➕ Kategorie anlegen & veröffentlichen</button>
+      </div>
     </section>
 
     <section class="admin-card">

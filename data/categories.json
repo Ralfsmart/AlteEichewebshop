@@ -1,0 +1,7 @@
+[
+  { "name": "Trockenware", "file": "data/trockenware.csv" },
+  { "name": "Drogerie Kosmetik Nonfood", "file": "data/drogerie-kosmetik-nonfood.csv" },
+  { "name": "Getränke Alkohol", "file": "data/getraenke-alkohol.csv" },
+  { "name": "Getränke Alkoholfrei", "file": "data/getraenke-alkoholfrei.csv" },
+  { "name": "Feinkost Veganer Ersatz", "file": "data/feinkost-veganer-ersatz.csv" }
+]

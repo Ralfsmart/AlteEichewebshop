@@ -26,13 +26,23 @@ function currentCartKey() {
   return s && s.username ? cartKeyForUser(s.username) : LS_KEYS.cart;
 }
 
-const CATEGORY_LIST = [
-  'Trockenware',
-  'Drogerie Kosmetik Nonfood',
-  'Getränke Alkohol',
-  'Getränke Alkoholfrei',
-  'Feinkost Veganer Ersatz'
+// Standardkategorien: Startpunkt für data/categories.json (falls diese Datei einmal nicht
+// erreichbar ist, z. B. offline oder ganz frisches Hosting ohne die Datei) sowie die Werte,
+// mit denen die Seite sofort rendert, bevor categories.json geladen ist.
+const DEFAULT_CATEGORY_CONFIG = [
+  { name: 'Trockenware', file: 'data/trockenware.csv' },
+  { name: 'Drogerie Kosmetik Nonfood', file: 'data/drogerie-kosmetik-nonfood.csv' },
+  { name: 'Getränke Alkohol', file: 'data/getraenke-alkohol.csv' },
+  { name: 'Getränke Alkoholfrei', file: 'data/getraenke-alkoholfrei.csv' },
+  { name: 'Feinkost Veganer Ersatz', file: 'data/feinkost-veganer-ersatz.csv' }
 ];
+
+// CATEGORY_LIST/CATEGORY_FILES sind absichtlich "let": Die eigentliche, für ALLE Besucher
+// gültige Kategorienliste kommt aus data/categories.json (siehe loadCategoriesConfig) und
+// kann sich dadurch zur Laufzeit ändern, wenn im Admin-Bereich Kategorien hinzugefügt oder
+// entfernt werden. Bis die Datei geladen ist, gelten die Standardkategorien oben.
+let CATEGORY_LIST = DEFAULT_CATEGORY_CONFIG.map(c => c.name);
+let CATEGORY_FILES = Object.fromEntries(DEFAULT_CATEGORY_CONFIG.map(c => [c.name, c.file]));
 
 const CATEGORY_CSV_HEADERS = ['ArtikelNr', 'Bezeichnung', 'Hersteller', 'Land', 'Qualitaet', 'Gebinde', 'PreisInklMwst', 'EntMwst', 'MwstSatz'];
 const SURCHARGE_HEADERS = ['Art', 'Prozentsatz'];
@@ -41,15 +51,32 @@ const SURCHARGE_HEADERS = ['Art', 'Prozentsatz'];
 // die Seite diese Dateien vom Hosting ab (fetch), damit jedes Mitglied auf jedem
 // Gerät denselben Katalog sieht -- ohne Datenbank, nur über statische Dateien.
 // Um eine Kategorie für alle sichtbar zu aktualisieren: im Admin-Bereich "Exportieren"
-// klicken und die heruntergeladene Datei im Hosting unter genau diesem Pfad ersetzen.
-const CATEGORY_FILES = {
-  'Trockenware': 'data/trockenware.csv',
-  'Drogerie Kosmetik Nonfood': 'data/drogerie-kosmetik-nonfood.csv',
-  'Getränke Alkohol': 'data/getraenke-alkohol.csv',
-  'Getränke Alkoholfrei': 'data/getraenke-alkoholfrei.csv',
-  'Feinkost Veganer Ersatz': 'data/feinkost-veganer-ersatz.csv'
-};
+// klicken und die heruntergeladene Datei im Hosting unter genau diesem Pfad ersetzen
+// (oder direkt über "🚀 Veröffentlichen", falls ein GitHub-Zugang hinterlegt ist).
+const CATEGORIES_FILE = 'data/categories.json';
 const SURCHARGE_FILE = 'data/zuschlaege.csv';
+
+function applyCategoryConfig(list) {
+  CATEGORY_LIST = list.map(c => c.name);
+  CATEGORY_FILES = Object.fromEntries(list.map(c => [c.name, c.file]));
+}
+
+function currentCategoryConfig() {
+  return CATEGORY_LIST.map(kat => ({ name: kat, file: CATEGORY_FILES[kat] }));
+}
+
+// Lädt die gemeinsame Kategorienliste vom Hosting. Existiert die Datei noch nicht (z. B. auf
+// einem Hosting-Stand von vor dieser Funktion) oder ist die Seite offline, bleiben die
+// Standardkategorien aktiv -- kein Fehler, nur ein stiller Fallback.
+async function loadCategoriesConfig() {
+  try {
+    const text = await fetchCsvFile(CATEGORIES_FILE);
+    const list = JSON.parse(text);
+    if (Array.isArray(list) && list.length && list.every(c => c && c.name && c.file)) {
+      applyCategoryConfig(list);
+    }
+  } catch (e) { /* Datei fehlt (noch) oder offline -- Standardkategorien bleiben aktiv */ }
+}
 
 const HEADER_MAP = {
   kategorie: 'kat',
@@ -114,7 +141,7 @@ const state = {
   checkoutPrevEntries: null  // Preise/Artikel vor dem letzten Bestellübersicht-Refresh (für Änderungs-Hervorhebung)
 };
 
-function init() {
+async function init() {
   state.products = loadJSON(LS_KEYS.products, null) || (window.DEFAULT_PRODUCTS || []);
   state.surcharges = loadJSON(LS_KEYS.surcharges, null) || (window.DEFAULT_SURCHARGES || []);
   state.overridePct = loadJSON(LS_KEYS.overridePct, null);
@@ -128,6 +155,10 @@ function init() {
   }
 
   state.view = isLoggedIn() ? 'shop' : 'auth';
+
+  // Kategorienliste zuerst laden, damit Filter/Admin-Bereich gleich mit dem aktuellen
+  // Stand rendern (inkl. evtl. im Admin-Bereich hinzugefügter/entfernter Kategorien).
+  await loadCategoriesConfig();
 
   renderCategoryOptions();
   renderAll();
@@ -719,6 +750,7 @@ function renderCategoryCsvList() {
         <label class="file-btn btn-small">📤 Hochladen (Vorschau)<input type="file" accept=".csv" class="cat-csv-input" hidden></label>
         <button class="btn-secondary btn-small cat-csv-export">⬇️ Exportieren</button>
         ${hasGithubConfig() ? `<button class="btn-publish btn-small cat-csv-publish">🚀 Veröffentlichen</button>` : ''}
+        <button class="btn-danger btn-small cat-csv-remove">🗑️ Entfernen</button>
       </div>
     </div>`;
   }).join('');
@@ -881,6 +913,124 @@ function githubErrorMessage(status) {
   if (status === 404) return 'Repository oder Branch nicht gefunden (Benutzername/Repo-Name/Branch prüfen).';
   if (status === 409) return 'Konflikt beim Schreiben (bitte kurz warten und erneut versuchen).';
   return 'GitHub-Fehler (HTTP ' + status + ').';
+}
+
+async function deleteFromGitHub(filePath, commitMessage) {
+  const cfg = getGithubConfig();
+  if (!cfg || !cfg.owner || !cfg.repo || !cfg.token) {
+    throw new Error('Kein GitHub-Zugang hinterlegt. Bitte zuerst unter „Veröffentlichung" speichern.');
+  }
+  const branch = cfg.branch || 'main';
+  const apiUrl = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${filePath}`;
+  const headers = { Authorization: `Bearer ${cfg.token}`, Accept: 'application/vnd.github+json' };
+
+  const getRes = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers });
+  if (getRes.status === 404) return; // Datei existiert serverseitig ohnehin nicht (mehr)
+  if (getRes.status !== 200) throw new Error(githubErrorMessage(getRes.status));
+  const sha = (await getRes.json()).sha;
+
+  const delRes = await fetch(apiUrl, {
+    method: 'DELETE',
+    headers: { ...headers, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: commitMessage, sha, branch })
+  });
+  if (!delRes.ok) throw new Error(githubErrorMessage(delRes.status));
+}
+
+/* ------------------------------------------------------------------ *
+ *  Kategorien hinzufügen / entfernen                                  *
+ *  Ändert, anders als der normale Kategorie-Inhalt-Upload, sofort     *
+ *  live für alle Besucher: ohne eine aktuelle categories.json auf dem *
+ *  Server würde deren Kategorie-Filter die neue/entfernte Kategorie   *
+ *  sonst gar nicht erst sehen bzw. weiter anzeigen. Erfordert daher   *
+ *  immer einen hinterlegten GitHub-Zugang (kein reiner Lokal-Modus).  *
+ * ------------------------------------------------------------------ */
+
+function uniqueCategoryFilePath(name) {
+  const base = slugify(name) || 'kategorie';
+  const used = new Set(Object.values(CATEGORY_FILES));
+  let path = `data/${base}.csv`;
+  let i = 2;
+  while (used.has(path)) { path = `data/${base}-${i}.csv`; i++; }
+  return path;
+}
+
+async function addCategoryFromFile(name, file) {
+  name = String(name || '').trim();
+  if (!name) throw new Error('Bitte einen Kategorienamen eingeben.');
+  if (CATEGORY_LIST.includes(name)) throw new Error('Eine Kategorie mit diesem Namen gibt es bereits.');
+  if (!file) throw new Error('Bitte eine CSV-Datei mit dem Inhalt der neuen Kategorie auswählen.');
+  if (!hasGithubConfig()) throw new Error('Kein GitHub-Zugang hinterlegt. Bitte zuerst unter „Veröffentlichung" speichern.');
+
+  const text = await readFile(file);
+  const objs = rowsToObjects(parseCSV(text));
+  if (!objs.length) throw new Error('CSV enthält keine Datenzeilen.');
+  const mapped = objs.map(mapCsvRow);
+  const missingBase = ['art', 'bez'].filter(k => !(k in mapped[0]));
+  if (missingBase.length || !hasUsablePrice(mapped[0])) {
+    throw new Error('CSV-Kopfzeile passt nicht. Erwartet werden entweder die Spalten "' +
+      CATEGORY_CSV_HEADERS.join(', ') + '" oder das Bodan-Bestellsystem-Format mit "EK VPE".');
+  }
+  const newItems = mapped.map(r => productFromMappedRow(name, r)).filter(p => p.art && p.bez);
+  const filePath = uniqueCategoryFilePath(name);
+
+  CATEGORY_LIST = CATEGORY_LIST.concat([name]);
+  CATEGORY_FILES = { ...CATEGORY_FILES, [name]: filePath };
+
+  // Neue CSV-Datei und die aktualisierte Kategorienliste in einem Zug veröffentlichen --
+  // nie nur eine von beiden, sonst stünde kurzzeitig eine Kategorie ohne Datei (oder eine
+  // Datei ohne gelistete Kategorie) auf dem Server.
+  const csv = objectsToCSV(newItems.map(p => ({
+    ArtikelNr: p.art, Bezeichnung: p.bez, Hersteller: p.hers, Land: p.land,
+    Qualitaet: p.qual, Gebinde: p.geb, PreisInklMwst: p.preis, EntMwst: p.mwstb, MwstSatz: p.mwst
+  })), CATEGORY_CSV_HEADERS);
+  await publishToGitHub(filePath, csv, 'Neue Kategorie "' + name + '" angelegt (Admin-Panel)');
+  await publishToGitHub(CATEGORIES_FILE, JSON.stringify(currentCategoryConfig(), null, 2),
+    'Kategorie "' + name + '" zur Kategorienliste hinzugefügt (Admin-Panel)');
+
+  state.products = state.products.concat(newItems);
+  state.catMeta[name] = { updated: Date.now(), source: file.name };
+  state.dataSource[name] = 'server';
+  saveJSON(LS_KEYS.products, state.products);
+  saveJSON(LS_KEYS.catMeta, state.catMeta);
+  saveJSON(LS_KEYS.dataSource, state.dataSource);
+  state.page = 1;
+  renderCategoryOptions();
+  renderAll();
+}
+
+async function removeCategory(kat) {
+  if (!hasGithubConfig()) throw new Error('Kein GitHub-Zugang hinterlegt. Bitte zuerst unter „Veröffentlichung" speichern.');
+  const filePath = CATEGORY_FILES[kat];
+
+  const newList = CATEGORY_LIST.filter(k => k !== kat);
+  const newFiles = { ...CATEGORY_FILES };
+  delete newFiles[kat];
+
+  // Erst die Kategorienliste veröffentlichen: sobald das durch ist, sehen Besucher die
+  // Kategorie beim nächsten Laden nicht mehr -- das Entfernen der (dann verwaisten)
+  // CSV-Datei danach ist nur noch Aufräumarbeit und nicht mehr zeitkritisch.
+  CATEGORY_LIST = newList;
+  CATEGORY_FILES = newFiles;
+  await publishToGitHub(CATEGORIES_FILE, JSON.stringify(currentCategoryConfig(), null, 2),
+    'Kategorie "' + kat + '" entfernt (Admin-Panel)');
+  try {
+    await deleteFromGitHub(filePath, 'Kategorie-Datei "' + kat + '" entfernt (Admin-Panel)');
+  } catch (e) {
+    // Die Kategorie ist für alle Besucher bereits weg (categories.json ist aktualisiert);
+    // falls nur das Aufräumen der verwaisten CSV-Datei fehlschlägt, ist das unkritisch.
+  }
+
+  state.products = state.products.filter(p => p.kat !== kat);
+  delete state.catMeta[kat];
+  delete state.dataSource[kat];
+  saveJSON(LS_KEYS.products, state.products);
+  saveJSON(LS_KEYS.catMeta, state.catMeta);
+  saveJSON(LS_KEYS.dataSource, state.dataSource);
+  if (state.category === kat) state.category = '';
+  state.page = 1;
+  renderCategoryOptions();
+  renderAll();
 }
 
 // Liefert "August 2026" (aktueller Bestellmonat) fuer Betreffzeile und Dateiname.
@@ -1420,6 +1570,22 @@ function bindGlobalEvents() {
       }
       return;
     }
+    if (e.target.classList.contains('cat-csv-remove')) {
+      const btn = e.target;
+      const kat = btn.closest('.cat-csv-row').dataset.kat;
+      if (!confirm('Kategorie "' + kat + '" wirklich entfernen? Das wird sofort für alle Besucher veröffentlicht und kann nur durch erneutes Anlegen rückgängig gemacht werden.')) return;
+      const label = btn.textContent;
+      btn.disabled = true; btn.textContent = '🗑️ Entferne …';
+      try {
+        await removeCategory(kat);
+        showToast('Kategorie "' + kat + '" entfernt und veröffentlicht.');
+        renderAdmin();
+      } catch (err) {
+        showToast('Fehler beim Entfernen: ' + err.message, true);
+        btn.disabled = false; btn.textContent = label;
+      }
+      return;
+    }
   });
   document.getElementById('categoryCsvList').addEventListener('change', async e => {
     if (!e.target.classList.contains('cat-csv-input')) return;
@@ -1439,6 +1605,25 @@ function bindGlobalEvents() {
     showToast('Lade Kategorien vom Server …');
     await loadServerCatalog(true);
     showToast('Vom Server neu geladen.');
+  });
+
+  document.getElementById('addCategoryForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const nameInput = document.getElementById('newCategoryName');
+    const fileInput = document.getElementById('newCategoryFile');
+    const btn = document.getElementById('addCategoryBtn');
+    const label = btn.textContent;
+    btn.disabled = true; btn.textContent = '➕ Lege an …';
+    try {
+      await addCategoryFromFile(nameInput.value, fileInput.files[0]);
+      showToast('Kategorie "' + nameInput.value.trim() + '" angelegt und veröffentlicht.');
+      document.getElementById('addCategoryForm').reset();
+      renderAdmin();
+    } catch (err) {
+      showToast('Fehler: ' + err.message, true);
+    } finally {
+      btn.disabled = false; btn.textContent = label;
+    }
   });
 
   /* ---- Admin: Zuschläge (einzelne Felder) ---- */
