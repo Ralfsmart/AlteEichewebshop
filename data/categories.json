@@ -18,5 +18,9 @@
   {
     "name": "Weihnachten",
     "file": "data/weihnachten.csv"
+  },
+  {
+    "name": "Monatsaktion",
+    "file": "data/monatsaktion.csv"
   }
 ]
