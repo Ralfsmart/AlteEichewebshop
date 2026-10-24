@@ -236,6 +236,7 @@
       <h3>Produktkatalog je Kategorie</h3>
       <p class="hint">Diese Seite hat keine Datenbank: Damit <strong>alle</strong> Mitglieder denselben Katalog sehen, lädt der Shop die Daten bei jedem Aufruf aus den <code>data/*.csv</code>-Dateien deines Hostings. Ein Upload hier zeigt dir erst eine <strong>lokale Vorschau</strong> in diesem Browser. Um sie für alle sichtbar zu machen: „Exportieren" klicken und die heruntergeladene Datei im Hosting unter dem angegebenen Pfad ersetzen (z. B. per FTP oder Git-Push), dann neu deployen.</p>
       <p class="hint">Zwei Formate werden erkannt: entweder die Spalten <code>ArtikelNr, Bezeichnung, Hersteller, Land, Qualitaet, Gebinde, PreisInklMwst, EntMwst, MwstSatz</code> — oder direkt der Export aus Bodans Bestellsystem mit <code>ArtNr, Bezeichnung, Hersteller, Land, Qualität, Gebinde, EK Ladeneinheit, EK VPE, UVP, EAN, MwSt</code> (der Netto-Einkaufspreis „EK VPE" wird dann automatisch um die MwSt. hochgerechnet). Ein Upload ersetzt nur die jeweilige Kategorie.</p>
+      <div id="categoryPriceConflicts"></div>
       <div id="categoryCsvList" class="category-csv-list"></div>
       <button id="reloadServerBtn" class="btn-secondary" style="margin-top:12px;">🔄 Alle Kategorien vom Server neu laden</button>
 

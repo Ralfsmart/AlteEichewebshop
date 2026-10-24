@@ -705,6 +705,7 @@ function renderAdmin() {
     ? new Date(Math.max(...times)).toLocaleString('de-DE') : '–';
 
   renderGithubSettings();
+  renderCategoryPriceConflicts();
   renderCategoryCsvList();
   renderSurchargeEditor();
   document.getElementById('overridePctInput').value = state.overridePct === null || state.overridePct === undefined ? '' : state.overridePct;
@@ -754,6 +755,49 @@ const DATA_SOURCE_LABEL = {
   local: '⚠️ Nur lokale Vorschau – noch nicht für alle sichtbar!',
   default: 'ℹ️ Bodan-Originaldaten (Server-Datei nicht erreichbar)'
 };
+
+// Dieselbe Artikel-Nr. darf absichtlich in mehreren Kategorien auftauchen (z. B. normale
+// Kategorie + Monatsaktion). Weicht dabei aber der Preis zwischen den Kategorien voneinander ab
+// (z. B. weil nur eine der beiden CSV-Kopien beim letzten Preis-Update aktualisiert wurde), löst
+// das keinen Fehler aus -- cartEntries() wählt dann stillschweigend die zuletzt verarbeitete
+// Kategorie, je nach Reihenfolge in CATEGORY_LIST. Das kann die Preisänderungs-Warnung in der
+// Bestellübersicht unterdrücken, wenn ausgerechnet die "gewinnende" Kopie unverändert blieb.
+// Deshalb hier für den Admin-Bereich sichtbar machen, statt es stillschweigend passieren zu lassen.
+function findCategoryPriceConflicts() {
+  const byArt = new Map();
+  for (const p of state.products) {
+    if (!byArt.has(p.art)) byArt.set(p.art, []);
+    byArt.get(p.art).push(p);
+  }
+  const conflicts = [];
+  byArt.forEach((list, art) => {
+    if (list.length < 2) return;
+    const cents = new Set(list.map(p => Math.round(p.preis * 100)));
+    if (cents.size > 1) {
+      conflicts.push({ art, bez: list[0].bez, entries: list.map(p => ({ kat: p.kat, preis: p.preis })) });
+    }
+  });
+  conflicts.sort((a, b) => a.bez.localeCompare(b.bez, 'de'));
+  return conflicts;
+}
+
+function renderCategoryPriceConflicts() {
+  const box = document.getElementById('categoryPriceConflicts');
+  if (!box) return;
+  const conflicts = findCategoryPriceConflicts();
+  if (!conflicts.length) { box.innerHTML = ''; return; }
+  box.innerHTML = `
+    <div class="price-conflict-notice">
+      ⚠️ ${conflicts.length} Artikel ${conflicts.length === 1 ? 'hat' : 'haben'} in mehreren Kategorien unterschiedliche Preise hinterlegt.
+      Dadurch kann im Warenkorb/der Bestellübersicht der falsche (alte) Preis angezeigt und eine Preiserhöhung dabei nicht als Warnung auffallen. Bitte angleichen:
+      <ul class="price-conflict-list">
+        ${conflicts.map(c => `
+          <li><strong>${escapeHtml(c.art)}</strong> – ${escapeHtml(c.bez)}: ${c.entries.map(e => `${escapeHtml(e.kat)} ${money(e.preis)}`).join(' · ')}</li>
+        `).join('')}
+      </ul>
+    </div>
+  `;
+}
 
 function renderCategoryCsvList() {
   const container = document.getElementById('categoryCsvList');
@@ -1073,7 +1117,33 @@ function safeFilenamePart(str) {
     .replace(/^_+|_+$/g, '');
 }
 
-function exportBestellliste() {
+// Export/E-Mail-Versand liegen auf der bereits geöffneten Bestellübersicht, lesen aber nur den
+// gerade im Speicher stehenden Katalogstand (state.products) -- der kann veraltet sein, wenn die
+// Bestellübersicht zwar offen blieb (z. B. nach "Exportieren") und der Katalog in der Zwischenzeit
+// erneut aktualisiert wurde, bevor tatsächlich "E-Mail senden" geklickt wird. Deshalb hier (wie
+// schon beim Öffnen in openCheckout()) noch einmal frisch laden und vergleichen, statt einen
+// inzwischen veralteten Preis unbemerkt in Export/E-Mail zu übernehmen.
+async function refreshCheckoutBeforeSend() {
+  const prevByArt = new Map(cartEntries().map(e => [e.p.art, {
+    vk: e.vk, bez: e.p.bez, geb: e.p.geb, mwst: e.p.mwst, art: e.p.art
+  }]));
+  await loadServerCatalog(true);
+  const freshEntries = cartEntries();
+  const priceChanged = freshEntries.some(e => {
+    const prev = prevByArt.get(e.p.art);
+    return prev && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+  });
+  const itemRemoved = [...prevByArt.keys()].some(art => !freshEntries.some(e => e.p.art === art));
+  state.checkoutPrevEntries = prevByArt;
+  renderAll();
+  return priceChanged || itemRemoved;
+}
+
+async function exportBestellliste() {
+  if (await refreshCheckoutBeforeSend()) {
+    showToast('Die Preise haben sich seit dem Öffnen der Bestellübersicht geändert -- bitte unten prüfen und danach erneut exportieren.', true);
+    return;
+  }
   const entries = cartEntries();
   if (!entries.length) { showToast('Warenkorb ist leer.', true); return; }
   const acc = currentUserAccount();
@@ -1126,7 +1196,11 @@ function buildOrderEmailBody(entries, totalVk) {
   return lines.join('\n');
 }
 
-function emailBestellung() {
+async function emailBestellung() {
+  if (await refreshCheckoutBeforeSend()) {
+    showToast('Die Preise haben sich seit dem Öffnen der Bestellübersicht geändert -- bitte unten prüfen und danach erneut senden.', true);
+    return;
+  }
   const entries = cartEntries();
   if (!entries.length) { showToast('Warenkorb ist leer.', true); return; }
   const acc = currentUserAccount();

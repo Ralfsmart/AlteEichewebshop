@@ -351,6 +351,12 @@ body.bg-market {
 .link-btn:hover { color: var(--green); }
 
 /* ---------- Admin: Kategorien-CSV-Liste ---------- */
+.price-conflict-notice {
+  background: #fbeae9; color: var(--danger); border: 1px solid var(--danger);
+  border-radius: var(--radius); padding: 10px 14px; margin-top: 10px; font-size: .9rem; font-weight: 600;
+}
+.price-conflict-list { margin: 8px 0 0; padding-left: 20px; font-weight: 400; }
+.price-conflict-list li { margin-bottom: 4px; }
 .category-csv-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
 .cat-csv-row {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
