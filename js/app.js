@@ -596,23 +596,33 @@ function renderCartSummary(entries) {
 // einmal angezeigter Hinweis nicht bei jedem erneuten Öffnen wiederholt wird. Von openCheckout()
 // (erstes Öffnen) und refreshCheckoutBeforeSend() (Export/E-Mail) gemeinsam genutzt.
 async function refreshCheckoutAndDetectChanges() {
+  // Artikel, die schon vor Einführung von cartPriceSeen (oder seit einer Browser-/Geräte-Migration)
+  // im Warenkorb lagen, haben noch keinen gespeicherten "gesehenen" Preis -- dafür gibt es keinen
+  // Ersatz, die Seite kennt den damaligen Preis schlicht nicht mehr. Statt das stillschweigend als
+  // "unverändert" zu werten (das Problem, das genau zu dem Zimt-Fall geführt hat), wird so ein
+  // Artikel als "Preis nicht geprüft" markiert, damit der Kunde bewusst hinschaut.
   const prevByArt = new Map(cartEntries().map(e => {
     const seen = state.cartPriceSeen[e.p.art];
     return [e.p.art, {
-      vk: seen !== undefined ? seen : e.vk, bez: e.p.bez, geb: e.p.geb, mwst: e.p.mwst, art: e.p.art
+      vk: seen !== undefined ? seen : e.vk, unknown: seen === undefined,
+      bez: e.p.bez, geb: e.p.geb, mwst: e.p.mwst, art: e.p.art
     }];
   }));
   await loadServerCatalog(true);
   const freshEntries = cartEntries();
   const priceChanged = freshEntries.some(e => {
     const prev = prevByArt.get(e.p.art);
-    return prev && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+    return prev && !prev.unknown && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+  });
+  const priceUnknown = freshEntries.some(e => {
+    const prev = prevByArt.get(e.p.art);
+    return prev && prev.unknown;
   });
   const itemRemoved = [...prevByArt.keys()].some(art => !freshEntries.some(e => e.p.art === art));
   state.checkoutPrevEntries = prevByArt;
   freshEntries.forEach(e => { state.cartPriceSeen[e.p.art] = e.vk; });
   saveJSON(currentCartPriceKey(), state.cartPriceSeen);
-  return priceChanged || itemRemoved;
+  return priceChanged || priceUnknown || itemRemoved;
 }
 
 async function openCheckout() {
@@ -675,12 +685,16 @@ function renderCheckout() {
   } else {
     tbody.innerHTML = entries.map((e, i) => {
       const prev = prevByArt && prevByArt.get(e.p.art);
-      const priceChanged = prev && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+      const priceChanged = prev && !prev.unknown && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+      const priceUnknown = prev && prev.unknown;
+      const confirmBtn = `<button class="confirm-price-btn btn-secondary btn-small" data-art="${escapeHtml(e.p.art)}">✓ passt so</button>`;
       const priceCell = priceChanged
-        ? `<span class="price-old"><s>${money(prev.vk)}</s></span> <span class="price-new">${money(e.vk)}</span>`
-        : money(e.vk);
+        ? `<span class="price-old"><s>${money(prev.vk)}</s></span> <span class="price-new">${money(e.vk)}</span> ${confirmBtn}`
+        : priceUnknown
+          ? `${money(e.vk)} <span class="price-unknown-badge" title="Dieser Artikel lag schon länger im Warenkorb. Der angezeigte Preis ist der aktuell gültige -- bitte kurz bestätigen, dass er noch passt.">bitte bestätigen</span> ${confirmBtn}`
+          : money(e.vk);
       return `
-      <tr class="${priceChanged ? 'row-price-changed' : ''}">
+      <tr class="${priceChanged ? 'row-price-changed' : priceUnknown ? 'row-price-unknown' : ''}">
         <td>${i + 1}</td>
         <td>${escapeHtml(e.p.art)}</td>
         <td>${escapeHtml(e.p.bez)}</td>
@@ -696,14 +710,19 @@ function renderCheckout() {
 
   const changedCount = prevByArt ? entries.filter(e => {
     const prev = prevByArt.get(e.p.art);
-    return prev && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+    return prev && !prev.unknown && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+  }).length : 0;
+  const unknownCount = prevByArt ? entries.filter(e => {
+    const prev = prevByArt.get(e.p.art);
+    return prev && prev.unknown;
   }).length : 0;
   const notice = document.getElementById('checkoutChangesNotice');
-  if (changedCount || removedRows.length) {
+  if (changedCount || unknownCount || removedRows.length) {
     const parts = [];
     if (changedCount) parts.push(`${changedCount} Preis${changedCount === 1 ? '' : 'e'} wurde${changedCount === 1 ? '' : 'n'} seit deiner Auswahl aktualisiert`);
+    if (unknownCount) parts.push(`${unknownCount} Preis${unknownCount === 1 ? '' : 'e'} noch nicht bestätigt (Artikel liegen schon länger im Warenkorb)`);
     if (removedRows.length) parts.push(`${removedRows.length} Artikel ${removedRows.length === 1 ? 'ist' : 'sind'} nicht mehr verfügbar`);
-    notice.innerHTML = `<div class="checkout-changes-notice">⚠️ ${parts.join(' · ')} — bitte unten prüfen.</div>`;
+    notice.innerHTML = `<div class="checkout-changes-notice">⚠️ ${parts.join(' · ')} — bitte unten in der jeweiligen Zeile mit „✓ passt so" bestätigen.</div>`;
   } else {
     notice.innerHTML = '';
   }
@@ -1172,7 +1191,7 @@ async function refreshCheckoutBeforeSend() {
 
 async function exportBestellliste() {
   if (await refreshCheckoutBeforeSend()) {
-    showToast('Die Preise haben sich seit dem Öffnen der Bestellübersicht geändert -- bitte unten prüfen und danach erneut exportieren.', true);
+    showToast('Bitte unten die markierten Preise bestätigen und danach erneut exportieren.', true);
     return;
   }
   const entries = cartEntries();
@@ -1229,7 +1248,7 @@ function buildOrderEmailBody(entries, totalVk) {
 
 async function emailBestellung() {
   if (await refreshCheckoutBeforeSend()) {
-    showToast('Die Preise haben sich seit dem Öffnen der Bestellübersicht geändert -- bitte unten prüfen und danach erneut senden.', true);
+    showToast('Bitte unten die markierten Preise bestätigen und danach erneut senden.', true);
     return;
   }
   const entries = cartEntries();
@@ -1651,6 +1670,20 @@ function bindGlobalEvents() {
   document.getElementById('printBtn').addEventListener('click', () => window.print());
   document.getElementById('exportBestellungBtn').addEventListener('click', exportBestellliste);
   document.getElementById('emailBestellungBtn').addEventListener('click', emailBestellung);
+
+  // "✓ passt so" steht pro Zeile direkt neben dem markierten Preis (in renderCheckout() erzeugt) --
+  // deshalb hier per Event-Delegation auf dem (statischen) Tabellen-Container abgefangen, statt bei
+  // jedem Rendern neue Listener zu binden.
+  document.getElementById('checkoutRows').addEventListener('click', e => {
+    const btn = e.target.closest('.confirm-price-btn');
+    if (!btn) return;
+    const art = btn.dataset.art;
+    // state.cartPriceSeen ist schon beim Laden (refreshCheckoutAndDetectChanges) auf den aktuell
+    // angezeigten Preis aktualisiert worden -- hier wird nur noch die Markierung für GENAU diesen
+    // Artikel in der Anzeige ausgeblendet, kein erneuter Serverabruf nötig.
+    if (state.checkoutPrevEntries) state.checkoutPrevEntries.delete(art);
+    renderCheckout();
+  });
 
   /* ---- Admin gate ---- */
   document.getElementById('adminSetupForm').addEventListener('submit', async e => {

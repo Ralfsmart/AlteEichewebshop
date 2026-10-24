@@ -231,6 +231,11 @@ input, select { font-family: inherit; }
 .price-new { color: var(--danger); font-weight: 700; }
 .row-removed { background: #fbeae9; color: var(--danger); }
 .row-removed td { color: var(--danger); }
+.row-price-unknown { background: #fff6e0; }
+.price-unknown-badge {
+  display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 10px;
+  background: #a06a1a; color: #fff; font-size: .72rem; font-weight: 700; white-space: nowrap;
+}
 
 .totals-box { max-width: 360px; margin: 16px 0 0 auto; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
 .checkout-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; justify-content: flex-end; }
