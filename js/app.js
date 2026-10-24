@@ -26,6 +26,21 @@ function currentCartKey() {
   return s && s.username ? cartKeyForUser(s.username) : LS_KEYS.cart;
 }
 
+// Hält fest, zu welchem Preis ein Artikel zuletzt im Warenkorb gesehen/bestätigt wurde --
+// getrennt vom flüchtigen state.products-Cache, der bei jedem Seitenaufruf im Hintergrund
+// (loadServerCatalog() in init(), unawaited) ohnehin automatisch aktualisiert wird. Ohne diesen
+// eigenen, dauerhaften Wert hätte die Preisänderungs-Warnung in der Bestellübersicht praktisch
+// nie etwas zu melden: Bis man dort hinklickt, ist der Hintergrund-Refresh in aller Regel längst
+// durchgelaufen und hat den "alten" Preis im Cache schon durch den neuen ersetzt -- der Vergleich
+// "vorher/nachher" sah dann nur noch zweimal denselben (neuen) Preis.
+function cartPriceKeyForUser(username) {
+  return 'ws_cart_price_' + username;
+}
+function currentCartPriceKey() {
+  const s = getSession();
+  return s && s.username ? cartPriceKeyForUser(s.username) : 'ws_cart_price';
+}
+
 // Standardkategorien: Startpunkt für data/categories.json (falls diese Datei einmal nicht
 // erreichbar ist, z. B. offline oder ganz frisches Hosting ohne die Datei) sowie die Werte,
 // mit denen die Seite sofort rendert, bevor categories.json geladen ist.
@@ -128,6 +143,7 @@ const state = {
   surcharges: [],
   overridePct: null,
   cart: {},        // { artNr: qty }
+  cartPriceSeen: {}, // { artNr: zuletzt angezeigter Verkaufspreis } -- siehe currentCartPriceKey()
   catMeta: {},      // { kategorie: { updated, source } }
   dataSource: {},   // { kategorie: 'server' | 'local' | 'default' }
   view: 'auth',     // auth | shop | checkout | admin
@@ -146,6 +162,7 @@ async function init() {
   state.surcharges = loadJSON(LS_KEYS.surcharges, null) || (window.DEFAULT_SURCHARGES || []);
   state.overridePct = loadJSON(LS_KEYS.overridePct, null);
   state.cart = loadJSON(currentCartKey(), {});
+  state.cartPriceSeen = loadJSON(currentCartPriceKey(), {});
   state.catMeta = loadJSON(LS_KEYS.catMeta, {});
   state.dataSource = loadJSON(LS_KEYS.dataSource, {});
 
@@ -570,16 +587,40 @@ function renderCartSummary(entries) {
 // Server laden und mit dem Stand vor dem Refresh vergleichen. So fallen Preisänderungen oder
 // inzwischen entfernte Artikel auf, auch wenn der Warenkorb schon länger (über mehrere Besuche)
 // im Browser lag, statt sie beim Bestellen stillschweigend zu übernehmen.
+// Lädt den Katalog frisch und vergleicht gegen den DAUERHAFT gespeicherten "zuletzt gesehenen"
+// Preis (state.cartPriceSeen, siehe currentCartPriceKey()) -- bewusst NICHT gegen den aktuellen
+// state.products-Stand im Speicher: der wird schon beim bloßen Seitenaufruf im Hintergrund
+// aktualisiert (unawaited loadServerCatalog() in init()), typischerweise lange bevor man
+// tatsächlich auf "Bestellübersicht" klickt. Ein Vergleich dagegen hätte so gut wie nie etwas zu
+// melden. Aktualisiert anschließend den gesehenen Preis auf den jetzt angezeigten Stand, damit ein
+// einmal angezeigter Hinweis nicht bei jedem erneuten Öffnen wiederholt wird. Von openCheckout()
+// (erstes Öffnen) und refreshCheckoutBeforeSend() (Export/E-Mail) gemeinsam genutzt.
+async function refreshCheckoutAndDetectChanges() {
+  const prevByArt = new Map(cartEntries().map(e => {
+    const seen = state.cartPriceSeen[e.p.art];
+    return [e.p.art, {
+      vk: seen !== undefined ? seen : e.vk, bez: e.p.bez, geb: e.p.geb, mwst: e.p.mwst, art: e.p.art
+    }];
+  }));
+  await loadServerCatalog(true);
+  const freshEntries = cartEntries();
+  const priceChanged = freshEntries.some(e => {
+    const prev = prevByArt.get(e.p.art);
+    return prev && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
+  });
+  const itemRemoved = [...prevByArt.keys()].some(art => !freshEntries.some(e => e.p.art === art));
+  state.checkoutPrevEntries = prevByArt;
+  freshEntries.forEach(e => { state.cartPriceSeen[e.p.art] = e.vk; });
+  saveJSON(currentCartPriceKey(), state.cartPriceSeen);
+  return priceChanged || itemRemoved;
+}
+
 async function openCheckout() {
-  const prevByArt = new Map(cartEntries().map(e => [e.p.art, {
-    vk: e.vk, bez: e.p.bez, geb: e.p.geb, mwst: e.p.mwst, art: e.p.art
-  }]));
   state.cartOpen = false;
   state.view = 'checkout';
   state.checkoutPrevEntries = null;
   renderAll();
-  await loadServerCatalog(true);
-  state.checkoutPrevEntries = prevByArt;
+  await refreshCheckoutAndDetectChanges();
   renderAll();
 }
 
@@ -1124,19 +1165,9 @@ function safeFilenamePart(str) {
 // schon beim Öffnen in openCheckout()) noch einmal frisch laden und vergleichen, statt einen
 // inzwischen veralteten Preis unbemerkt in Export/E-Mail zu übernehmen.
 async function refreshCheckoutBeforeSend() {
-  const prevByArt = new Map(cartEntries().map(e => [e.p.art, {
-    vk: e.vk, bez: e.p.bez, geb: e.p.geb, mwst: e.p.mwst, art: e.p.art
-  }]));
-  await loadServerCatalog(true);
-  const freshEntries = cartEntries();
-  const priceChanged = freshEntries.some(e => {
-    const prev = prevByArt.get(e.p.art);
-    return prev && Math.round(prev.vk * 100) !== Math.round(e.vk * 100);
-  });
-  const itemRemoved = [...prevByArt.keys()].some(art => !freshEntries.some(e => e.p.art === art));
-  state.checkoutPrevEntries = prevByArt;
+  const changed = await refreshCheckoutAndDetectChanges();
   renderAll();
-  return priceChanged || itemRemoved;
+  return changed;
 }
 
 async function exportBestellliste() {
@@ -1278,14 +1309,18 @@ function importCartFromBackup(text) {
   const arts = Object.keys(entries);
   if (!arts.length) { showToast('Keine Artikelnummern erkannt.', true); return; }
 
-  const validArts = new Set(state.products.map(p => String(p.art)));
+  const byArt = new Map(state.products.map(p => [String(p.art), p]));
+  const pct = totalSurchargePct();
   let addedCount = 0, unknownCount = 0;
   arts.forEach(art => {
-    if (!validArts.has(art)) { unknownCount++; return; }
+    const p = byArt.get(art);
+    if (!p) { unknownCount++; return; }
     state.cart[art] = (state.cart[art] || 0) + entries[art];
+    state.cartPriceSeen[art] = verkaufspreis(p.preis, pct);
     addedCount++;
   });
   saveJSON(currentCartKey(), state.cart);
+  saveJSON(currentCartPriceKey(), state.cartPriceSeen);
   renderAll();
 
   // Nicht-numerischer Text (z. B. Produktnamen, falls jemand mehr als nur Artikelnummern
@@ -1311,9 +1346,18 @@ function importCartFromBackup(text) {
 
 function setQty(art, qty) {
   qty = Math.max(0, Math.floor(Number(qty) || 0));
-  if (qty === 0) delete state.cart[art];
-  else state.cart[art] = qty;
+  if (qty === 0) {
+    delete state.cart[art];
+    delete state.cartPriceSeen[art];
+  } else {
+    state.cart[art] = qty;
+    // Aktuell angezeigten Preis als "gesehen" festhalten -- Basis für die Preisänderungs-Warnung
+    // in der Bestellübersicht, siehe currentCartPriceKey().
+    const p = state.products.find(pr => String(pr.art) === String(art));
+    if (p) state.cartPriceSeen[art] = verkaufspreis(p.preis, totalSurchargePct());
+  }
   saveJSON(currentCartKey(), state.cart);
+  saveJSON(currentCartPriceKey(), state.cartPriceSeen);
   updateQtyUI(art, qty);
 }
 
@@ -1365,6 +1409,7 @@ function onAuthSuccess(msg) {
   // innerhalb derselben Sitzung (Abmelden -> anderes Konto anmelden, ohne Neuladen der Seite)
   // noch der Warenkorb des vorherigen Kontos im Speicher stehen bleiben.
   state.cart = loadJSON(currentCartKey(), {});
+  state.cartPriceSeen = loadJSON(currentCartPriceKey(), {});
   state.view = 'shop';
   switchAuthTab('login');
   renderCategoryOptions();
@@ -1457,8 +1502,10 @@ function bindGlobalEvents() {
     // Nur den eigenen Warenkorb entfernen -- den Schlüssel vor deleteAccount() ermitteln, weil
     // das darin enthaltene clearSession() sonst currentCartKey() schon auf niemanden mehr zeigt.
     localStorage.removeItem(cartKeyForUser(s.username));
+    localStorage.removeItem(cartPriceKeyForUser(s.username));
     deleteAccount(s.username);
     state.cart = {};
+    state.cartPriceSeen = {};
     state.cartOpen = false;
     state.view = 'auth';
     renderAll();
@@ -1486,6 +1533,7 @@ function bindGlobalEvents() {
   document.getElementById('logoutBtn').addEventListener('click', () => {
     clearSession();
     state.cart = {};
+    state.cartPriceSeen = {};
     state.cartOpen = false;
     state.view = 'auth';
     renderAll();
@@ -1550,7 +1598,13 @@ function bindGlobalEvents() {
     openCheckout();
   });
   document.getElementById('cartClearBtn').addEventListener('click', () => {
-    if (confirm('Warenkorb wirklich leeren?')) { state.cart = {}; saveJSON(currentCartKey(), state.cart); renderAll(); }
+    if (confirm('Warenkorb wirklich leeren?')) {
+      state.cart = {};
+      state.cartPriceSeen = {};
+      saveJSON(currentCartKey(), state.cart);
+      saveJSON(currentCartPriceKey(), state.cartPriceSeen);
+      renderAll();
+    }
   });
 
   document.getElementById('cartImportFile').addEventListener('change', async e => {
