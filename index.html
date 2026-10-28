@@ -264,14 +264,6 @@
       <button id="addSurchargeBtn" class="btn-secondary btn-small" style="margin-top:8px;">+ Zuschlag hinzufügen</button>
       <div class="sc-row sc-total"><span>Gesamt-Zuschlag (berechnet)</span><span id="computedTotalPct">0%</span></div>
 
-      <div class="override-row">
-        <label for="overridePctInput">Manueller Gesamt-Zuschlag % (überschreibt die Felder oben, leer = automatisch)</label>
-        <div class="override-controls">
-          <input id="overridePctInput" type="number" step="0.1" min="0" placeholder="z. B. 8">
-          <button id="resetOverrideBtn" class="btn-secondary">Zurücksetzen</button>
-        </div>
-      </div>
-
       <div class="admin-actions">
         <label class="file-btn">📤 Zuschläge-CSV hochladen (ersetzt alle Felder)<input id="surchargeCsvInput" type="file" accept=".csv" hidden></label>
         <button id="exportSurchargesBtn" class="btn-secondary">⬇️ Zuschläge als CSV exportieren</button>

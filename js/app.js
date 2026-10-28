@@ -7,7 +7,6 @@
 const LS_KEYS = {
   products: 'ws_products',
   surcharges: 'ws_surcharges',
-  overridePct: 'ws_override_pct',
   cart: 'ws_cart',
   catMeta: 'ws_cat_meta',
   dataSource: 'ws_data_source',
@@ -141,7 +140,6 @@ function slugify(s) {
 const state = {
   products: [],
   surcharges: [],
-  overridePct: null,
   cart: {},        // { artNr: qty }
   cartPriceSeen: {}, // { artNr: zuletzt angezeigter Verkaufspreis } -- siehe currentCartPriceKey()
   catMeta: {},      // { kategorie: { updated, source } }
@@ -162,7 +160,6 @@ const state = {
 async function init() {
   state.products = loadJSON(LS_KEYS.products, null) || (window.DEFAULT_PRODUCTS || []);
   state.surcharges = loadJSON(LS_KEYS.surcharges, null) || (window.DEFAULT_SURCHARGES || []);
-  state.overridePct = loadJSON(LS_KEYS.overridePct, null);
   state.cart = loadJSON(currentCartKey(), {});
   state.cartPriceSeen = loadJSON(currentCartPriceKey(), {});
   state.catMeta = loadJSON(LS_KEYS.catMeta, {});
@@ -280,9 +277,6 @@ async function loadServerCatalog(force) {
  * ------------------------------------------------------------------ */
 
 function totalSurchargePct() {
-  if (state.overridePct !== null && state.overridePct !== undefined && state.overridePct !== '') {
-    return Number(state.overridePct);
-  }
   // "Gesamt"-Zeilen sind abgeleitete Anzeige-/Altlast-Werte, keine eigenen Zuschlagsposten --
   // nie mitsummieren, sonst würde der Gesamtwert doppelt gezählt.
   return state.surcharges
@@ -793,7 +787,6 @@ function renderAdmin() {
   renderCategoryPriceConflicts();
   renderCategoryCsvList();
   renderSurchargeEditor();
-  document.getElementById('overridePctInput').value = state.overridePct === null || state.overridePct === undefined ? '' : state.overridePct;
 }
 
 function renderGithubSettings() {
@@ -995,10 +988,8 @@ function importSurchargesCSV(text) {
     return { art, pct: parseFloat(pctRaw) || 0 };
   }).filter(s => s.art);
   state.surcharges = surcharges;
-  state.overridePct = null;
   state.dataSource.__surcharges = 'local';
   saveJSON(LS_KEYS.surcharges, state.surcharges);
-  saveJSON(LS_KEYS.overridePct, state.overridePct);
   saveJSON(LS_KEYS.dataSource, state.dataSource);
   renderAll();
 }
@@ -1937,18 +1928,6 @@ function bindGlobalEvents() {
     renderAdmin();
   });
 
-  document.getElementById('overridePctInput').addEventListener('input', e => {
-    const v = e.target.value;
-    state.overridePct = v === '' ? null : v;
-    saveJSON(LS_KEYS.overridePct, state.overridePct);
-    renderAll();
-  });
-  document.getElementById('resetOverrideBtn').addEventListener('click', () => {
-    state.overridePct = null;
-    saveJSON(LS_KEYS.overridePct, null);
-    renderAll();
-  });
-
   /* ---- Admin: Kundenkonten ---- */
   document.getElementById('exportUsersBtn').addEventListener('click', () => {
     downloadText('kundenkonten.csv', exportUsersCSV());
@@ -1969,12 +1948,10 @@ function bindGlobalEvents() {
     if (!confirm('Wirklich auf die Original-Bodan-Daten zurücksetzen? Eigene CSV-Uploads gehen verloren (Kundenkonten bleiben erhalten).')) return;
     state.products = window.DEFAULT_PRODUCTS || [];
     state.surcharges = window.DEFAULT_SURCHARGES || [];
-    state.overridePct = null;
     state.catMeta = {};
     state.dataSource = {};
     saveJSON(LS_KEYS.products, state.products);
     saveJSON(LS_KEYS.surcharges, state.surcharges);
-    saveJSON(LS_KEYS.overridePct, null);
     saveJSON(LS_KEYS.catMeta, state.catMeta);
     saveJSON(LS_KEYS.dataSource, state.dataSource);
     state.category = ''; state.page = 1;
