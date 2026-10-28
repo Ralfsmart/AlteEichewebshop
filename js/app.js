@@ -171,6 +171,12 @@ async function init() {
   }
 
   state.view = isLoggedIn() ? 'shop' : 'auth';
+  // Direkter Link auf eine öffentliche Seite (z. B. aus einer E-Mail), unabhängig vom Login:
+  // https://.../#agb oder https://.../#impressum
+  const hashView = (window.location.hash || '').replace('#', '');
+  if (hashView === 'agb' || hashView === 'impressum') {
+    state.view = hashView;
+  }
 
   // Kategorienliste zuerst laden, damit Filter/Admin-Bereich gleich mit dem aktuellen
   // Stand rendern (inkl. evtl. im Admin-Bereich hinzugefügter/entfernter Kategorien).
