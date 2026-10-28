@@ -222,6 +222,12 @@ input, select { font-family: inherit; }
 .checkout-table th { background: var(--bg); font-weight: 700; }
 .checkout-table .empty { text-align: center; color: var(--muted); padding: 30px; }
 
+.checkout-catalog-status {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-bottom: 12px; flex-wrap: wrap;
+}
+.checkout-catalog-status .hint { margin: 0; }
+
 .checkout-changes-notice {
   background: #fbeae9; color: var(--danger); border: 1px solid var(--danger);
   border-radius: var(--radius); padding: 10px 14px; margin-bottom: 12px; font-size: .9rem; font-weight: 600;

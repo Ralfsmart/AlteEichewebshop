@@ -155,7 +155,8 @@ const state = {
   pageSize: 60,
   cartOpen: false,
   checkoutPrevEntries: null, // Preise/Artikel vor dem letzten Bestellübersicht-Refresh (für Änderungs-Hervorhebung)
-  lastCatalogLoadErrors: []  // Kategorien, deren Server-Reload beim letzten loadServerCatalog()-Aufruf fehlschlug
+  lastCatalogLoadErrors: [], // Kategorien, deren Server-Reload beim letzten loadServerCatalog()-Aufruf fehlschlug
+  catalogLastLoadedAt: null  // Zeitstempel (Date.now()) des letzten loadServerCatalog()-Durchlaufs, unabhängig vom Erfolg
 };
 
 async function init() {
@@ -269,6 +270,7 @@ async function loadServerCatalog(force) {
   }
 
   saveJSON(LS_KEYS.dataSource, state.dataSource);
+  state.catalogLastLoadedAt = Date.now();
   renderCategoryOptions();
   renderAll();
 }
@@ -665,6 +667,13 @@ function renderCheckout() {
   document.getElementById('checkoutNachname').textContent = acc ? (acc.nachname || '') : '';
   document.getElementById('checkoutIban').textContent = acc ? (acc.iban || '') : '';
   document.getElementById('checkoutPaymentReason').textContent = 'Bestellung - ' + currentMonthYear();
+
+  const statusText = document.getElementById('checkoutCatalogStatusText');
+  if (statusText) {
+    statusText.textContent = state.catalogLastLoadedAt
+      ? `Katalogstand: ${new Date(state.catalogLastLoadedAt).toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' })} Uhr`
+      : 'Katalogstand: unbekannt';
+  }
 
   // Artikel, die noch im Warenkorb liegen, aber inzwischen aus dem Katalog verschwunden sind
   // (z. B. nicht mehr im Sortiment) -- werden einmalig durchgestrichen mit angezeigt.
@@ -1664,6 +1673,19 @@ function bindGlobalEvents() {
   });
 
   document.getElementById('backToShopBtn').addEventListener('click', () => { state.view = 'shop'; renderAll(); });
+
+  document.getElementById('reloadPricesBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('reloadPricesBtn');
+    btn.disabled = true;
+    btn.textContent = '🔄 Lädt …';
+    try {
+      await refreshCheckoutAndDetectChanges();
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '🔄 Preise neu laden';
+      renderAll();
+    }
+  });
 
   document.getElementById('backFromImpressumBtn').addEventListener('click', () => {
     state.view = isLoggedIn() ? 'shop' : 'auth';
