@@ -43,11 +43,12 @@ input, select { font-family: inherit; }
 .topbar-right { display: flex; align-items: center; gap: 12px; margin-left: 12px; }
 .whoami { font-size: .85rem; opacity: .9; white-space: nowrap; }
 .btn-small { padding: 7px 12px; font-size: .82rem; }
-.topnav button {
+.topnav button, .topnav a {
   background: transparent; border: 1px solid rgba(255,255,255,.35);
   color: #fff; padding: 8px 14px; border-radius: var(--radius);
+  text-decoration: none; display: inline-flex; align-items: center;
 }
-.topnav button:hover { background: rgba(255,255,255,.12); }
+.topnav button:hover, .topnav a:hover { background: rgba(255,255,255,.12); }
 .cart-toggle {
   background: var(--green); border: none; color: #fff;
   padding: 8px 14px; border-radius: var(--radius); font-weight: 600;
@@ -196,7 +197,7 @@ input, select { font-family: inherit; }
 .file-btn:hover { background: #ece9df; }
 
 /* ---------- Footer ---------- */
-.site-footer { display: flex; justify-content: center; padding: 18px 0 24px; }
+.site-footer { display: flex; justify-content: center; gap: 16px; padding: 18px 0 24px; }
 .footer-link {
   background: none; border: none; color: var(--muted); font-size: .82rem;
   text-decoration: underline; cursor: pointer; padding: 4px;

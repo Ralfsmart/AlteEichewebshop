@@ -19,6 +19,7 @@
       <button data-nav="shop">Shop</button>
       <button data-nav="profile">Mein Konto</button>
       <button data-nav="admin">Daten verwalten</button>
+      <a href="FoodCoopAlteEicheWebshopAnleitung.pdf" target="_blank" rel="noopener">📖 Hilfe</a>
     </nav>
     <div class="topbar-right auth-only hidden">
       <span id="whoami" class="whoami"></span>
@@ -322,7 +323,49 @@
   </div>
 </main>
 
+<!-- ===================== AGB ===================== -->
+<main id="view-agb" class="view hidden">
+  <div class="checkout-header">
+    <h2>Bestell-Bedingungen</h2>
+    <button id="backFromAgbBtn" class="btn-secondary">← Zurück</button>
+  </div>
+
+  <div class="admin-card">
+    <p>Liebe Mitbesteller:innen, durch die Bestellung stimmst Du automatisch den nachfolgenden Bedingungen der FoodCoop „Alte Eiche" zu.</p>
+
+    <h3>Vorherige Überweisung</h3>
+    <p>Für eine erfolgreiche Bestellung muss der Betrag für die bestellten Produkte vorab auf dem Konto der FoodCoop „Alte Eiche" eingegangen sein – spätestens am Stichtag, der für die jeweilige Bestellung bekannt gegeben wird.</p>
+
+    <h3>Pfand</h3>
+    <p>Bei der Bestellung ist nicht erkennbar, ob es sich um Pfandgefäße handelt. Dadurch kann nachträglich noch Pfandgeld fällig werden.<br>
+    Tipp: Bei der Abholung immer Kleingeld (5,00 €) bereithalten.</p>
+    <ul>
+      <li>Es wird eine Pfandmünze mit dem Pfandbetrag von 5,00 € ausgegeben, bitte diese Münze für das Einlösen aufbewahren.</li>
+      <li>Bei Pfandrückgabe muss die Pfandmünze mit dem Leergut abgegeben werden, um das Pfandgeld von 5,00 € zurück zu erhalten.</li>
+    </ul>
+
+    <h3>Rückerstattung von bereits geleisteten Überweisungen</h3>
+    <p>Sollte ein bestelltes Produkt nicht geliefert werden, wird dessen Betrag zurückerstattet.<br>
+    Um Überweisungskosten zu sparen, wird der zu viel überwiesene Betrag in Bar gegen eine Quittung ausbezahlt (meist bei der Bestellabholung).</p>
+
+    <h3>Abholung</h3>
+    <p>Der Abholungstermin wird rechtzeitig bekannt gegeben. Meist stehen 2–3 Termine an darauffolgenden Tagen zur Verfügung.<br>
+    Bitte achtet darauf, falls Ihr selbst keine Zeit habt, dass Ihr einen Vertreter beauftragt.<br>
+    Umgang mit Pfand, siehe oben unter Punkt „Pfand".</p>
+
+    <h3>DSGVO (Datenschutz-Grundverordnung)</h3>
+    <p>Mit der Bestellung stimmst Du zu, dass Deine notwendigen Daten im Rahmen der Bestellabwicklung erhoben und nicht an Dritte weitergegeben werden. Gesetzlicher Rahmen bildet die DSGVO (Datenschutz-Grundverordnung).<br>
+    Ansprechpartner ist der Sprecher:In der FoodCoop „Alte Eiche" über die E-Mail-Adresse: <a href="mailto:alte-eiche@gmx.net">alte-eiche@gmx.net</a></p>
+
+    <h3>Salvatorische Klausel</h3>
+    <p>Falls eine Bedingung ungültig wäre, bleiben die restlichen Bedingungen weiterhin gültig.</p>
+
+    <p class="hint">Wir wünschen Euch viel Spaß und Erfolg bei Eurer Bestellung.<br>Euer FoodCoop „Alte Eiche"-Team</p>
+  </div>
+</main>
+
 <footer class="site-footer">
+  <button id="agbLink" class="footer-link">AGB</button>
   <button id="impressumLink" class="footer-link">Impressum</button>
 </footer>
 

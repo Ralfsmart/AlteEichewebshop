@@ -412,6 +412,7 @@ function renderAll() {
   document.getElementById('view-profile').classList.toggle('hidden', state.view !== 'profile');
   document.getElementById('view-admin').classList.toggle('hidden', state.view !== 'admin');
   document.getElementById('view-impressum').classList.toggle('hidden', state.view !== 'impressum');
+  document.getElementById('view-agb').classList.toggle('hidden', state.view !== 'agb');
   document.body.classList.toggle('bg-market', state.view === 'shop');
 
   document.querySelectorAll('.auth-only').forEach(el => el.classList.toggle('hidden', !loggedIn));
@@ -1683,10 +1684,21 @@ function bindGlobalEvents() {
     renderAll();
   });
 
-  // Eigener Handler statt der generischen [data-nav]-Bindung, da diese ein Login voraussetzt --
-  // das Impressum muss aber auch ohne Anmeldung erreichbar sein.
+  document.getElementById('backFromAgbBtn').addEventListener('click', () => {
+    state.view = isLoggedIn() ? 'shop' : 'auth';
+    renderAll();
+  });
+
+  // Eigene Handler statt der generischen [data-nav]-Bindung, da diese ein Login voraussetzt --
+  // Impressum und AGB müssen aber auch ohne Anmeldung erreichbar sein.
   document.getElementById('impressumLink').addEventListener('click', () => {
     state.view = 'impressum';
+    renderAll();
+    window.scrollTo(0, 0);
+  });
+
+  document.getElementById('agbLink').addEventListener('click', () => {
+    state.view = 'agb';
     renderAll();
     window.scrollTo(0, 0);
   });
