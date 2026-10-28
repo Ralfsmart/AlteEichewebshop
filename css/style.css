@@ -197,12 +197,17 @@ input, select { font-family: inherit; }
 .file-btn:hover { background: #ece9df; }
 
 /* ---------- Footer ---------- */
-.site-footer { display: flex; justify-content: center; gap: 16px; padding: 18px 0 24px; }
-.footer-link {
-  background: none; border: none; color: var(--muted); font-size: .82rem;
-  text-decoration: underline; cursor: pointer; padding: 4px;
+.site-footer {
+  display: flex; justify-content: center; gap: 10px; padding: 14px 0 24px;
+  position: relative; z-index: 1;
 }
-.footer-link:hover { color: var(--text); }
+.footer-link {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  color: var(--text); font-size: .85rem; font-weight: 600;
+  text-decoration: none; cursor: pointer; padding: 7px 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+.footer-link:hover { background: var(--bg); border-color: var(--green); color: var(--green-dark); }
 
 /* ---------- Checkout ---------- */
 .checkout-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
