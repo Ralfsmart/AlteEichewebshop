@@ -154,7 +154,8 @@ const state = {
   page: 1,
   pageSize: 60,
   cartOpen: false,
-  checkoutPrevEntries: null  // Preise/Artikel vor dem letzten Bestellübersicht-Refresh (für Änderungs-Hervorhebung)
+  checkoutPrevEntries: null, // Preise/Artikel vor dem letzten Bestellübersicht-Refresh (für Änderungs-Hervorhebung)
+  lastCatalogLoadErrors: []  // Kategorien, deren Server-Reload beim letzten loadServerCatalog()-Aufruf fehlschlug
 };
 
 async function init() {
@@ -225,16 +226,24 @@ async function loadServerCatalog(force) {
 
   let anyOk = false;
   const byKat = {};
+  const failedKats = [];
   results.forEach((r, i) => {
     const kat = katsToFetch[i];
     if (r.status === 'fulfilled' && r.value.items.length) {
       byKat[kat] = r.value.items;
       state.dataSource[kat] = 'server';
       anyOk = true;
-    } else if (!state.dataSource[kat]) {
-      state.dataSource[kat] = 'default';
+    } else {
+      // Reload fehlgeschlagen (Netzwerkfehler oder leere/kaputte Datei) -- alter Stand für
+      // diese Kategorie bleibt unverändert aktiv, siehe Merge unten. Damit das nicht
+      // unbemerkt bleibt (z. B. in der Bestellübersicht), wird die Kategorie vorgemerkt.
+      failedKats.push(kat);
+      if (!state.dataSource[kat]) {
+        state.dataSource[kat] = 'default';
+      }
     }
   });
+  state.lastCatalogLoadErrors = failedKats;
 
   if (anyOk) {
     // "others" sind Artikel aus Kategorien, die in diesem Durchlauf nicht neu abgerufen wurden
@@ -717,12 +726,19 @@ function renderCheckout() {
     return prev && prev.unknown;
   }).length : 0;
   const notice = document.getElementById('checkoutChangesNotice');
-  if (changedCount || unknownCount || removedRows.length) {
+  const loadErrorKats = state.lastCatalogLoadErrors || [];
+  if (changedCount || unknownCount || removedRows.length || loadErrorKats.length) {
     const parts = [];
     if (changedCount) parts.push(`${changedCount} Preis${changedCount === 1 ? '' : 'e'} wurde${changedCount === 1 ? '' : 'n'} seit deiner Auswahl aktualisiert`);
     if (unknownCount) parts.push(`${unknownCount} Preis${unknownCount === 1 ? '' : 'e'} noch nicht bestätigt (Artikel liegen schon länger im Warenkorb)`);
     if (removedRows.length) parts.push(`${removedRows.length} Artikel ${removedRows.length === 1 ? 'ist' : 'sind'} nicht mehr verfügbar`);
-    notice.innerHTML = `<div class="checkout-changes-notice">⚠️ ${parts.join(' · ')} — bitte unten in der jeweiligen Zeile mit „✓ passt so" bestätigen.</div>`;
+    let html = parts.length
+      ? `<div class="checkout-changes-notice">⚠️ ${parts.join(' · ')} — bitte unten in der jeweiligen Zeile mit „✓ passt so" bestätigen.</div>`
+      : '';
+    if (loadErrorKats.length) {
+      html += `<div class="checkout-changes-notice checkout-load-error">⚠️ ${escapeHtml(loadErrorKats.join(', '))} konnte${loadErrorKats.length === 1 ? '' : 'n'} nicht neu geladen werden — angezeigte Preise in ${loadErrorKats.length === 1 ? 'dieser Kategorie' : 'diesen Kategorien'} könnten veraltet sein. Bitte Seite neu laden und erneut prüfen.</div>`;
+    }
+    notice.innerHTML = html;
   } else {
     notice.innerHTML = '';
   }
