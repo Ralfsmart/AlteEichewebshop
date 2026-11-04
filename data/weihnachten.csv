@@ -274,6 +274,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 586878,Simply Seeds Kekse Mandel-Zimt glutenfrei,Hammermühle,Diverse,100% Biozutaten,7x100g,14.680400000000002,0.9604000000000017,7
 26904,Spekulatius aus Weizen,Erdmann Hauser,Diverse,Demeter (Deutschland),8x150g,20.116000000000003,1.3160000000000025,7
 526536,Spekulatius,Linea Natura,Diverse,100% Biozutaten,20x250g,47.080000000000005,3.0800000000000054,7
+586906,TOWERDISPLAY Weihnachten 2026 glf.-Hammermühle,Hammermühle,Diverse,100% Biozutaten,Display,275.63200000000006,18.03200000000004,7
 85738,Zartbitter Printen vegan,Linea Natura,Diverse,100% Biozutaten,12x125g,35.31,2.3100000000000023,7
 527177,Zartbitter-Elisenlebkuchen ca.75g vegan - Theke,Rosengarten,Diverse,99%,18Stück,44.4906,2.9106000000000023,7
 586683,Zimtsterne glutenfrei,Hammermühle,Diverse,100% Biozutaten,6x140g,23.0478,1.5077999999999996,7
@@ -323,9 +324,9 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 532586,Familien Punsch,Voelkel,Diverse,100% Biozutaten,"6x0,75l",21.3486,3.4086,19
 532956,Heißer Horst,Rabenhorst,Diverse,100% Biozutaten,"6x0,75l",20.491799999999998,3.271799999999999,19
 33087,Heißer Rabe,Rabenhorst,Diverse,100% Biozutaten,"6x0,75l",20.491799999999998,3.271799999999999,19
-532343,Hygge Punsch Apfel Blaubeere,Voelkel,Diverse,100% Biozutaten,"6x0,75l",21.3486,3.4086,19
-532400,Hygge Punsch Apfel Mandarine DEMETER,Voelkel,Diverse,Demeter (Deutschland),"6x0,75l",21.3486,3.4086,19
-532707,Hygge Punsch Zimtsnegle DEMETER,Voelkel,Diverse,Demeter (Deutschland),"6x0,75l",21.3486,3.4086,19
+532343,Hygge Punsch Apfel Blaubeere,Voelkel,Diverse,100% Biozutaten,"6x0,75l",18.921,3.020999999999999,19
+532400,Hygge Punsch Apfel Mandarine DEMETER,Voelkel,Diverse,Demeter (Deutschland),"6x0,75l",18.921,3.020999999999999,19
+532707,Hygge Punsch Zimtsnegle DEMETER,Voelkel,Diverse,Demeter (Deutschland),"6x0,75l",18.921,3.020999999999999,19
 532589,Winter Apfel Punsch,Voelkel,Diverse,100% Biozutaten,"6x0,75l",21.3486,3.4086,19
 531479,Apfel Wildfrucht Punsch DEMETER,Beutelsbacher,Diverse,Demeter (Deutschland),"6x0,7l",16.064999999999998,2.5649999999999977,19
 630121,Familienpunsch Heißer Hirsch orange Traube-Orange,Acht Grad Plus,Diverse,100% Biozutaten,"6x0,75l",19.4208,3.1007999999999996,19
@@ -340,7 +341,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 638607,Kirsch Humbel 40%Vol. - Kleingröße,Dschinn,Schweiz,Bio-Suisse,12x20ml,23.990399999999998,3.8303999999999974,19
 638636,Rum braun Ron de Marinero FairTrade 40%Vol.,Dschinn,Brasilien,EG-Bio,12x20ml,17.136,2.735999999999999,19
 638608,Williams Humbel 40%Vol. - Kleingröße,Dschinn,Schweiz,Bio-Suisse,12x20ml,25.9896,4.1495999999999995,19
-638007,Aronia Glühwein 9%Vol.,Aronia Original,Diverse,100% Biozutaten,"6x0,75l",21.063,3.3629999999999995,19
+638007,Aronia Glühwein 9%Vol.,Aronia Original,Diverse,100% Biozutaten,"6x0,75l",23.205,3.7049999999999983,19
 38642,Festtagsglühwein rot 11% Vol.,Peter Riegel Weinhandel,Spanien,100% Biozutaten,"6x1,0l",18.7068,2.9868000000000006,19
 538299,"Festtagsglühwein weiß 10,2% Vol.",Peter Riegel Weinhandel,Spanien,100% Biozutaten,"6x1,0l",18.7068,2.9868000000000006,19
 539239,"Feuerzangenbowle mit Alkohol 10,9% Vol.",Peter Riegel Weinhandel,Spanien,100% Biozutaten,"6x0,75l",17.136,2.735999999999999,19
@@ -350,10 +351,9 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 538015,Glühwein Heißer Hirsch rot 11% Vol.,Acht Grad Plus,Diverse,100% Biozutaten,"6x0,75l",19.4208,3.1007999999999996,19
 538026,Glühwein Heißer Hirsch rot alkoholfrei,Acht Grad Plus,Diverse,100% Biozutaten,"6x0,73l",19.4208,3.1007999999999996,19
 538016,Glühwein Heißer Hirsch weiß 10% Vol.,Acht Grad Plus,Diverse,100% Biozutaten,"6x0,75l",19.4208,3.1007999999999996,19
-538027,Glühwein Heißer Hirsch weiß alkoholfrei,Acht Grad Plus,Diverse,100% Biozutaten,"6x0,73l",19.4208,3.1007999999999996,19
-538039,Hygge Glühwein Hvid weiß 10% Vol.,Voelkel,Diverse,100% Biozutaten,"6x0,7l",21.3486,3.4086,19
-538038,"Hygge Glühwein Rode rot 9,8% Vol.",Voelkel,Diverse,100% Biozutaten,"6x0,7l",21.3486,3.4086,19
-532717,Hygge Punsch Bitter Apfelsin DEMETER,Voelkel,Diverse,Demeter (Deutschland),"6x0,75l",21.3486,3.4086,19
+538039,Hygge Glühwein Hvid weiß 10% Vol.,Voelkel,Diverse,100% Biozutaten,"6x0,7l",18.921,3.020999999999999,19
+538038,"Hygge Glühwein Rode rot 9,8% Vol.",Voelkel,Diverse,100% Biozutaten,"6x0,7l",18.921,3.020999999999999,19
+532717,Hygge Punsch Bitter Apfelsin DEMETER,Voelkel,Diverse,Demeter (Deutschland),"6x0,75l",18.921,3.020999999999999,19
 538298,"Landpartie Glühwein rot 12,3% Vol.",Peter Riegel Weinhandel,Deutschland,100% Biozutaten,"6x0,75l",17.493,2.7929999999999993,19
 539206,"Landpartie Glühwein weiß 9,8% Vol.",Peter Riegel Weinhandel,Deutschland,100% Biozutaten,"6x0,75l",17.493,2.7929999999999993,19
 539208,Landpartie Premium Glüher rot alkoholfrei,Peter Riegel Weinhandel,Deutschland,EG-Bio,"6x0,735l",19.634999999999998,3.134999999999998,19
