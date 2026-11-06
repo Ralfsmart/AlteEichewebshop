@@ -3,6 +3,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 571971,Atmewohl - Kissenspray,Primavera,Diverse,Naturkosmetik (BNN),30ml,7.4732,1.1932,19
 570557,Bio-Tampons TamTampon normalo 16ST,Einhorn,Slowenien,nicht per Bio-VO geregelt,Stück,2.8248,0.18480000000000008,7
 571479,Body Butter Rose Love - Holy Body,Khadi,Indien,Naturkosmetik (BNN),250ml,18.3974,2.9374000000000002,19
+571859,Calendula Schlaf Gut Bad,Weleda,Diverse,Naturkosmetik (BNN),200ml,4.4982,0.7182,19
 587860,Dudu-Osun Schwarze Seife classic,Dudu Osun,Nigeria,Naturkosmetik (BNN),150g,3.3914999999999997,0.5414999999999996,19
 587862,Dudu-Osun Schwarze Seife pure,Dudu Osun,Nigeria,Naturkosmetik (BNN),150g,3.3914999999999997,0.5414999999999996,19
 699545,Forever Bundle - Shaker und Messlöffel,Bluefarm,Deutschland,nicht per Bio-VO geregelt,Stück,10.055499999999999,1.6054999999999993,19
@@ -58,6 +59,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 693841,Anti-Falten Nachtcreme Q10 basis sensitiv,Lavera,Diverse,Naturkosmetik (BNN),50ml,9.2701,1.4800999999999993,19
 571382,Anti-Falten Serum Blauer Enzian & Edelweiß,Weleda,Diverse,Naturkosmetik (BNN),30ml,17.790499999999998,2.8404999999999987,19
 571066,Anti-Pigmentflecken Bright Serum,Weleda,Diverse,Naturkosmetik (BNN),30ml,18.3141,2.9240999999999993,19
+573163,Augencreme Regenerierend DEMETER - Rose,Baldini,Diverse,Demeter (Deutschland),15ml,8.9607,1.430699999999999,19
 571735,Barrier Balance 2-Phasen Mizellenwasser,Lavera,Diverse,Naturkosmetik (BNN),400ml,6.4855,1.0354999999999999,19
 571739,Barrier Balance Augenpflege,Lavera,Diverse,Naturkosmetik (BNN),15ml,7.3304,1.1703999999999999,19
 571737,Barrier Balance Nachtpflege,Lavera,Diverse,Naturkosmetik (BNN),50ml,7.4494,1.1894,19
@@ -330,8 +332,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 570359,Deep Repair Shampoo,Sante,Diverse,Naturkosmetik (BNN),500ml,5.961899999999999,0.9518999999999993,19
 691881,Duftstofffreies Haarspray für starken Halt,Unique Beauty,Diverse,Naturkosmetik (BNN),150ml,6.0927999999999995,0.9727999999999994,19
 686857,Family Festes Glanz Shampoo 2in1,Sante,Diverse,Naturkosmetik (BNN),60g,4.1888,0.6687999999999996,19
-91237,Farbreflex Shampoo braun-schwarz Haselnuss,Logona,Diverse,Naturkosmetik (BNN),250ml,5.926200000000001,0.9462000000000002,19
-91236,Farbreflex Shampoo rot-braun Henna,Logona,Diverse,Naturkosmetik (BNN),250ml,5.926200000000001,0.9462000000000002,19
 686856,Festes Feuchtigkeits Shampoo 2in1,Sante,Diverse,Naturkosmetik (BNN),60g,4.1888,0.6687999999999996,19
 691559,Festes Pflege-Shampoo Hanf & Brennnessel,Logona,Diverse,Naturkosmetik (BNN),60g,6.021399999999999,0.9613999999999994,19
 571365,Festes Pflegeshampoo basis sens.Feuchtigk.& Pflege,Lavera,Diverse,Naturkosmetik (BNN),50g,2.38,0.3799999999999999,19
@@ -382,7 +382,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 571995,Hydro Shine Shampoo m. OnPack 50ml Spülung - Feuch,Weleda,Diverse,Naturkosmetik (BNN),1,5.5335,0.8834999999999997,19
 573048,Hydro Shine Spülung,Weleda,Diverse,Naturkosmetik (BNN),50ml,3.2011,0.5110999999999999,19
 570367,Intense Hydration Conditioner,Sante,Diverse,Naturkosmetik (BNN),150ml,3.3082,0.5282,19
-570372,Intense Hydration Haarmaske,Sante,Diverse,Naturkosmetik (BNN),150ml,4.6291,0.7391000000000001,19
 570357,Intense Hydration Shampoo,Sante,Diverse,Naturkosmetik (BNN),500ml,5.961899999999999,0.9518999999999993,19
 570362,Intense Hydration Shampoo,Sante,Diverse,Naturkosmetik (BNN),950ml,9.936499999999999,1.5864999999999991,19
 696652,Intensiv Pflegendes Haaröl,Weleda,Diverse,Naturkosmetik (BNN),50ml,9.639,1.5389999999999997,19
@@ -560,9 +559,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 560864,Taschenkamm Holz - fein 14cm,Kost Kamm,Diverse,nicht per Bio-VO geregelt,Stück,7.5684000000000005,1.2084000000000001,19
 560865,Taschenkamm Holz - mittel 14cm,Kost Kamm,Diverse,nicht per Bio-VO geregelt,Stück,8.0801,1.2900999999999998,19
 5711171,aloe vera gel pur mit Duft,SantaVerde,Diverse,Naturkosmetik (BNN),100ml,6.0333,0.9632999999999994,19
-573230,Ben&Anna Badesalz Cornflower - Sachet,Ben und Anna,Lettland,Naturkosmetik (BNN),60g,1.3565999999999998,0.2165999999999999,19
-573231,Ben&Anna Badesalz Lavender - Sachet,Ben und Anna,Lettland,Naturkosmetik (BNN),60g,1.3565999999999998,0.2165999999999999,19
-573232,Ben&Anna Badesalz Rose - Sachet,Ben und Anna,Lettland,Naturkosmetik (BNN),60g,1.3565999999999998,0.2165999999999999,19
 573094,Adventskalender,Weleda,Deutschland,Naturkosmetik (BNN),Set,68.5321,10.942099999999996,19
 573074,AMBER DIVINE Shower Cream - Limited Edition,Weleda,Diverse,Naturkosmetik (BNN),200ml,5.8429,0.9329000000000001,19
 571935,Aroma Duschgel Balance - ausgleichend,Sante,Diverse,Naturkosmetik (BNN),200ml,2.5228,0.40280000000000005,19
@@ -572,8 +568,11 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 571931,Badeschaumkissen Beste Freunde,Lüttes Welt,Diverse,Naturkosmetik (BNN),12x50g,17.5644,2.8043999999999993,19
 691990,Basen Bad,Fitne,Diverse,Naturkosmetik (BNN),400g,11.650099999999998,1.8600999999999992,19
 592961,Basischer Duschbalsam,Fitne,Diverse,Naturkosmetik (BNN),200ml,6.009499999999999,0.9594999999999994,19
+573230,Ben&Anna Badesalz Cornflower - Sachet,Ben und Anna,Lettland,Naturkosmetik (BNN),60g,1.3565999999999998,0.2165999999999999,19
 685372,Ben&Anna Badesalz Cornflower,Ben und Anna,Lettland,Naturkosmetik (BNN),300g,3.7366,0.5966,19
+573231,Ben&Anna Badesalz Lavender - Sachet,Ben und Anna,Lettland,Naturkosmetik (BNN),60g,1.3565999999999998,0.2165999999999999,19
 685373,Ben&Anna Badesalz Lavender,Ben und Anna,Lettland,Naturkosmetik (BNN),300g,3.7366,0.5966,19
+573232,Ben&Anna Badesalz Rose - Sachet,Ben und Anna,Lettland,Naturkosmetik (BNN),60g,1.3565999999999998,0.2165999999999999,19
 685374,Ben&Anna Badesalz Rose,Ben und Anna,Lettland,Naturkosmetik (BNN),300g,3.7366,0.5966,19
 685375,Ben&Anna Shower- Gel Berry Infusion,Ben und Anna,Lettland,Naturkosmetik (BNN),250ml,3.1178,0.4977999999999998,19
 685376,Ben&Anna Shower- Gel Blue Lagoon,Ben und Anna,Lettland,Naturkosmetik (BNN),250ml,3.1178,0.4977999999999998,19
@@ -762,7 +761,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 571183,Petit Fleurs Mini - Blütenseifen im Set 4x20g,Savon du Midi,Frankreich,Naturkosmetik (BNN),Set,2.6418,0.42179999999999973,19
 573054,Pflanzenölseife Eiskristall - Display,Speick,Diverse,Naturkosmetik (BNN),12x50g,16.2792,2.5991999999999997,19
 573052,Pflanzenölseife Engel - Display,Speick,Diverse,Naturkosmetik (BNN),12x50g,16.2792,2.5991999999999997,19
-587198,Pflanzenölseife Tanne - Display,Speick,Diverse,Naturkosmetik (BNN),12x50g,16.2792,2.5991999999999997,19
 570824,Pflegedusche Basis Sensitiv 2in1 Aloe&pfl.Keratin,Lavera,Diverse,Naturkosmetik (BNN),250ml,3.3082,0.5282,19
 570826,Pflegedusche Erfrischend Zitrone & Zitronengras,Lavera,Diverse,Naturkosmetik (BNN),250ml,3.0820999999999996,0.49209999999999976,19
 570825,Pflegedusche Vitalisierend Orange & Minze,Lavera,Diverse,Naturkosmetik (BNN),250ml,3.0820999999999996,0.49209999999999976,19
@@ -1242,7 +1240,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 96717,Rasierwasser,Weleda,Diverse,Naturkosmetik (BNN),100ml,10.709999999999999,1.709999999999999,19
 588839,Shaving Cream for men only,Benecos,Diverse,Naturkosmetik (BNN),100ml,2.6656,0.42559999999999976,19
 571816,3-in1 Pflegelotion MED Baby Weiße Malve-parfümfrei,Weleda,Diverse,Naturkosmetik (BNN),200ml,11.6382,1.8582,19
-571865,3in1 SOS Balsam MED Baby Weiße Malve,Weleda,Diverse,Naturkosmetik (BNN),50ml,8.2705,1.3205,19
 571864,3in1 Waschbalsam MED Weiße Malve,Weleda,Diverse,Naturkosmetik (BNN),200ml,6.7829999999999995,1.0829999999999993,19
 571863,3in1 Wundschutzcreme MED Baby Weiße Malve,Weleda,Diverse,Naturkosmetik (BNN),50ml,6.4974,1.0373999999999999,19
 588315,Baby & Kinder Pflegecreme,Lavera,Diverse,Naturkosmetik (BNN),75ml,3.6652,0.5851999999999999,19
@@ -1257,7 +1254,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 592940,Calendula Pflegecreme Körper & Gesicht,Weleda,Diverse,Naturkosmetik (BNN),30ml,2.6893999999999996,0.4293999999999998,19
 592936,Calendula Pflegecreme Körper & Gesicht,Weleda,Diverse,Naturkosmetik (BNN),75ml,6.4022,1.0221999999999998,19
 592965,Calendula Plegemilch,Weleda,Diverse,Naturkosmetik (BNN),200ml,8.5204,1.3604000000000003,19
-571859,Calendula Schlaf Gut Bad,Weleda,Diverse,Naturkosmetik (BNN),200ml,6.7829999999999995,1.0829999999999993,19
+571859,Calendula Schlaf Gut Bad,Weleda,Diverse,Naturkosmetik (BNN),200ml,4.4982,0.7182,19
 89415,CALENDULA Super Protect DEMETER,Martina Gebhardt,Diverse,Demeter (Deutschland),100ml,12.2689,1.9588999999999999,19
 592934,Calendula Waschlotion & Shampoo,Weleda,Diverse,Naturkosmetik (BNN),200ml,6.2237,0.9936999999999996,19
 592764,Calendula Wind-und-Wetterbalsam,Weleda,Diverse,Naturkosmetik (BNN),30ml,5.473999999999999,0.8739999999999997,19
@@ -1343,7 +1340,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 588648,Eyeshadow-Base prime fine,Benecos,Diverse,Naturkosmetik (BNN),Stück,3.0582999999999996,0.48829999999999973,19
 696449,Face Primer,Benecos,Diverse,Naturkosmetik (BNN),Stück,2.9749999999999996,0.47499999999999964,19
 588806,Fresh Bronzing Duo ibiza nights,Benecos,Diverse,Naturkosmetik (BNN),8g,2.9631000000000003,0.4731000000000001,19
-571237,Geschenkset Nagellack Classic in Red 3-er,Benecos,Diverse,Naturkosmetik (BNN),Set,5.949999999999999,0.9499999999999993,19
 571236,Geschenkset Nagellack Nude Obsession 3-er,Benecos,Diverse,Naturkosmetik (BNN),Set,5.949999999999999,0.9499999999999993,19
 571315,Highlighter Refill dark illuminance - vegan,Benecos,Diverse,Naturkosmetik (BNN),3g,2.38,0.3799999999999999,19
 696420,Highlighter Refill gold dust - vegan,Benecos,Diverse,Naturkosmetik (BNN),3g,2.38,0.3799999999999999,19
@@ -2243,7 +2239,6 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 571641,Mottlock Kleidermottenbox-Klebefalle JubiEd. 2-er,Aries,Diverse,konventionell,6Stück,48.6948,7.774799999999999,19
 90970,Mottlock Maxi - Mottenklebefalle für Gewerbe,Aries,Diverse,konventionell,2Stück,7.842099999999999,1.2520999999999995,19
 90975,Mottlock Mottenklebefallen 3St,Aries,Diverse,konventionell,24Set,93.6768,14.956800000000001,19
-698465,Trapango Fruchtfliegen-Lebendfalle,Macur,Diverse,nicht per Bio-VO geregelt,6Stück,23.633399999999998,3.7733999999999988,19
 537236,Asia Salat Mizuna,Bingenheimer Saatgut,Deutschland,Demeter (Deutschland),5Tüten,9.5765,0.6265000000000001,7
 37186,Asia Salat Red Giant,Bingenheimer Saatgut,Deutschland,Demeter (Deutschland),5Tüten,9.5765,0.6265000000000001,7
 537365,Atlasblume Godetia grandiflora,Bingenheimer Saatgut,Deutschland,Demeter (Deutschland),5Tüten,10.967500000000001,0.7175000000000011,7
@@ -2503,7 +2498,7 @@ ArtikelNr,Bezeichnung,Hersteller,Land,Qualitaet,Gebinde,PreisInklMwst,EntMwst,Mw
 689552,Katzenfutter Lachs Paté sensitiv - Dose,DEFU,Diverse,100% Biozutaten,12x200g,24.781200000000002,1.6212000000000018,7
 689555,Katzenfutter Lachs Paté sensitiv - Dose,DEFU,Diverse,100% Biozutaten,12x410g,34.5396,2.259599999999999,7
 689543,Katzenfutter Lachs sensitiv - Alucup,DEFU,Diverse,100% Biozutaten,16x100g,20.0304,1.3104000000000013,7
-589016,Katzenfutter Mini Snack Verwöhnbröckchen,Yarrah,Niederlande,7,10x50g,23.647000000000002,1.5470000000000006,7
+589016,Katzenfutter Mini Snack Verwöhnbröckchen,Yarrah,Niederlande,100% Biozutaten,10x50g,23.647000000000002,1.5470000000000006,7
 570520,Katzenfutter Rind sensitiv - Alucup,DEFU,Diverse,100% Biozutaten,16x100g,20.0304,1.3104000000000013,7
 570519,Katzenfutter Rind sensitiv - Dose,DEFU,Diverse,100% Biozutaten,12x200g,24.9096,1.6296,7
 570518,Katzenfutter Rind sensitiv - Dose,DEFU,Diverse,100% Biozutaten,12x410g,34.5396,2.259599999999999,7
