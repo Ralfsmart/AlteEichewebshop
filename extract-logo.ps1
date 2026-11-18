@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
 $srcPath = "C:\Users\ralfs\OneDrive\Documents\Claude\Bodan_Bestellung_26_Juni.xls"
-$outPath = "C:\Users\ralfs\OneDrive\Documents\Claude\webshop\img\logo.png"
+$outPath = (Join-Path $PSScriptRoot "img\logo.png")
 
 New-Item -ItemType Directory -Force -Path (Split-Path $outPath) | Out-Null
 

@@ -1,5 +1,5 @@
 $ErrorActionPreference = "Stop"
-$dataDir = "C:\Users\ralfs\OneDrive\Documents\Claude\webshop\data"
+$dataDir = (Join-Path $PSScriptRoot "data")
 $rows = Import-Csv -Path (Join-Path $dataDir "produkte.csv") -Encoding UTF8
 
 $headers = "ArtikelNr","Bezeichnung","Hersteller","Land","Qualitaet","Gebinde","PreisInklMwst","EntMwst","MwstSatz"

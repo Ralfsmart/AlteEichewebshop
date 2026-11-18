@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
-$dataDir = "C:\Users\ralfs\OneDrive\Documents\Claude\webshop\data"
-$jsDir   = "C:\Users\ralfs\OneDrive\Documents\Claude\webshop\js"
+$dataDir = (Join-Path $PSScriptRoot "data")
+$jsDir   = (Join-Path $PSScriptRoot "js")
 
 New-Item -ItemType Directory -Force -Path $jsDir | Out-Null
 

@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
 $srcPath = "C:\Users\ralfs\OneDrive\Documents\Claude\Bodan_Bestellung_26_Juni.xls"
-$outDir  = "C:\Users\ralfs\OneDrive\Documents\Claude\webshop\data"
+$outDir  = (Join-Path $PSScriptRoot "data")
 
 $excel = New-Object -ComObject Excel.Application
 $excel.Visible = $false
