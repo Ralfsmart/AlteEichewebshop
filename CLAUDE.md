@@ -162,6 +162,15 @@ curl -s -o /dev/null -w "%{http_code}\n" "https://ralfsmart.github.io/AlteEichew
 ```
 Der `?t=...`-Parameter umgeht Caching. Deploy-Verzögerung nach einem Push: bis zu ~1 Minute.
 
+## Obsidian-Spiegelung
+
+Diese Datei hat eine Kopie in Obsidian:
+`C:\Users\ralfs\OneDrive\Documents\Claude\Obsidian\Webshop FoodCoop Alte Eiche\CLAUDE.md`.
+**Nach jeder inhaltlichen Änderung an dieser CLAUDE.md die Kopie dort ebenfalls aktualisieren**
+(reine Dateikopie reicht). Kein Hook, keine Automatik — der Nutzer arbeitet von mehreren Geräten,
+ein lokaler Git-Hook würde nur auf einem davon greifen. Deckt nur diese Datei ab, nicht die
+Live-Admin-Änderungen am Produktkatalog (siehe „WICHTIGSTE FALLE" oben).
+
 ## Sonstige Hinweise
 
 - Alle Preise/Mengenangaben sind deutsch formatiert (`de-DE`, Komma als Dezimaltrennzeichen) —
