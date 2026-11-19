@@ -180,3 +180,17 @@ Live-Admin-Änderungen am Produktkatalog (siehe „WICHTIGSTE FALLE" oben).
 - Keine Tests/CI in diesem Repo — Verifikation passiert manuell wie oben beschrieben.
 - Node ist auf diesem Rechner installiert, `node --check js/app.js` eignet sich als schneller
   Syntax-Check vor dem Commit (kein Linter/Formatter eingerichtet).
+
+## Abschluss einer Neuentwicklung (Ende-zu-Ende)
+
+Gilt für jede Änderung an Code oder Inhalten dieses Repos. Reihenfolge einhalten, nichts überspringen:
+
+1. **Start:** `git pull`, Stand prüfen.
+2. **Ziel klären:** Was soll am Ende funktionieren und woran erkennt es der Nutzer? Bei größeren Vorhaben zuerst einen kurzen Plan zeigen und auf das Ja warten.
+3. **Branch:** Größere Neuentwicklung (mehrere Dateien oder neue Funktion): eigenen Branch `feature/<thema>` anlegen und dort arbeiten, **nicht** direkt auf `main`. Kleine Änderungen (Tippfehler, einzelne Textstelle) gehen direkt auf `main`.
+4. **Prüfen:** `node --check js/app.js`, danach lokaler Test wie im Abschnitt zum Testen beschrieben (`serve.ps1`, Admin ohne Login, GitHub-Veröffentlichung nur mit gemocktem `fetch`).
+5. **Gegenprüfung:** Bei Änderungen an Login, Admin, Datenverarbeitung oder Mitgliederdaten einen Subagenten die Änderung mit frischem Blick auf Fehler und Sicherheit prüfen lassen.
+6. **Doku:** Obsidian-Notiz `C:\Users\ralfs\OneDrive\Documents\Claude\Obsidian\Webshop FoodCoop Alte Eiche\Webshop FoodCoop Alte Eiche.md` aktualisieren; bei Änderung an dieser CLAUDE.md zusätzlich die Spiegelkopie (siehe Abschnitt Obsidian-Spiegelung).
+7. **Commit:** Kleine Commits mit klarer Nachricht. Vorher sicherstellen, dass keine Zugangsdaten, Mitgliederdaten oder IBANs enthalten sind. Die Autor-Adresse ist die GitHub-Noreply-Adresse (globale Git-Einstellung, nicht ändern).
+8. **Veröffentlichen:** Ein Push auf `main` bzw. das Zusammenführen eines Branches stellt die Live-Seite um (GitHub Pages). **Vorher den Nutzer fragen und auf das Ja warten.** Danach Live-Check per `curl` (siehe Diagnose, Verzögerung bis ca. 1 Minute). Vor jeder Änderung `git fetch` und `git pull`, weil das Admin-Panel direkt ins Repo schreibt.
+9. **Abschlussbericht:** Kurz sagen, was geändert wurde, was offen ist und was der Nutzer noch tun muss (z. B. `git pull` auf dem anderen Rechner).
